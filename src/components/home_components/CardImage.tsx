@@ -11,7 +11,7 @@ const CardImage = ({
 }) => {
   return (
     <a href="#">
-      <div className="h-48 lg:h-72 min-w-36 lg:min-w-52 bg-gray-300 relative bg-cover rounded-xl overflow-hidden flex flex-col justify-stretch">
+      <div className="h-48 lg:h-72 min-w-36 lg:min-w-52 bg-gray-300 relative bg-cover rounded-xl overflow-hidden flex flex-col justify-stretch hover:opacity-90">
         <Image
           src={imageSrc}
           alt={title}

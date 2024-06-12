@@ -60,7 +60,7 @@ const Gallery = () => {
           <div className="grid grid-cols-2 gap-4  lg:hidden">
             <div className="flex flex-col gap-4">
               {photos1.map((photo, index) => (
-                <div key={index} className="">
+                <div key={index} className="hover:opacity-90">
                   <div>
                     <Image
                       onClick={() => openModal(photo)}
@@ -77,7 +77,7 @@ const Gallery = () => {
 
             <div className="flex flex-col gap-4">
               {photos2.map((photo, index) => (
-                <div key={index} className="">
+                <div key={index} className="hover:opacity-90">
                   <div>
                     <Image
                       onClick={() => openModal(photo)}

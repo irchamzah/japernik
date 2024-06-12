@@ -3,22 +3,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const videos = [
-  "p0s0_4KO9t4",
-  "p0s0_4KO9t4",
-  "p0s0_4KO9t4",
-  "p0s0_4KO9t4",
-  "p0s0_4KO9t4",
-  "p0s0_4KO9t4",
-  // Tambahkan video ID lainnya
-];
-
 const Test = () => {
   // Membagi video ke dalam kelompok 3 elemen
-  const videoChunks = [];
-  for (let i = 0; i < videos.length; i += 3) {
-    videoChunks.push(videos.slice(i, i + 3));
-  }
 
   interface Image {
     id: number;
@@ -73,7 +59,7 @@ const Test = () => {
             {photoChunks.map((photo, index) => (
               <div key={index} className="flex flex-col gap-4">
                 {photo.map((photocontent, photoIndex) => (
-                  <div key={photoIndex} className="">
+                  <div key={photoIndex} className="hover:opacity-90">
                     <div>
                       <Image
                         onClick={() => openModal(photocontent)}

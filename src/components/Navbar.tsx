@@ -44,7 +44,7 @@ const Navbar = () => {
           <div className="flex justify-between h-full mx-auto max-w-7xl">
             <div className="flex space-x-4 items-center">
               <div>
-                <Link href="#" className="text-white text-2xl  font-bold">
+                <Link href="/" className="text-white text-2xl  font-bold">
                   JAPERNIK
                 </Link>
               </div>
