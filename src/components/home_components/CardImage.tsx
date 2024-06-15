@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const CardImage = ({
   imageSrc,
@@ -10,19 +10,19 @@ const CardImage = ({
   description: string;
 }) => {
   return (
-    <a href="#">
-      <div className="h-48 lg:h-72 min-w-36 lg:min-w-52 bg-gray-300 relative bg-cover rounded-xl overflow-hidden flex flex-col justify-stretch hover:opacity-90">
+    <a href='#'>
+      <div className='relative flex h-48 min-w-36 flex-col justify-stretch overflow-hidden rounded-xl bg-gray-300 bg-cover hover:opacity-90 lg:h-72 lg:min-w-52'>
         <Image
           src={imageSrc}
           alt={title}
           width={300} // Ubah ukuran gambar sesuai kebutuhan
           height={300} // Ubah ukuran gambar sesuai kebutuhan
-          objectFit=""
-          className="h-full object-cover"
+          objectFit=''
+          className='h-full object-cover'
         />
-        <div className="absolute inset-0 p-4 text-white bg-gradient-to-b from-black/50 to-transparent bg-opacity-10 h-1/2">
-          <div className="text-sm">{title}</div>
-          <div className="text-sm font-bold">{description}</div>
+        <div className='absolute inset-0 h-1/2 bg-opacity-10 bg-gradient-to-b from-black/50 to-transparent p-4 text-white'>
+          <div className='text-sm'>{title}</div>
+          <div className='text-sm font-bold'>{description}</div>
         </div>
       </div>
     </a>

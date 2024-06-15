@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import Image, { StaticImageData } from 'next/image';
+import { useState } from 'react';
 
 const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +41,7 @@ const Gallery = () => {
       setSelectedImage(image);
       setIsModalOpen(true);
     } else {
-      console.error("Image source is undefined");
+      console.error('Image source is undefined');
     }
   };
 
@@ -51,41 +51,39 @@ const Gallery = () => {
 
   return (
     <>
-      <div className="mt-20 lg:mb-12 mb-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl lg:text-4xl text-center text-gray-900 mb-10">
-            GALERI
-          </h2>
+      <div className='mx-6 mb-32 mt-20 lg:mb-12'>
+        <div className='mx-auto max-w-7xl'>
+          <h2 className='mb-10 text-3xl text-gray-900 lg:text-4xl'>Galeri</h2>
 
-          <div className="grid grid-cols-2 gap-4  lg:hidden">
-            <div className="flex flex-col gap-4">
+          <div className='grid grid-cols-2 gap-4 lg:hidden'>
+            <div className='flex flex-col gap-4'>
               {photos1.map((photo, index) => (
-                <div key={index} className="hover:opacity-90">
+                <div key={index} className='hover:opacity-90'>
                   <div>
                     <Image
                       onClick={() => openModal(photo)}
                       width={400}
                       height={400}
-                      className="h-auto max-w-full rounded-lg object-cover"
+                      className='h-full w-full max-w-full rounded-lg object-cover'
                       src={photo.src}
-                      alt=""
+                      alt=''
                     />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className='flex flex-col gap-4'>
               {photos2.map((photo, index) => (
-                <div key={index} className="hover:opacity-90">
+                <div key={index} className='hover:opacity-90'>
                   <div>
                     <Image
                       onClick={() => openModal(photo)}
                       width={400}
                       height={400}
-                      className="h-auto max-w-full rounded-lg object-cover"
+                      className='h-full w-full max-w-full rounded-lg object-cover'
                       src={photo.src}
-                      alt=""
+                      alt=''
                     />
                   </div>
                 </div>
@@ -95,14 +93,14 @@ const Gallery = () => {
         </div>
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-auto flex justify-center items-center animated faster fadeIn">
+        <div className='animated faster fadeIn fixed inset-0 z-50 flex items-center justify-center overflow-auto'>
           <div
-            className="fixed inset-0 bg-black opacity-75"
+            className='fixed inset-0 bg-black opacity-75'
             onClick={closeModal}
           />
-          <div className="relative max-w-2xl bg-black p-1 rounded-lg mx-4">
+          <div className='relative mx-6 max-w-2xl rounded-lg bg-black p-1'>
             <Image
-              className="max-w-full max-h-full rounded-lg"
+              className='max-h-full max-w-full rounded-lg'
               width={500}
               height={500}
               src={selectedImage?.src!}

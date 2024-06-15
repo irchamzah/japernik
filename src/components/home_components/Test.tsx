@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import React, { useState } from "react";
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 const Test = () => {
   // Membagi video ke dalam kelompok 3 elemen
@@ -43,7 +43,7 @@ const Test = () => {
       setSelectedImage(image);
       setIsModalOpen(true);
     } else {
-      console.error("Image source is undefined");
+      console.error('Image source is undefined');
     }
   };
 
@@ -53,40 +53,41 @@ const Test = () => {
 
   return (
     <>
-      <div className="hidden lg:flex items-center justify-center mb-32">
-        <div className="w-full max-w-7xl px-5">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {photoChunks.map((photo, index) => (
-              <div key={index} className="flex flex-col gap-4">
-                {photo.map((photocontent, photoIndex) => (
-                  <div key={photoIndex} className="hover:opacity-90">
-                    <div>
-                      <Image
-                        onClick={() => openModal(photocontent)}
-                        width={300}
-                        height={0}
-                        className="h-auto max-w-full rounded-lg object-cover"
-                        src={photocontent.src}
-                        alt=""
-                      />
+      <div className='mx-6'>
+        <div className='mb-32 hidden items-center justify-center lg:flex'>
+          <div className='w-full max-w-7xl'>
+            <div className='grid grid-cols-2 gap-4 lg:grid-cols-4'>
+              {photoChunks.map((photo, index) => (
+                <div key={index} className='flex flex-col gap-4'>
+                  {photo.map((photocontent, photoIndex) => (
+                    <div key={photoIndex} className='hover:opacity-90'>
+                      <div>
+                        <Image
+                          onClick={() => openModal(photocontent)}
+                          width={300}
+                          height={0}
+                          className='h-full w-full max-w-full rounded-lg object-cover'
+                          src={photocontent.src}
+                          alt=''
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            ))}
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-auto flex justify-center items-center animated faster fadeIn">
+        <div className='animated faster fadeIn fixed inset-0 z-50 flex items-center justify-center overflow-auto'>
           <div
-            className="fixed inset-0 bg-black opacity-75"
+            className='fixed inset-0 bg-black opacity-75'
             onClick={closeModal}
           />
-          <div className="relative max-w-2xl bg-black p-1 rounded-lg mx-4">
+          <div className='relative mx-6 max-w-2xl rounded-lg bg-black p-1'>
             <Image
-              className="max-w-full max-h-full rounded-lg"
+              className='max-h-full max-w-full rounded-lg'
               width={450}
               height={0}
               src={selectedImage?.src!}
