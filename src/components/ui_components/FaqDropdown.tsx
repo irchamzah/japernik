@@ -32,9 +32,9 @@ const FaqDropdown = ({
             <div className='grow font-medium text-gray-700'>{title}</div>
             <div title='ini icon ke kanan' className=''>
               {isOpen ? (
-                <IoIosArrowUp className='text-xl text-gray-500 group-hover:text-blue-500' />
+                <IoIosArrowUp className='text-xl text-gray-500 group-hover:text-purple-500' />
               ) : (
-                <IoIosArrowDown className='text-xl text-gray-500 group-hover:text-blue-500' />
+                <IoIosArrowDown className='text-xl text-gray-500 group-hover:text-purple-500' />
               )}
             </div>
           </div>

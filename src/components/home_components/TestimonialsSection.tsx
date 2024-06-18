@@ -45,7 +45,9 @@ const TestimonialsSection = () => {
   return (
     <div className='mx-6 mb-32 mt-20'>
       <div className='mx-auto max-w-7xl'>
-        <h2 className='mb-10 text-3xl text-gray-900 lg:text-4xl'>Testimoni</h2>
+        <h2 className='mb-4 text-2xl font-semibold text-gray-900 md:text-3xl lg:text-4xl'>
+          Testimoni
+        </h2>
 
         <div className='relative'>
           <LeftRightButton>

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
@@ -66,11 +67,11 @@ const InfoDropdown = ({
             key={index}
             className='w-min decoration-gray-500 hover:underline'
           >
-            <a href={subMenu.link}>
+            <Link href={subMenu.link}>
               <div className='w-max pb-4 font-medium text-gray-500' role='none'>
                 {subMenu.label}
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </div>

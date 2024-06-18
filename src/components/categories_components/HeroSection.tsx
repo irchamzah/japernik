@@ -1,6 +1,8 @@
+import Link from 'next/link';
+
 const HeroSection = () => {
   return (
-    <section className='mt-20 lg:mx-6 lg:mt-32'>
+    <section className='mt-40 sm:mt-36 lg:mx-6'>
       <div
         className='relative mx-auto flex min-h-60 max-w-7xl items-center overflow-hidden bg-green-900 bg-cover bg-center lg:rounded-xl'
         style={{
@@ -14,7 +16,7 @@ const HeroSection = () => {
             You think it. A programmer develops it.
           </p>
           <div className='mt-6 rounded-md border border-white px-4 py-2 hover:bg-white hover:text-gray-900'>
-            <a href='#'>How It Works?</a>
+            <Link href='#'>How It Works?</Link>
           </div>
         </div>
       </div>

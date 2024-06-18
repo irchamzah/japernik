@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const CardImage = ({
   imageSrc,
@@ -10,7 +11,7 @@ const CardImage = ({
   description: string;
 }) => {
   return (
-    <a href='#'>
+    <Link href='#'>
       <div className='relative flex h-48 min-w-36 flex-col justify-stretch overflow-hidden rounded-xl bg-gray-300 bg-cover hover:opacity-90 lg:h-72 lg:min-w-52'>
         <Image
           src={imageSrc}
@@ -25,7 +26,7 @@ const CardImage = ({
           <div className='text-sm font-bold'>{description}</div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

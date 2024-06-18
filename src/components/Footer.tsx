@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   FaFacebook,
   FaInstagram,
@@ -37,36 +38,36 @@ export default function Footer() {
               title='ini bungkus 6 sosmed'
               className='flex justify-center gap-2 pb-4 text-gray-500 sm:py-2'
             >
-              <a href='#'>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaTiktok className='h-5 w-5' />
                 </div>
-              </a>
-              <a href='#'>
+              </Link>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaInstagram className='h-5 w-5' />
                 </div>
-              </a>
-              <a href='#'>
+              </Link>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaLinkedin className='h-5 w-5' />
                 </div>
-              </a>
-              <a href='#'>
+              </Link>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaFacebook className='h-5 w-5' />
                 </div>
-              </a>
-              <a href='#'>
+              </Link>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaPinterest className='h-5 w-5' />
                 </div>
-              </a>
-              <a href='#'>
+              </Link>
+              <Link href='#'>
                 <div className='rounded-full p-2 hover:bg-gray-200'>
                   <FaSquareXTwitter className='h-5 w-5' />
                 </div>
-              </a>
+              </Link>
             </div>
             <div className='flex items-center justify-center gap-2 text-gray-500 sm:ml-6'>
               <div className='flex items-center rounded-full p-2 px-3 py-2 hover:bg-gray-200'>

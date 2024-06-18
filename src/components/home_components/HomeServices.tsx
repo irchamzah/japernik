@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   FaBasketballBall,
   FaBattleNet,
@@ -14,12 +15,12 @@ const HomeServices = () => {
     {
       link: '/categories',
       icon: <FiCamera className='w-full text-5xl' />,
-      Description: 'Make Up',
+      Description: 'Detail Categories',
     },
     {
-      link: '#',
+      link: '/all_services',
       icon: <MdBluetoothSearching className='w-full text-5xl' />,
-      Description: 'Service Name',
+      Description: 'All Services',
     },
     {
       link: '#',
@@ -63,7 +64,7 @@ const HomeServices = () => {
       <div className='mx-6'>
         <section className='mx-auto mb-12 grid max-w-7xl grid-cols-3 gap-x-4 gap-y-7 py-5 text-gray-600 md:grid-cols-4 lg:grid-cols-9'>
           {services.map((service, index) => (
-            <a key={index} href={`${service.link}`}>
+            <Link key={index} href={`${service.link}`}>
               <div className='flex flex-col items-center'>
                 <div className='relative'>
                   <div className='relative rounded-2xl border border-gray-200 bg-white p-7 hover:border-blue-500'>
@@ -75,7 +76,7 @@ const HomeServices = () => {
                   {service.Description}
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </section>
       </div>

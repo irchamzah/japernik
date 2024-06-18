@@ -3,7 +3,7 @@
 import { ReactNode, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const LeftRightButton = ({ children }: { children: ReactNode }) => {
+const LeftRightButton_2 = ({ children }: { children: ReactNode }) => {
   const [scrollX, setScrollX] = useState(0);
   const serviceRef = useRef<HTMLDivElement>(null);
 
@@ -31,13 +31,13 @@ const LeftRightButton = ({ children }: { children: ReactNode }) => {
     <>
       <div className='relative'>
         <button
-          className={`absolute -top-12 right-0 z-10 my-auto mr-12 h-10 w-10 rounded-full border bg-white active:bg-gray-100 lg:-top-14`}
+          className={`absolute left-0 z-10 -mx-10 my-auto h-10 w-10 rounded-full bg-white active:bg-gray-100`}
           onClick={scrollLeft}
         >
           <FaChevronLeft className='mx-auto text-gray-500' />
         </button>
         <button
-          className={`absolute -top-12 right-0 z-10 my-auto h-10 w-10 rounded-full border bg-white active:bg-gray-100 lg:-top-14`}
+          className={`absolute right-0 z-10 -mx-10 my-auto h-10 w-10 rounded-full bg-white active:bg-gray-100`}
           onClick={scrollRight}
         >
           <FaChevronRight className='mx-auto text-gray-500' />
@@ -51,4 +51,4 @@ const LeftRightButton = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default LeftRightButton;
+export default LeftRightButton_2;

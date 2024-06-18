@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { GiLips } from 'react-icons/gi';
@@ -72,11 +73,11 @@ const Dropdown = ({
             >
               {title}
             </div>
-            <div title='ini icon ke kanan' className='py-6 sm:hidden'>
+            <div title='ini icon ke kanan' className='px-3 py-6 sm:hidden'>
               {isOpen ? (
-                <IoIosArrowUp className='text-xl text-gray-500 group-hover:text-blue-500' />
+                <IoIosArrowUp className='text-xl text-gray-500 group-hover:text-purple-500' />
               ) : (
-                <IoIosArrowDown className='text-xl text-gray-500 group-hover:text-blue-500' />
+                <IoIosArrowDown className='text-xl text-gray-500 group-hover:text-purple-500' />
               )}
             </div>
           </div>
@@ -90,7 +91,7 @@ const Dropdown = ({
           <div className='py-1' role='none'>
             <div className='mb-2'></div>
             {items.map((item, index) => (
-              <a
+              <Link
                 href={item.link}
                 className={`group block rounded-lg px-4 py-1 text-lg font-medium text-gray-700 decoration-gray-600 hover:bg-gray-100 ${isSmScreen ? 'hover:underline' : ''} no-underline sm:-mx-3 sm:px-3 sm:text-gray-600`}
                 role='menuitem'
@@ -100,7 +101,7 @@ const Dropdown = ({
                   <span className='grow'>{item.label}</span>
                   <FaArrowRight className='hidden text-sm text-gray-500 sm:group-hover:block' />
                 </div>
-              </a>
+              </Link>
             ))}
             <div className='mb-6'></div>
           </div>

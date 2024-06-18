@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const BannerSection = () => {
   return (
@@ -26,12 +27,12 @@ const BannerSection = () => {
                 </p>
               </div>
             </div>
-            <a
+            <Link
               href='#'
               className='w-min text-nowrap rounded-xl bg-gray-900 px-4 py-2 font-semibold text-white hover:opacity-90 lg:mt-auto'
             >
               Browse agencies
-            </a>
+            </Link>
           </div>
           <div title='ini buat fotonya' className='flex basis-1/2 items-center'>
             <Image

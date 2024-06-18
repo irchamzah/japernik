@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import Search from './SearchService';
 import SearchService from './SearchService';
+import Link from 'next/link';
 
 const HomeHero = () => {
   const images = [
@@ -26,7 +27,7 @@ const HomeHero = () => {
 
   return (
     <div className='mx-0 lg:mx-6'>
-      <div className='mx-auto mt-16 max-w-7xl rounded-xl lg:mt-32 lg:pb-2'>
+      <div className='mx-auto mt-32 max-w-7xl rounded-xl lg:mt-36 lg:pb-2'>
         <div
           className='rounded-t-xl text-white'
           style={{
@@ -42,24 +43,24 @@ const HomeHero = () => {
               <div className='mb-8 hidden items-center text-sm md:flex'>
                 <p className=''>Popular Services:</p>
                 <div className='mx-2 flex items-center gap-2'>
-                  <a
+                  <Link
                     href='#'
                     className='rounded-full border-[1px] border-white px-4 py-1'
                   >
                     Make Up
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className='rounded-full border-[1px] border-white px-4 py-1'
                   >
                     MC
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href='#'
                     className='rounded-full border-[1px] border-white px-4 py-1'
                   >
                     Dekorasi
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
