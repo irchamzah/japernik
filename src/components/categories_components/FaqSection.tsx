@@ -1,4 +1,4 @@
-import FaqDropdown from '../ui_components/FaqDropdown';
+import FaqDropdown from './FaqDropdown';
 
 const FaqSection = () => {
   const faqdropdownitems = {

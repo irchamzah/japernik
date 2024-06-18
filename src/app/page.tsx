@@ -8,10 +8,12 @@ import TestimonialsSection from '@/components/home_components/TestimonialsSectio
 import Gallery from '@/components/home_components/Gallery';
 import Test from '@/components/home_components/Test';
 import MoreInfoSection from '@/components/categories_components/MoreInfoSection';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (
     <Layout>
+      <Navbar mode={'fixed'} />
       <HomeHero />
       <HomeServices />
       <HomePopularServices sectionTitle='Jasa Terpopuler' />
@@ -20,7 +22,6 @@ export default function Home() {
       <TestimonialsSection />
       <Gallery />
       <Test />
-      <MoreInfoSection />
     </Layout>
   );
 }

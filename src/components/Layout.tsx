@@ -1,12 +1,13 @@
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import MoreInfoSection from './categories_components/MoreInfoSection';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      <Navbar />
       <div>{children}</div>
+      <MoreInfoSection />
       <Footer />
     </div>
   );

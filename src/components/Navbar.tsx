@@ -6,7 +6,7 @@ import { FiMenu } from 'react-icons/fi';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
 
-const Navbar = () => {
+const Navbar = ({ mode }: { mode: string }) => {
   // const [isScrolled, setIsScrolled] = useState(false);
   // const [isScrolled_2, setIsScrolled_2] = useState(false);
   // useEffect(() => {
@@ -71,7 +71,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='fixed top-0 z-20 w-full'>
+      <nav className={`top-0 z-20 w-full ${mode}`}>
         <div className='min-h-20 border-b bg-white'>
           <div className='mx-6 flex h-20 max-w-7xl items-center justify-between lg:mx-auto'>
             <Link href='/'>

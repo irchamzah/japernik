@@ -1,7 +1,7 @@
 import { FaArrowRight } from 'react-icons/fa';
 import { GiLips } from 'react-icons/gi';
-import CategoryCard from './CategoryCard';
-import LeftRightButton from './LeftRightButton';
+import CategoryCard from '../ui_components/CategoryCard';
+import LeftRightButton from '../ui_components/LeftRightButton';
 
 const CategorySection = () => {
   return (
