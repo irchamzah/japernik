@@ -7,28 +7,6 @@ import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
 
 const Navbar = ({ mode }: { mode: string }) => {
-  // const [isScrolled, setIsScrolled] = useState(false);
-  // const [isScrolled_2, setIsScrolled_2] = useState(false);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 300) {
-  //       setIsScrolled(true);
-  //     } else {
-  //       setIsScrolled(false);
-  //     }
-
-  //     if (window.scrollY > 700) {
-  //       setIsScrolled_2(true);
-  //     } else {
-  //       setIsScrolled_2(false);
-  //     }
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-
   useEffect(() => {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
