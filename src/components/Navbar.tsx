@@ -51,7 +51,7 @@ const Navbar = ({ mode }: { mode: string }) => {
     <>
       <nav className={`top-0 z-20 w-full ${mode}`}>
         <div className='min-h-20 border-b bg-white'>
-          <div className='mx-6 flex h-20 max-w-7xl items-center justify-between lg:mx-auto'>
+          <div className='mx-6 flex h-20 max-w-7xl items-center justify-between xl:mx-auto'>
             <Link href='/'>
               <div
                 title='ini logo'
@@ -148,7 +148,7 @@ const Navbar = ({ mode }: { mode: string }) => {
                       Programming & Tech
                     </div>
                   </Link>
-                  <Link href='#' className='snap-center'>
+                  <Link href='/detail_service' className='snap-center'>
                     <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
                       Digital Marketing
                     </div>

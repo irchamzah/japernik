@@ -81,7 +81,7 @@ const Filter = () => {
       </div>
       {isFilterVisible && (
         <>
-          <div className='fixed inset-0 w-full'>
+          <div className='fixed inset-0 z-20 w-full'>
             <div className='relative h-full overflow-auto bg-white px-6 pb-20'>
               <div
                 title='ini isi clear all, Filter, close button'
@@ -155,7 +155,7 @@ const Filter = () => {
       )}
       {isSortVisible && (
         <>
-          <div className='fixed inset-0 w-full'>
+          <div className='fixed inset-0 z-20 w-full'>
             <div className='relative h-full overflow-auto bg-white px-6 pb-20'>
               <div
                 title='ini isi clear all, Filter, close button'

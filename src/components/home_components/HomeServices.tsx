@@ -23,7 +23,7 @@ const HomeServices = () => {
       Description: 'All Services',
     },
     {
-      link: '#',
+      link: '/detail_service',
       icon: <SiElasticsearch className='w-full text-5xl' />,
       Description: 'Service Name',
     },
