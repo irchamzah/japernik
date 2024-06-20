@@ -27,7 +27,7 @@ export default function detail_service() {
       <ProfileCard />
       <PhotoSlider images={images} />
       <ServiceDescriptionDetail />
-      <GetToKnow />
+      <GetToKnow header='Get to Know Malik' />
       <Reviews />
     </Layout>
   );

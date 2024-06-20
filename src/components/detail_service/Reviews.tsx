@@ -12,7 +12,7 @@ const Reviews = () => {
   };
   return (
     <div className='mx-auto max-w-7xl'>
-      <div className='mx-6 mb-12 xl:mx-0'>
+      <div className='mx-6 my-12 xl:mx-0'>
         <button
           title='ini title'
           className='flex w-full items-center justify-between'

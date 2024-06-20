@@ -16,7 +16,7 @@ const ServiceDescriptionDetail = () => {
             <div className='mb-6 text-xl font-bold text-gray-700'>
               About this service
             </div>
-            <p
+            <div
               className={`relative overflow-hidden text-gray-600 ${isExpanded ? 'max-h-full' : 'max-h-48 sm:max-h-24'}`}
             >
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -34,7 +34,7 @@ const ServiceDescriptionDetail = () => {
               <div
                 className={`bg-white-fade absolute bottom-0 h-20 w-full ${isExpanded ? 'hidden' : ''}`}
               ></div>
-            </p>
+            </div>
             <button
               onClick={toggleExpansion}
               className={`mt-4 font-medium active:bg-gray-100`}

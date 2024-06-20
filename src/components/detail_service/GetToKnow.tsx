@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { IoIosStar } from 'react-icons/io';
+import { IoChatbubblesOutline } from 'react-icons/io5';
+import { MdEdit } from 'react-icons/md';
 
-const GetToKnow = () => {
+const GetToKnow = ({ header }: { header: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = () => {
@@ -14,9 +16,7 @@ const GetToKnow = () => {
   return (
     <div className='mx-auto max-w-7xl'>
       <div className='mx-6 mb-8 xl:mx-0'>
-        <h1 className='mb-6 text-xl font-bold text-gray-700'>
-          Get to know Malik
-        </h1>
+        <h1 className='mb-6 text-xl font-bold text-gray-700'>{header}</h1>
         <div
           title='foto, nama, profesi, rating'
           className='flex flex-col items-center gap-3'
@@ -40,6 +40,16 @@ const GetToKnow = () => {
               <span className='mr-1 font-semibold text-gray-700'>4.7</span>
               <span className='mr-1 text-gray-500'>(84)</span>
             </div>
+          </div>
+          <div className='flex gap-2'>
+            <button className='flex items-center rounded border bg-purple-500 px-4 py-2 text-white active:bg-purple-600'>
+              <IoChatbubblesOutline className='mr-2' />
+              Contact Seller
+            </button>
+            <button className='flex items-center rounded border px-4 py-2 active:bg-gray-100'>
+              <MdEdit className='mr-2' />
+              Edit Profile
+            </button>
           </div>
         </div>
         <div className='mt-6 rounded border p-6'>
@@ -65,7 +75,7 @@ const GetToKnow = () => {
           </div>
           <hr />
           <div className='mt-4 text-gray-600'>
-            <p
+            <div
               className={`relative overflow-hidden ${isExpanded ? 'max-h-full' : 'max-h-48 sm:max-h-24'}`}
             >
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem,
@@ -83,7 +93,7 @@ const GetToKnow = () => {
               <div
                 className={`bg-white-fade absolute bottom-0 h-20 w-full ${isExpanded ? 'hidden' : ''}`}
               ></div>
-            </p>
+            </div>
           </div>
           <button
             onClick={toggleExpansion}

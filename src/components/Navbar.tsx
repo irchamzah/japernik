@@ -140,22 +140,22 @@ const Navbar = ({ mode }: { mode: string }) => {
                 <div className='no-scrollbar flex h-10 snap-x items-center text-nowrap font-medium text-gray-500'>
                   <Link href='/categories' className='snap-center'>
                     <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Graphic & Design
+                      Categories
                     </div>
                   </Link>
                   <Link href='/all_services' className='snap-center'>
                     <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Programming & Tech
+                      All Services
                     </div>
                   </Link>
                   <Link href='/detail_service' className='snap-center'>
                     <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Digital Marketing
+                      Detail Service
                     </div>
                   </Link>
-                  <Link href='#' className='snap-center'>
+                  <Link href='/detail_profile' className='snap-center'>
                     <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Video & Animation
+                      Detail Profile
                     </div>
                   </Link>
                   <Link href='#' className='snap-center'>
@@ -218,6 +218,23 @@ const Navbar = ({ mode }: { mode: string }) => {
           <Link href={'#'}>
             <div className='rounded-xl p-3 hover:bg-gray-100'>
               Become a Seller
+            </div>
+          </Link>
+          <hr />
+          <Link href={'/categories'}>
+            <div className='rounded-xl p-3 hover:bg-gray-100'>Categories</div>
+          </Link>
+          <Link href={'all_services'}>
+            <div className='rounded-xl p-3 hover:bg-gray-100'>All Services</div>
+          </Link>
+          <Link href={'/detail_service'}>
+            <div className='rounded-xl p-3 hover:bg-gray-100'>
+              Detail Service
+            </div>
+          </Link>
+          <Link href={'/detail_profile'}>
+            <div className='rounded-xl p-3 hover:bg-gray-100'>
+              Detail Profile
             </div>
           </Link>
         </div>
