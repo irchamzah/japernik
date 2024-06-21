@@ -5,8 +5,91 @@ import { useEffect } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
+import { GiLipstick } from 'react-icons/gi';
 
 const Navbar = ({ mode }: { mode: string }) => {
+  const categories = [
+    {
+      icon: <GiLipstick />,
+      label: 'Make Up',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Wedding Organizer',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Fotografi dan Videografi',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Dekorasi',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Catering',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Penyewaan Gaun dan Jas',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Undangan',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Souvenir',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Hiburan',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'MC',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Penyewaan Tempat',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Transportasi',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Konsultasi Pernikahan',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Penataan Rambut (Hairdo)',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Sound System dan Lighting',
+      link: '/all_services',
+    },
+    {
+      icon: <GiLipstick />,
+      label: 'Perawatan Pra-Pernikahan',
+      link: '/all_services',
+    },
+  ];
   useEffect(() => {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -16,6 +99,7 @@ const Navbar = ({ mode }: { mode: string }) => {
     const handleMenuToggle = () => {
       mobileMenu?.classList.toggle('hidden');
       overlay?.classList.toggle('hidden');
+      document.body.classList.add('no-scroll');
     };
 
     const handleClickOutside = (event: any) => {
@@ -26,12 +110,14 @@ const Navbar = ({ mode }: { mode: string }) => {
       ) {
         mobileMenu.classList.add('hidden');
         overlay?.classList.add('hidden');
+        document.body.classList.remove('no-scroll');
       }
     };
 
     const handleCloseButtonClick = () => {
       mobileMenu?.classList.toggle('hidden');
       overlay?.classList.toggle('hidden');
+      document.body.classList.remove('no-scroll');
     };
 
     mobileMenuButton?.addEventListener('click', handleMenuToggle);
@@ -49,7 +135,7 @@ const Navbar = ({ mode }: { mode: string }) => {
 
   return (
     <>
-      <nav className={`top-0 z-20 w-full ${mode}`}>
+      <nav className={`top-0 z-20 w-full ${mode} `}>
         <div className='min-h-20 border-b bg-white'>
           <div className='mx-6 flex h-20 max-w-7xl items-center justify-between xl:mx-auto'>
             <Link href='/'>
@@ -68,7 +154,7 @@ const Navbar = ({ mode }: { mode: string }) => {
                 <input
                   type='text'
                   className='-mr-1 w-full rounded-l-sm border px-4 py-2'
-                  placeholder='Jasa apa yang kamu cari?'
+                  placeholder='Cari jasa apa?'
                 />
                 <button className=''>
                   <div className='flex h-full rounded-r-sm bg-gray-800 px-4 py-2 text-white hover:opacity-90'>
@@ -86,7 +172,7 @@ const Navbar = ({ mode }: { mode: string }) => {
                   title='ini become seller'
                   className='flex h-10 items-center text-nowrap hover:text-purple-500'
                 >
-                  Become a Seller
+                  Menjadi Penjual
                 </div>
               </Link>
               <Link href=''>
@@ -138,56 +224,17 @@ const Navbar = ({ mode }: { mode: string }) => {
             <div className='mx-auto max-w-7xl px-10'>
               <LeftRightButton_2>
                 <div className='no-scrollbar flex h-10 snap-x items-center text-nowrap font-medium text-gray-500'>
-                  <Link href='/categories' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Categories
-                    </div>
-                  </Link>
-                  <Link href='/all_services' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      All Services
-                    </div>
-                  </Link>
-                  <Link href='/detail_service' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Detail Service
-                    </div>
-                  </Link>
-                  <Link href='/detail_profile' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Detail Profile
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Writing & Translation
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Music & Audio
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Business
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Consulting
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      Data
-                    </div>
-                  </Link>
-                  <Link href='#' className='snap-center'>
-                    <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                      AI Services
-                    </div>
-                  </Link>
+                  {categories.map((category, index) => (
+                    <Link
+                      key={index}
+                      href={category.link}
+                      className='snap-center'
+                    >
+                      <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
+                        {category.label}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </LeftRightButton_2>
             </div>
@@ -197,7 +244,7 @@ const Navbar = ({ mode }: { mode: string }) => {
 
       <div className='overlay fixed inset-0 z-30 hidden bg-black opacity-50'></div>
 
-      <div className='mobile-menu fixed right-0 top-0 z-50 hidden h-screen w-72 bg-white px-6 py-[22px] text-gray-900'>
+      <div className='mobile-menu fixed right-0 top-0 z-50 hidden h-screen w-72 overflow-auto bg-white px-6 py-[22px] text-gray-900'>
         <div className='mb-5 flex justify-end'>
           <button className='closeButton items-end'>
             <IoClose className='text-3xl' />
@@ -221,22 +268,14 @@ const Navbar = ({ mode }: { mode: string }) => {
             </div>
           </Link>
           <hr />
-          <Link href={'/categories'}>
-            <div className='rounded-xl p-3 hover:bg-gray-100'>Categories</div>
-          </Link>
-          <Link href={'all_services'}>
-            <div className='rounded-xl p-3 hover:bg-gray-100'>All Services</div>
-          </Link>
-          <Link href={'/detail_service'}>
-            <div className='rounded-xl p-3 hover:bg-gray-100'>
-              Detail Service
-            </div>
-          </Link>
-          <Link href={'/detail_profile'}>
-            <div className='rounded-xl p-3 hover:bg-gray-100'>
-              Detail Profile
-            </div>
-          </Link>
+          <h1 className='mt-10 p-3 font-bold'>Jasa yang Tersedia:</h1>
+          {categories.map((category, index) => (
+            <Link key={index} href={category.link}>
+              <div className='ml-3 rounded-xl p-3 hover:bg-gray-100'>
+                {category.label}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </>

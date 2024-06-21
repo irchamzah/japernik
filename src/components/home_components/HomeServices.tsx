@@ -1,61 +1,100 @@
 import Link from 'next/link';
+import { BiTrim } from 'react-icons/bi';
+import { BsSoundwave } from 'react-icons/bs';
+import { CiMicrophoneOn } from 'react-icons/ci';
+import { FaGifts, FaPhotoVideo } from 'react-icons/fa';
+import { GiAmpleDress, GiLipstick } from 'react-icons/gi';
+import { IoCheckmarkDoneOutline, IoFastFoodOutline } from 'react-icons/io5';
 import {
-  FaBasketballBall,
-  FaBattleNet,
-  FaBuysellads,
-  FaConciergeBell,
-  FaCouch,
-} from 'react-icons/fa';
-import { FiCamera } from 'react-icons/fi';
-import { MdBluetoothSearching } from 'react-icons/md';
-import { SiElasticsearch, SiOpensearch } from 'react-icons/si';
+  MdEmojiTransportation,
+  MdOutlineInsertInvitation,
+  MdOutlineMapsHomeWork,
+} from 'react-icons/md';
+import { PiGuitar, PiHairDryerLight } from 'react-icons/pi';
+import { RiSpeakLine } from 'react-icons/ri';
+import { SiAwsorganizations } from 'react-icons/si';
 
 const HomeServices = () => {
   const services = [
     {
-      link: '/categories',
-      icon: <FiCamera className='w-full text-5xl' />,
-      Description: 'Detail Categories',
-    },
-    {
+      icon: <GiLipstick className='w-full text-5xl' />,
+      label: 'Make Up',
       link: '/all_services',
-      icon: <MdBluetoothSearching className='w-full text-5xl' />,
-      Description: 'All Services',
     },
     {
-      link: '/detail_service',
-      icon: <SiElasticsearch className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <SiAwsorganizations className='w-full text-5xl' />,
+      label: 'Wedding Organizer',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <FaBasketballBall className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <FaPhotoVideo className='w-full text-5xl' />,
+      label: 'Fotografi dan Videografi',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <FaBattleNet className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <BiTrim className='w-full text-5xl' />,
+      label: 'Dekorasi',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <FaBuysellads className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <IoFastFoodOutline className='w-full text-5xl' />,
+      label: 'Catering',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <FaConciergeBell className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <GiAmpleDress className='w-full text-5xl' />,
+      label: 'Penyewaan Gaun dan Jas',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <FaCouch className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <MdOutlineInsertInvitation className='w-full text-5xl' />,
+      label: 'Undangan',
+      link: '/all_services',
     },
     {
-      link: '#',
-      icon: <SiOpensearch className='w-full text-5xl' />,
-      Description: 'Service Name',
+      icon: <FaGifts className='w-full text-5xl' />,
+      label: 'Souvenir',
+      link: '/all_services',
+    },
+    {
+      icon: <PiGuitar className='w-full text-5xl' />,
+      label: 'Hiburan',
+      link: '/all_services',
+    },
+    {
+      icon: <CiMicrophoneOn className='w-full text-5xl' />,
+      label: 'MC',
+      link: '/all_services',
+    },
+    {
+      icon: <MdOutlineMapsHomeWork className='w-full text-5xl' />,
+      label: 'Penyewaan Tempat',
+      link: '/all_services',
+    },
+    {
+      icon: <MdEmojiTransportation className='w-full text-5xl' />,
+      label: 'Transportasi',
+      link: '/all_services',
+    },
+    {
+      icon: <RiSpeakLine className='w-full text-5xl' />,
+      label: 'Konsultasi Pernikahan',
+      link: '/all_services',
+    },
+    {
+      icon: <PiHairDryerLight className='w-full text-5xl' />,
+      label: 'Penataan Rambut (Hairdo)',
+      link: '/all_services',
+    },
+    {
+      icon: <BsSoundwave className='w-full text-5xl' />,
+      label: 'Sound System dan Lighting',
+      link: '/all_services',
+    },
+    {
+      icon: <IoCheckmarkDoneOutline className='w-full text-5xl' />,
+      label: 'Perawatan Pra-Pernikahan',
+      link: '/all_services',
     },
   ];
 
@@ -73,7 +112,7 @@ const HomeServices = () => {
                   <div className='absolute -inset-1 -z-10 rounded-2xl bg-gray-100 blur-sm'></div>
                 </div>
                 <div className='mt-2 text-center text-sm font-bold'>
-                  {service.Description}
+                  {service.label}
                 </div>
               </div>
             </Link>

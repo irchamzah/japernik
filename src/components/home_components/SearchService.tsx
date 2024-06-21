@@ -7,9 +7,9 @@ const SearchService = () => {
         <input
           type='text'
           className='w-full px-4 py-2 focus:outline-none'
-          placeholder='Cari Jasa...'
+          placeholder='Cari jasa apa?'
         />
-        <button className='flex items-center justify-center bg-pink-500 px-2 py-2 text-white'>
+        <button className='flex items-center justify-center bg-purple-500 px-2 py-2 text-white'>
           <CiSearch className='h-6 w-6' />
         </button>
       </div>

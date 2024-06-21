@@ -37,10 +37,10 @@ const HomeHero = () => {
           <div className='container mx-auto flex max-h-[500px] items-center px-4 py-24'>
             <div className='mx-auto flex h-full w-full max-w-2xl flex-col items-center rounded-lg bg-gray-900 bg-opacity-70 p-10 text-center'>
               <h1 className='mb-6 text-4xl font-bold md:text-5xl'>
-                MUA, MC, dan Dekorasi <br /> semua ada disini!
+                Layanan Pernikahan Lengkap untuk Momen Istimewa Anda
               </h1>
               <SearchService />
-              <div className='mb-8 hidden items-center text-sm md:flex'>
+              <div className='mb-8 hidden items-center text-sm'>
                 <p className=''>Popular Services:</p>
                 <div className='mx-2 flex items-center gap-2'>
                   <Link
@@ -68,7 +68,7 @@ const HomeHero = () => {
         </div>
         <div className='mx-auto hidden min-h-24 items-center justify-center rounded-b-xl bg-gray-100 text-gray-400 md:flex'>
           <div className='container flex items-center justify-center gap-12'>
-            <span className='font-bold'>Trusted By:</span>
+            <span className='font-bold'>Dipercayakan oleh:</span>
             <ul className='flex gap-12'>
               <li>
                 <Image

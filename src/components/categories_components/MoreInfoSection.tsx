@@ -2,22 +2,74 @@ import { IoIosArrowDown } from 'react-icons/io';
 import InfoDropdown from '../ui_components/InfoDropdown';
 
 const MoreInfoSection = () => {
-  const dropdownDummy1 = [
+  const categories = [
     {
-      label: 'Graphics & Design',
-      link: '#',
+      label: 'Make Up',
+      link: '/all_services',
     },
     {
-      label: 'Digital Marketing',
-      link: '#',
+      label: 'Wedding Organizer',
+      link: '/all_services',
     },
     {
-      label: 'Writing & Translation',
-      link: '#',
+      label: 'Fotografi dan Videografi',
+      link: '/all_services',
+    },
+    {
+      label: 'Dekorasi',
+      link: '/all_services',
+    },
+    {
+      label: 'Catering',
+      link: '/all_services',
+    },
+    {
+      label: 'Penyewaan Gaun dan Jas',
+      link: '/all_services',
+    },
+    {
+      label: 'Undangan',
+      link: '/all_services',
+    },
+    {
+      label: 'Souvenir',
+      link: '/all_services',
+    },
+    {
+      label: 'Hiburan',
+      link: '/all_services',
+    },
+    {
+      label: 'MC',
+      link: '/all_services',
+    },
+    {
+      label: 'Penyewaan Tempat',
+      link: '/all_services',
+    },
+    {
+      label: 'Transportasi',
+      link: '/all_services',
+    },
+    {
+      label: 'Konsultasi Pernikahan',
+      link: '/all_services',
+    },
+    {
+      label: 'Penataan Rambut (Hairdo)',
+      link: '/all_services',
+    },
+    {
+      label: 'Sound System dan Lighting',
+      link: '/all_services',
+    },
+    {
+      label: 'Perawatan Pra-Pernikahan',
+      link: '/all_services',
     },
   ];
 
-  const dropdownDummy2 = [
+  const about = [
     {
       label: 'Careers',
       link: '#',
@@ -30,9 +82,25 @@ const MoreInfoSection = () => {
       label: 'Partnerships',
       link: '#',
     },
+    {
+      label: 'Privacy Policy',
+      link: '#',
+    },
+    {
+      label: 'Terms of Service',
+      link: '#',
+    },
+    {
+      label: 'Intellectual Property Claims',
+      link: '#',
+    },
+    {
+      label: 'Investor Relations',
+      link: '#',
+    },
   ];
 
-  const dropdownDummy3 = [
+  const support = [
     {
       label: 'Help & Support',
       link: '#',
@@ -42,7 +110,101 @@ const MoreInfoSection = () => {
       link: '#',
     },
     {
+      label: 'Selling on Japernik',
+      link: '#',
+    },
+    {
+      label: 'Buying on Japernik',
+      link: '#',
+    },
+    {
+      label: 'Japernik Guides',
+      link: '#',
+    },
+    {
       label: 'Learn',
+      link: '#',
+    },
+  ];
+
+  const community = [
+    {
+      label: 'Customer Success Stories',
+      link: '#',
+    },
+    {
+      label: 'Community Hub',
+      link: '#',
+    },
+    {
+      label: 'Forum',
+      link: '#',
+    },
+    {
+      label: 'Events',
+      link: '#',
+    },
+    {
+      label: 'Blog',
+      link: '#',
+    },
+    {
+      label: 'Creators',
+      link: '#',
+    },
+    {
+      label: 'Affiliates',
+      link: '#',
+    },
+    {
+      label: 'Podcast',
+      link: '#',
+    },
+    {
+      label: 'Invite a Friend',
+      link: '#',
+    },
+    {
+      label: 'Become a Seller',
+      link: '#',
+    },
+    {
+      label: 'Community Standards',
+      link: '#',
+    },
+  ];
+
+  const businessSolutions = [
+    {
+      label: 'About Business Solutions',
+      link: '#',
+    },
+    {
+      label: 'Japernik Pro',
+      link: '#',
+    },
+    {
+      label: 'Japernik Certified',
+      link: '#',
+    },
+    {
+      label: 'Become an Agency',
+      link: '#',
+    },
+    {
+      label: 'Japernik Enterprise',
+      link: '#',
+    },
+    {
+      label: 'Clear Voice',
+      link: '#',
+    },
+    {
+      label: 'Working Not Working',
+      link: '#',
+    },
+    {
+      label: 'Contact Sales',
       link: '#',
     },
   ];
@@ -52,16 +214,16 @@ const MoreInfoSection = () => {
       <section className='mx-6'>
         <div className='mx-auto max-w-7xl'>
           <div className='grid gap-4 sm:grid-cols-3 lg:grid-cols-5'>
-            <InfoDropdown menuLabel='Categories' subMenus={dropdownDummy1} />
-            <InfoDropdown menuLabel='About' subMenus={dropdownDummy2} />
+            <InfoDropdown menuLabel='Categories' subMenus={categories} />
+            <InfoDropdown menuLabel='About' subMenus={about} />
             <InfoDropdown
               menuLabel='Support and Education'
-              subMenus={dropdownDummy3}
+              subMenus={support}
             />
-            <InfoDropdown menuLabel='Community' subMenus={dropdownDummy3} />
+            <InfoDropdown menuLabel='Community' subMenus={community} />
             <InfoDropdown
               menuLabel='Business Solutions'
-              subMenus={dropdownDummy3}
+              subMenus={businessSolutions}
             />
           </div>
         </div>

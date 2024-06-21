@@ -16,7 +16,6 @@ export default function Home() {
       <Navbar mode={'fixed'} />
       <HomeHero />
       <HomeServices />
-      <HomePopularServices sectionTitle='Jasa Terpopuler' />
       <StepsSection />
       <YouTubeFrame />
       <TestimonialsSection />
