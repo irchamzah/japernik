@@ -1,46 +1,82 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { IoIosStar } from 'react-icons/io';
 
-const ProductCard = () => {
+const ProductCard = ({
+  thumbnail,
+  authorImg,
+  authorName,
+  productDescription,
+  rating,
+  countReview,
+  price,
+  productLink,
+  authorLink,
+}: {
+  thumbnail: string;
+  authorImg: string;
+  authorName: string;
+  productDescription: string;
+  rating: number;
+  countReview: number;
+  price: number;
+  productLink: string;
+  authorLink: string;
+}) => {
   return (
     <div title='container utk seller' className='mt-4'>
       <div title='isi foto & detail seller' className='flex w-full flex-col'>
-        <div title='ini foto' className='flex w-full'>
-          <Image
-            src={'/images/random_image/img1.jpg'}
-            alt='foto seller'
-            width={100}
-            height={0}
-            className='h-52 w-full rounded-lg border object-cover'
-          />
-        </div>
+        <Link href={productLink}>
+          <div title='ini foto' className='flex w-full'>
+            <Image
+              src={thumbnail}
+              alt='foto seller'
+              width={100}
+              height={0}
+              className='h-52 w-full rounded-lg border object-cover'
+            />
+          </div>
+        </Link>
         <div title='ini detail seller' className='mt-3'>
           <div
             title='ini foto seller, nama seller'
             className='flex w-full items-center'
           >
-            <Image
-              src={'/images/random_image/img1.jpg'}
-              alt='foto seller'
-              width={20}
-              height={0}
-              className='mr-2 h-6 w-6 rounded-full object-cover'
-            />
-            <span className='text-sm font-semibold'>Irchamzah Developer</span>
+            <Link href={authorLink}>
+              <Image
+                src={authorImg}
+                alt='foto seller'
+                width={20}
+                height={0}
+                className='mr-2 h-6 w-6 rounded-full object-cover'
+              />
+            </Link>
+            <Link href={authorLink}>
+              <span className='text-sm font-semibold'>{authorName}</span>
+            </Link>
           </div>
-          <div title='ini deskripsi'>
-            <p className='mt-1 w-full text-sm text-gray-700'>
-              I will build saas business as a full stack saas developer web app
-            </p>
-          </div>
-          <div title='ini rating' className='mt-2 flex items-center'>
-            <IoIosStar />
-            <span className='ml-1 font-semibold'>5.0</span>
-            <span className='ml-1 text-gray-500'>(45)</span>
-          </div>
-          <div title='ini harga' className=''>
-            <span className='font-semibold'>From US $1,445</span>
-          </div>
+
+          <Link href={productLink}>
+            <div title='ini deskripsi'>
+              <p className='mt-1 w-full text-sm text-gray-700'>
+                {productDescription}
+              </p>
+            </div>
+          </Link>
+          <Link href={productLink}>
+            <div title='ini rating' className='mt-2 flex items-center'>
+              <IoIosStar />
+              <span className='ml-1 font-semibold'>{rating.toFixed(1)}</span>
+              <span className='ml-1 text-gray-500'>({countReview})</span>
+            </div>
+          </Link>
+          <Link href={productLink}>
+            <div title='ini harga' className=''>
+              <span className='font-semibold'>
+                Mulai dari IDR {price.toLocaleString('id-ID')}
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
