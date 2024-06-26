@@ -1,17 +1,36 @@
 'use client';
 
+import { User } from '@/lib/actions/user.actions';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { IoIosStar } from 'react-icons/io';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
 
-const GetToKnow = ({ header }: { header: string }) => {
+const GetToKnow = ({
+  header,
+  profileData,
+  ratingAvg,
+  reviewCount,
+}: {
+  header: string;
+  profileData: User;
+  ratingAvg: number;
+  reviewCount: number;
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const [date, setDate] = useState('');
+  useEffect(() => {
+    if (profileData && profileData.createdAt) {
+      setDate(new Date(profileData.createdAt).toString());
+    }
+  }, [profileData]);
 
   return (
     <div className='mx-auto max-w-7xl'>
@@ -23,7 +42,7 @@ const GetToKnow = ({ header }: { header: string }) => {
         >
           <div>
             <Image
-              src={'https://randomuser.me/api/portraits/men/1.jpg'}
+              src={profileData.photo || ''}
               alt=''
               width={100}
               height={0}
@@ -31,21 +50,28 @@ const GetToKnow = ({ header }: { header: string }) => {
             />
           </div>
           <div className='flex flex-col items-center gap-1'>
-            <div className='font-semibold text-gray-700'>Malik</div>
-            <div className='text-sm text-gray-600'>
-              Senior Full Stack Developer
+            <div className='font-semibold text-gray-700'>
+              {profileData.name}
             </div>
+            <div className='text-sm text-gray-600'>{profileData.title}</div>
             <div className='flex items-center'>
               <IoIosStar className='mr-1 text-gray-700' />
-              <span className='mr-1 font-semibold text-gray-700'>4.7</span>
-              <span className='mr-1 text-gray-500'>(84)</span>
+              <span className='mr-1 font-semibold text-gray-700'>
+                {ratingAvg}
+              </span>
+              <span className='mr-1 text-gray-500'>({reviewCount})</span>
             </div>
           </div>
           <div className='flex gap-2'>
-            <button className='flex items-center rounded border bg-purple-500 px-4 py-2 text-white active:bg-purple-600'>
-              <IoChatbubblesOutline className='mr-2' />
-              Contact Seller
-            </button>
+            <Link
+              href={`https://wa.me/${profileData.phoneNumber}`}
+              target='_blank'
+            >
+              <button className='flex items-center rounded border bg-purple-500 px-4 py-2 text-white active:bg-purple-600'>
+                <IoChatbubblesOutline className='mr-2' />
+                Whatsapp Seller
+              </button>
+            </Link>
             <button className='flex items-center rounded border px-4 py-2 active:bg-gray-100'>
               <MdEdit className='mr-2' />
               Edit Profile
@@ -54,44 +80,35 @@ const GetToKnow = ({ header }: { header: string }) => {
         </div>
         <div className='mt-6 rounded border p-6'>
           <div className='mb-4 flex flex-col'>
-            <span className='mb-1 text-gray-500'>From</span>
-            <span className='font-semibold text-gray-600'>Pakistan</span>
+            <span className='mb-1 text-gray-500'>Lokasi</span>
+            <span className='font-semibold text-gray-600'>
+              {profileData.address}
+            </span>
           </div>
           <div className='mb-4 flex flex-col'>
             <span className='mb-1 text-gray-500'>Member since</span>
-            <span className='font-semibold text-gray-600'>Apr 2020</span>
+            <span className='font-semibold text-gray-600'>{date}</span>
           </div>
-          <div className='mb-4 flex flex-col'>
+          {/* <div className='mb-4 flex flex-col'>
             <span className='mb-1 text-gray-500'>Avg. response time</span>
             <span className='font-semibold text-gray-600'>16 hours</span>
-          </div>
-          <div className='mb-4 flex flex-col'>
+          </div> */}
+          {/* <div className='mb-4 flex flex-col'>
             <span className='mb-1 text-gray-500'>Last delivery</span>
             <span className='font-semibold text-gray-600'>3 weeks</span>
-          </div>
-          <div className='mb-4 flex flex-col'>
+          </div> */}
+          {/* <div className='mb-4 flex flex-col'>
             <span className='mb-1 text-gray-500'>Languages</span>
             <span className='font-semibold text-gray-600'>English</span>
-          </div>
+          </div> */}
           <hr />
           <div className='mt-4 text-gray-600'>
             <div
               className={`relative overflow-hidden ${isExpanded ? 'max-h-full' : 'max-h-48 sm:max-h-24'}`}
             >
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-              qui soluta ullam error fugit voluptatem reprehenderit iste facere
-              labore nesciunt cum sit, omnis, magnam tempora! Repudiandae,
-              numquam. Repellendus autem asperiores tenetur possimus nostrum
-              assumenda debitis esse adipisci ipsum maxime, iusto architecto cum
-              sit accusantium tempora, quaerat culpa porro laborum sed? Omnis,
-              id? Non doloribus modi velit, et, mollitia quas a earum
-              repellendus consectetur rem placeat distinctio tempore sed nihil
-              vitae? Itaque beatae esse magni non harum temporibus obcaecati
-              debitis mollitia aliquam ipsam facere, expedita possimus veritatis
-              nisi eos recusandae qui dignissimos ea numquam doloribus quos.
-              Asperiores, unde doloremque? Eaque, vel?
+              {profileData.description}
               <div
-                className={`bg-white-fade absolute bottom-0 h-20 w-full ${isExpanded ? 'hidden' : ''}`}
+                className={`absolute bottom-0 h-20 w-full bg-white-fade ${isExpanded ? 'hidden' : ''}`}
               ></div>
             </div>
           </div>

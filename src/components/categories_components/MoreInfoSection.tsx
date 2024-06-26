@@ -1,211 +1,209 @@
 import { IoIosArrowDown } from 'react-icons/io';
 import InfoDropdown from '../ui_components/InfoDropdown';
+import { Category } from '@/lib/actions/category.actions';
 
-const MoreInfoSection = () => {
-  const categories = [
-    {
-      label: 'Make Up',
-      link: '/all_services',
-    },
-    {
-      label: 'Wedding Organizer',
-      link: '/all_services',
-    },
-    {
-      label: 'Fotografi dan Videografi',
-      link: '/all_services',
-    },
-    {
-      label: 'Dekorasi',
-      link: '/all_services',
-    },
-    {
-      label: 'Catering',
-      link: '/all_services',
-    },
-    {
-      label: 'Penyewaan Gaun dan Jas',
-      link: '/all_services',
-    },
-    {
-      label: 'Undangan',
-      link: '/all_services',
-    },
-    {
-      label: 'Souvenir',
-      link: '/all_services',
-    },
-    {
-      label: 'Hiburan',
-      link: '/all_services',
-    },
-    {
-      label: 'MC',
-      link: '/all_services',
-    },
-    {
-      label: 'Penyewaan Tempat',
-      link: '/all_services',
-    },
-    {
-      label: 'Transportasi',
-      link: '/all_services',
-    },
-    {
-      label: 'Konsultasi Pernikahan',
-      link: '/all_services',
-    },
-    {
-      label: 'Penataan Rambut (Hairdo)',
-      link: '/all_services',
-    },
-    {
-      label: 'Sound System dan Lighting',
-      link: '/all_services',
-    },
-    {
-      label: 'Perawatan Pra-Pernikahan',
-      link: '/all_services',
-    },
-  ];
-
+const MoreInfoSection = ({ categories }: { categories: Category[] }) => {
   const about = [
     {
-      label: 'Careers',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Careers',
+      slug: '#',
     },
     {
-      label: 'Press & News',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Press & News',
+      slug: '#',
     },
     {
-      label: 'Partnerships',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Partnerships',
+      slug: '#',
     },
     {
-      label: 'Privacy Policy',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Privacy Policy',
+      slug: '#',
     },
     {
-      label: 'Terms of Service',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Terms of Service',
+      slug: '#',
     },
     {
-      label: 'Intellectual Property Claims',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Intellectual Property Claims',
+      slug: '#',
     },
     {
-      label: 'Investor Relations',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Investor Relations',
+      slug: '#',
     },
   ];
 
   const support = [
     {
-      label: 'Help & Support',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Help & Support',
+      slug: '#',
     },
     {
-      label: 'Trust & Safety',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Trust & Safety',
+      slug: '#',
     },
     {
-      label: 'Selling on Japernik',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Selling on Japernik',
+      slug: '#',
     },
     {
-      label: 'Buying on Japernik',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Buying on Japernik',
+      slug: '#',
     },
     {
-      label: 'Japernik Guides',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Japernik Guides',
+      slug: '#',
     },
     {
-      label: 'Learn',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Learn',
+      slug: '#',
     },
   ];
 
   const community = [
     {
-      label: 'Customer Success Stories',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Customer Success Stories',
+      slug: '#',
     },
     {
-      label: 'Community Hub',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Community Hub',
+      slug: '#',
     },
     {
-      label: 'Forum',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Forum',
+      slug: '#',
     },
     {
-      label: 'Events',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Events',
+      slug: '#',
     },
     {
-      label: 'Blog',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Blog',
+      slug: '#',
     },
     {
-      label: 'Creators',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Creators',
+      slug: '#',
     },
     {
-      label: 'Affiliates',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Affiliates',
+      slug: '#',
     },
     {
-      label: 'Podcast',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Podcast',
+      slug: '#',
     },
     {
-      label: 'Invite a Friend',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Invite a Friend',
+      slug: '#',
     },
     {
-      label: 'Become a Seller',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Become a Seller',
+      slug: '#',
     },
     {
-      label: 'Community Standards',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Community Standards',
+      slug: '#',
     },
   ];
 
   const businessSolutions = [
     {
-      label: 'About Business Solutions',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'About Business Solutions',
+      slug: '#',
     },
     {
-      label: 'Japernik Pro',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Japernik Pro',
+      slug: '#',
     },
     {
-      label: 'Japernik Certified',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Japernik Certified',
+      slug: '#',
     },
     {
-      label: 'Become an Agency',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Become an Agency',
+      slug: '#',
     },
     {
-      label: 'Japernik Enterprise',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Japernik Enterprise',
+      slug: '#',
     },
     {
-      label: 'Clear Voice',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Clear Voice',
+      slug: '#',
     },
     {
-      label: 'Working Not Working',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Working Not Working',
+      slug: '#',
     },
     {
-      label: 'Contact Sales',
-      link: '#',
+      id: '',
+      logo: '',
+      name: 'Contact Sales',
+      slug: '#',
     },
   ];
 

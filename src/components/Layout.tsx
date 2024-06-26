@@ -1,13 +1,14 @@
 import { ReactNode } from 'react';
-import Navbar from './Navbar';
 import Footer from './Footer';
 import MoreInfoSection from './categories_components/MoreInfoSection';
+import { fetchCategories } from '@/lib/actions/category.actions';
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = async ({ children }: { children: ReactNode }) => {
+  const categories = await fetchCategories();
   return (
     <div>
       <div>{children}</div>
-      <MoreInfoSection />
+      <MoreInfoSection categories={categories} />
       <Footer />
     </div>
   );

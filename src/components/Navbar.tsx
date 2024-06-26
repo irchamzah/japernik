@@ -5,91 +5,94 @@ import { useEffect } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
-import { GiLipstick } from 'react-icons/gi';
+import { Category, fetchCategories } from '@/lib/actions/category.actions';
 
-const Navbar = ({ mode }: { mode: string }) => {
-  const categories = [
-    {
-      icon: <GiLipstick />,
-      label: 'Make Up',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Wedding Organizer',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Fotografi dan Videografi',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Dekorasi',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Catering',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Penyewaan Gaun dan Jas',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Undangan',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Souvenir',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Hiburan',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'MC',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Penyewaan Tempat',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Transportasi',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Konsultasi Pernikahan',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Penataan Rambut (Hairdo)',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Sound System dan Lighting',
-      link: '/all_services',
-    },
-    {
-      icon: <GiLipstick />,
-      label: 'Perawatan Pra-Pernikahan',
-      link: '/all_services',
-    },
-  ];
+const Navbar = ({
+  mode,
+  categories,
+}: {
+  mode: string;
+  categories: Category[];
+}) => {
+  //     label: 'Make Up',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Wedding Organizer',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Fotografi dan Videografi',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Dekorasi',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Catering',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Penyewaan Gaun dan Jas',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Undangan',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Souvenir',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Hiburan',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'MC',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Penyewaan Tempat',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Transportasi',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Konsultasi Pernikahan',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Penataan Rambut (Hairdo)',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Sound System dan Lighting',
+  //     link: '/all_services',
+  //   },
+  //   {
+  //     icon: <GiLipstick />,
+  //     label: 'Perawatan Pra-Pernikahan',
+  //     link: '/all_services',
+  //   },
+  // ];
   useEffect(() => {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -227,11 +230,11 @@ const Navbar = ({ mode }: { mode: string }) => {
                   {categories.map((category, index) => (
                     <Link
                       key={index}
-                      href={category.link}
+                      href={`/categories/${category.slug}`}
                       className='snap-center'
                     >
                       <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
-                        {category.label}
+                        {category.name}
                       </div>
                     </Link>
                   ))}
@@ -270,9 +273,9 @@ const Navbar = ({ mode }: { mode: string }) => {
           <hr />
           <h1 className='mt-10 p-3 font-bold'>Jasa yang Tersedia:</h1>
           {categories.map((category, index) => (
-            <Link key={index} href={category.link}>
+            <Link key={index} href={`/categories/${category.slug}`}>
               <div className='ml-3 rounded-xl p-3 hover:bg-gray-100'>
-                {category.label}
+                {category.name}
               </div>
             </Link>
           ))}

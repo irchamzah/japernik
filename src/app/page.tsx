@@ -7,15 +7,16 @@ import YouTubeFrame from '@/components/home_components/YoutubeFrame';
 import TestimonialsSection from '@/components/home_components/TestimonialsSection';
 import Gallery from '@/components/home_components/Gallery';
 import Test from '@/components/home_components/Test';
-import MoreInfoSection from '@/components/categories_components/MoreInfoSection';
 import Navbar from '@/components/Navbar';
+import { fetchCategories } from '@/lib/actions/category.actions';
 
-export default function Home() {
+export default async function Home() {
+  const categories = await fetchCategories();
   return (
     <Layout>
-      <Navbar mode={'fixed'} />
+      <Navbar mode={'fixed'} categories={categories} />
       <HomeHero />
-      <HomeServices />
+      <HomeServices categories={categories} />
       <StepsSection />
       <YouTubeFrame />
       <TestimonialsSection />

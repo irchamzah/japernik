@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const ServiceDescriptionDetail = () => {
+const ServiceDescriptionDetail = ({ description }: { description: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpansion = () => {
@@ -14,25 +14,14 @@ const ServiceDescriptionDetail = () => {
         <div className='mx-6 xl:mx-0'>
           <div className='mb-6'>
             <div className='mb-6 text-xl font-bold text-gray-700'>
-              About this service
+              Tentang jasa ini
             </div>
             <div
               className={`relative overflow-hidden text-gray-600 ${isExpanded ? 'max-h-full' : 'max-h-48 sm:max-h-24'}`}
             >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Doloribus, ullam! Nihil officiis, exercitationem consequatur quod
-              cumque debitis id dolorem ea autem mollitia praesentium obcaecati
-              voluptatem hic omnis aperiam quas assumenda. Mollitia incidunt
-              repellat distinctio nobis rerum natus sunt quam! Atque eum magnam
-              odit aliquid beatae aliquam quos laboriosam neque quis. Dolores
-              libero voluptatum velit dolorum debitis exercitationem ea soluta?
-              Non ex iure doloremque nisi in nihil necessitatibus? Rerum vero,
-              quisquam saepe quam illum corporis illo impedit, hic itaque labore
-              ullam molestias in iure. Architecto sint quas consequuntur
-              cupiditate ad, perspiciatis vero expedita assumenda, dolores
-              aspernatur necessitatibus earum officia odit laudantium.
+              {description}
               <div
-                className={`bg-white-fade absolute bottom-0 h-20 w-full ${isExpanded ? 'hidden' : ''}`}
+                className={`absolute bottom-0 h-20 w-full bg-white-fade ${isExpanded ? 'hidden' : ''}`}
               ></div>
             </div>
             <button

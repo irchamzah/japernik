@@ -1,10 +1,11 @@
 'use client';
 
+import { ServicePortfolio } from '@/lib/actions/servicePortfolio.actions';
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const PhotoSlider = ({ images }: { images: string[] }) => {
+const PhotoSlider = ({ images }: { images: ServicePortfolio[] }) => {
   //slider handle
   const [currentIndex, setCurrentIndex] = useState(0);
   const prevSlide = () => {
@@ -21,7 +22,7 @@ const PhotoSlider = ({ images }: { images: string[] }) => {
       <div className='relative mx-6 mb-10 xl:mx-0'>
         <div>
           <Image
-            src={images[currentIndex]}
+            src={images[currentIndex].url}
             alt={`Slide ${currentIndex}`}
             className='h-56 w-full object-cover sm:h-[427px]'
             width={500}

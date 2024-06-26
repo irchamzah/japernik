@@ -1,20 +1,16 @@
 'use client';
 
+import { Category } from '@/lib/actions/category.actions';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-
-interface subMenusArray {
-  label: string;
-  link: string;
-}
 
 const InfoDropdown = ({
   menuLabel,
   subMenus,
 }: {
   menuLabel: string;
-  subMenus: subMenusArray[];
+  subMenus: Category[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => {
@@ -67,9 +63,9 @@ const InfoDropdown = ({
             key={index}
             className='w-min decoration-gray-500 hover:underline'
           >
-            <Link href={subMenu.link}>
+            <Link href={`/categories/${subMenu.slug}`}>
               <div className='w-max pb-4 font-medium text-gray-500' role='none'>
-                {subMenu.label}
+                {subMenu.name}
               </div>
             </Link>
           </div>

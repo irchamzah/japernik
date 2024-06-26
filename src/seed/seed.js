@@ -13,6 +13,9 @@ async function createUsers() {
           photo: 'https://randomuser.me/api/portraits/men/1.jpg',
           title: 'Wedding Organizer',
           phoneNumber: '083134752738',
+          description:
+            'Saya seorang wedding organizer, saya sudah berpengalaman Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat id nisl eu egestas. Proin hendrerit, urna in cursus venenatis, ante risus luctus purus, eget ullamcorper leo erat in dolor. Nunc nec velit dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros quis tellus mollis sagittis eget sit amet diam. Nam dignissim mauris eget elementum dapibus. Nunc quis justo eu mi bibendum eleifend. Nullam tincidunt tellus a quam euismod tempor.',
+          address: 'Wonosari - Bondowoso',
         },
         {
           name: 'irchamzah kedua',
@@ -21,6 +24,9 @@ async function createUsers() {
           photo: 'https://randomuser.me/api/portraits/women/2.jpg',
           title: 'Fotografer dan Vidiografer',
           phoneNumber: '08123123123',
+          description:
+            'Saya seorang fotografer dan videografer, saya sudah berpengalaman Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat id nisl eu egestas. Proin hendrerit, urna in cursus venenatis, ante risus luctus purus, eget ullamcorper leo erat in dolor. Nunc nec velit dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique eros quis tellus mollis sagittis eget sit amet diam. Nam dignissim mauris eget elementum dapibus. Nunc quis justo eu mi bibendum eleifend. Nullam tincidunt tellus a quam euismod tempor.',
+          address: 'Sumbersari - Jember',
         },
       ],
     });
@@ -90,10 +96,11 @@ async function createServicePortfolio({ serviceTitle, url }) {
   }
 }
 
-async function createCategory({ name, logo }) {
+async function createCategory({ slug, name, logo }) {
   try {
     const newCategory = await prisma.category.create({
       data: {
+        slug: slug,
         name: name,
         logo: logo,
       },
@@ -187,68 +194,84 @@ async function main() {
   // Create Category
   await Promise.all([
     createCategory({
+      slug: 'make-up',
       name: 'Make Up',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/makeUp.svg',
     }),
     createCategory({
+      slug: 'wedding-organizer',
       name: 'Wedding Organizer',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/weddingOrganizer.svg',
     }),
     createCategory({
+      slug: 'fotografi-dan-videografi',
       name: 'Fotografi dan Videografi',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/fotografi.svg',
     }),
     createCategory({
+      slug: 'dekorasi',
       name: 'Dekorasi',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/dekorasi.svg',
     }),
     createCategory({
+      slug: 'catering',
       name: 'Catering',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/catering.svg',
     }),
     createCategory({
+      slug: 'penyewaan-gaun-dan-jas',
       name: 'Penyewaan Gaun dan Jas',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/penyewaanGaunDanJas.svg',
     }),
     createCategory({
+      slug: 'undangan',
       name: 'Undangan',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/undangan.svg',
     }),
     createCategory({
+      slug: 'souvenir',
       name: 'Souvenir',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/souvenir.svg',
     }),
     createCategory({
+      slug: 'hiburan',
       name: 'Hiburan',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/hiburan.svg',
     }),
     createCategory({
+      slug: 'mc',
       name: 'MC',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/mc.svg',
     }),
     createCategory({
+      slug: 'penyewaan-tempat',
       name: 'Penyewaan Tempat',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/tempat.svg',
     }),
     createCategory({
+      slug: 'transportasi',
       name: 'Transportasi',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/transportasi.svg',
     }),
     createCategory({
+      slug: 'konsultasi-pernikahan',
       name: 'Konsultasi Pernikahan',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/konsultasi.svg',
     }),
     createCategory({
+      slug: 'penataan-rambut',
       name: 'Penataan Rambut',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/hairdo.svg',
     }),
     createCategory({
+      slug: 'sound-system-dan-lighting',
       name: 'Sound System dan Lighting',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/soundSystem.svg',
     }),
     createCategory({
+      slug: 'perawatan-pra-pernikahan',
       name: 'Perawatan Pra-Pernikahan',
-      logo: '/images/random_image/img1.jpg',
+      logo: '/icons/categories_icon/praPernikahan.svg',
     }),
   ]);
 

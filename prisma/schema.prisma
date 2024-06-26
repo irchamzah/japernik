@@ -46,6 +46,8 @@ model User {
   photo           String?
   title           String
   phoneNumber     String
+  description     String
+  address         String
   services        Service[]
   reviews         Review[]
   sellerResponses SellerResponse[]
@@ -57,7 +59,8 @@ model User {
 
 model Category {
   id      String    @id @default(cuid())
-  name    String    @unique
+  slug    String    @unique
+  name    String
   logo    String
   Service Service[]
 }

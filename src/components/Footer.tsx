@@ -1,3 +1,4 @@
+import { Category } from '@/lib/actions/category.actions';
 import Link from 'next/link';
 import {
   FaFacebook,
