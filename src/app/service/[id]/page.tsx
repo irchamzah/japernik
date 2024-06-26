@@ -37,7 +37,7 @@ export default async function detail_service({
   const ratingReviewSeller = await avgRatingSumReviewSeller(service?.author.id);
 
   const averageRating =
-    service.review.reduce((acc: number, curr) => acc + curr.rating, 0) /
+    service.review.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
     service.review.length;
   const countReview = service.review.length;
 
