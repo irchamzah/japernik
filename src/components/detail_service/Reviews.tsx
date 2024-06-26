@@ -28,7 +28,7 @@ const Reviews = () => {
         <div className={`${isOpen ? '' : 'hidden'}`}>
           <div className='mb-8 mt-4 flex flex-col gap-1'>
             <div className='text-base font-semibold text-gray-700'>
-              56 reviews for this service
+              56 reviews for this service.
             </div>
             <div className='flex items-center gap-1'>
               <div className='flex gap-1 text-gray-700'>
