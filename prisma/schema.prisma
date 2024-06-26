@@ -29,6 +29,8 @@ model Service {
   review           Review[]
   createdAt        DateTime           @default(now()) @map(name: "created_at")
   updatedAt        DateTime           @updatedAt @map(name: "updated_at")
+
+  @@map(name: "service")
 }
 
 model ServicePortfolio {
@@ -36,6 +38,8 @@ model ServicePortfolio {
   url       String
   service   Service @relation(fields: [serviceId], references: [id])
   serviceId String
+
+  @@map(name: "servicePortfolio")
 }
 
 model User {
@@ -54,7 +58,7 @@ model User {
   createdAt       DateTime         @default(now()) @map(name: "created_at")
   updatedAt       DateTime         @updatedAt @map(name: "updated_at")
 
-  @@map(name: "users")
+  @@map(name: "user")
 }
 
 model Category {
@@ -63,6 +67,8 @@ model Category {
   name    String
   logo    String
   Service Service[]
+
+  @@map(name: "category")
 }
 
 model Review {
@@ -77,6 +83,8 @@ model Review {
   sellerResponses SellerResponse[]
   createdAt       DateTime         @default(now()) @map(name: "created_at")
   updatedAt       DateTime         @updatedAt @map(name: "updated_at")
+
+  @@map(name: "review")
 }
 
 model SellerResponse {
@@ -88,4 +96,6 @@ model SellerResponse {
   reviewId  String
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "sellerResponse")
 }
