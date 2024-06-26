@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "src/seed/seed.ts",
     "src/seed/seed.js",
-    "src/app/categories_backup/page"
+    "backup/categories_backup/page"
   ],
   "exclude": ["node_modules"]
 }
