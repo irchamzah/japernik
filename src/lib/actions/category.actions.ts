@@ -9,12 +9,12 @@ export interface Category {
 
 async function fetchCategories(): Promise<Category[]> {
   try {
-    const category = await prisma.category.findMany({});
-    if (!category) {
+    const categories = await prisma.category.findMany({});
+    if (!categories || categories.length === 0) {
       throw new Error('Kategori tidak ditemukan');
     }
 
-    return category;
+    return categories;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch category', error);
     process.exit(1);
