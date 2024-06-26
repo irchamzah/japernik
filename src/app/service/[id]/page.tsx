@@ -68,7 +68,7 @@ export default async function detail_service({
         ratingAvg={ratingReviewSeller.averageRating}
         reviewCount={ratingReviewSeller.totalReviews}
       />
-      <Reviews />
+      {/* <Reviews avgRatingService={averageRating} countReviewService={countReview} /> */}
     </Layout>
   );
 }

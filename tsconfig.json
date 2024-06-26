@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/seed/seed.ts",
-    "src/seed/seed.js"
+    "src/seed/seed.js",
+    "src/app/categories_test/page"
   ],
   "exclude": ["node_modules"]
 }
