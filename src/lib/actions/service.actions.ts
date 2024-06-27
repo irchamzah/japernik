@@ -1,6 +1,8 @@
 import prisma from '../../../lib/prisma';
 import { Category } from './category.actions';
+import { Review } from './review.actions';
 import { ServicePortfolio } from './servicePortfolio.actions';
+import { User } from './user.actions';
 
 export interface Service {
   id: string;
@@ -8,28 +10,17 @@ export interface Service {
   description: string;
   price: number;
   published: boolean;
-  author: {
-    id: string;
-    name: string;
-    username: string;
-    email: string;
-    photo: string | null;
-    title: string;
-    phoneNumber: string;
-  } | null;
+  author?: User;
+  authorId: string;
   category: Category;
-  servicePortfolio: ServicePortfolio[];
-  review: {
-    id: string;
-    rating: number;
-    response: string;
-    price: number;
-    userId: string;
-    serviceId: string;
-  }[];
+  categoryId: string;
+  servicePortfolio?: ServicePortfolio[];
+  review?: Review[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-async function getServicesByCategory(categorySlug: string): Promise<Service[]> {
+async function getServicesByCategory(categorySlug: string) {
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -53,7 +44,6 @@ async function getServicesByCategory(categorySlug: string): Promise<Service[]> {
     return services;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
-    process.exit(1);
   }
 }
 
@@ -65,13 +55,16 @@ async function getServiceById(serviceId: string) {
         author: true,
         category: true,
         servicePortfolio: true,
-        review: true,
+        review: {
+          include: {
+            sellerResponses: true,
+          },
+        },
       },
     });
     return service;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
-    process.exit(1);
   }
 }
 

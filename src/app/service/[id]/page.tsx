@@ -7,10 +7,7 @@ import ProfileCard from '@/components/detail_service/ProfileCard';
 import Reviews from '@/components/detail_service/Reviews';
 import ServiceDescriptionDetail from '@/components/detail_service/ServiceDesciptionDetail';
 import { fetchCategories } from '@/lib/actions/category.actions';
-import {
-  getServiceById,
-  getServicesByCategory,
-} from '@/lib/actions/service.actions';
+import { getServiceById } from '@/lib/actions/service.actions';
 import { avgRatingSumReviewSeller } from '@/lib/actions/user.actions';
 
 export default async function detail_service({
@@ -20,6 +17,11 @@ export default async function detail_service({
 }) {
   const categories = await fetchCategories();
   const service = await getServiceById(params.id);
+  // console.log('ISI DATA DARI SERVICE >>>>', service);
+
+  if (!categories) {
+    return <div>categories tidak ditemukan...</div>;
+  }
 
   if (!service) {
     return (
@@ -34,7 +36,11 @@ export default async function detail_service({
     );
   }
 
-  const ratingReviewSeller = await avgRatingSumReviewSeller(service?.author.id);
+  const ratingReviewSeller = await avgRatingSumReviewSeller(service.author.id);
+
+  if (!ratingReviewSeller) {
+    return <div>ratingReviewSeller tidak ditemukan...</div>;
+  }
 
   const averageRating =
     service.review.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
@@ -68,7 +74,11 @@ export default async function detail_service({
         ratingAvg={ratingReviewSeller.averageRating}
         reviewCount={ratingReviewSeller.totalReviews}
       />
-      {/* <Reviews avgRatingService={averageRating} countReviewService={countReview} /> */}
+      <Reviews
+        avgRatingService={averageRating}
+        countReviewService={countReview}
+        reviewsData={service.review}
+      />
     </Layout>
   );
 }

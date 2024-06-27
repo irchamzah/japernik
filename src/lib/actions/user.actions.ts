@@ -1,4 +1,6 @@
 import prisma from '../../../lib/prisma';
+import { Review } from './review.actions';
+import { Service } from './service.actions';
 
 export interface User {
   id: string;
@@ -8,9 +10,12 @@ export interface User {
   photo: string | null;
   title: string;
   phoneNumber: string;
-  address: string | null;
-  description: string | null;
+  description: string;
+  address: string;
+  services?: Service[];
+  reviews?: Review[];
   createdAt: Date;
+  updatedAt: Date;
 }
 
 export async function avgRatingSumReviewSeller(id: string) {
@@ -42,7 +47,6 @@ export async function avgRatingSumReviewSeller(id: string) {
 
     return { averageRating, totalReviews };
   } catch (error) {
-    console.error('Terjadi kesalahan saat manjalankan sumRatingSeller', error);
-    process.exit(1);
+    console.error('Terjadi kesalahan saat menjalankan sumRatingSeller', error);
   }
 }

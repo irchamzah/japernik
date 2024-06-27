@@ -398,6 +398,5 @@ main()
     process.exit(1);
   })
   .finally(async () => {
-    console.log('BERHASIL PUSH SEED DATABASE!!!!!!!!!!');
     await prisma.$disconnect();
   });

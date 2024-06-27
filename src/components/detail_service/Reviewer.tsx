@@ -1,15 +1,25 @@
+import { Review } from '@/lib/actions/review.actions';
 import ProfileReviewer from './ProfileReviewer';
 import ReviewersResponse from './ReviewersResponse';
 import SellersResponse from './SellersResponse';
 
-const Reviewer = () => {
+const Reviewer = async ({ dataReviewer }: { dataReviewer: Review }) => {
+  // console.log(
+  //   'ISI DARI DATA dataReviewer >>>>>>>>>',
+  //   dataReviewer.sellerResponses[0]
+  // );
   return (
     <div className='mb-8 mt-8 flex flex-col gap-4 rounded-2xl border p-4'>
-      <ProfileReviewer />
+      <ProfileReviewer userId={dataReviewer.userId} />
       <hr />
-      <ReviewersResponse />
-      <hr />
-      <SellersResponse />
+      <ReviewersResponse
+        rating={dataReviewer.rating}
+        postDate={dataReviewer.createdAt}
+        response={dataReviewer.response}
+        price={dataReviewer.price}
+      />
+
+      <SellersResponse sellerResponse={dataReviewer?.sellerResponses ?? []} />
     </div>
   );
 };

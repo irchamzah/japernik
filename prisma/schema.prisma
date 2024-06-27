@@ -50,8 +50,8 @@ model User {
   photo           String?
   title           String
   phoneNumber     String
-  description     String?
-  address         String?
+  description     String
+  address         String
   services        Service[]
   reviews         Review[]
   sellerResponses SellerResponse[]
