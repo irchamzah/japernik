@@ -7,22 +7,20 @@ import ProfileCard from '@/components/detail_service/ProfileCard';
 import Reviews from '@/components/detail_service/Reviews';
 import ServiceDescriptionDetail from '@/components/detail_service/ServiceDesciptionDetail';
 import { fetchCategories } from '@/lib/actions/category.actions';
-import { getServiceById } from '@/lib/actions/service.actions';
-import { avgRatingSumReviewSeller } from '@/lib/actions/user.actions';
+import { getServiceBySlug } from '@/lib/actions/service.actions';
+import { avgRatingCountReviewServiceByServiceSlug } from '@/lib/actions/user.actions';
 
 export default async function detail_service({
   params,
 }: {
-  params: { id: string };
+  params: { serviceSlug: string };
 }) {
   const categories = await fetchCategories();
-  const service = await getServiceById(params.id);
-  // console.log('ISI DATA DARI SERVICE >>>>', service);
-
   if (!categories) {
     return <div>categories tidak ditemukan...</div>;
   }
 
+  const service = await getServiceBySlug(params.serviceSlug);
   if (!service) {
     return (
       <Layout>
@@ -36,16 +34,12 @@ export default async function detail_service({
     );
   }
 
-  const ratingReviewSeller = await avgRatingSumReviewSeller(service.author.id);
-
+  const ratingReviewSeller = await avgRatingCountReviewServiceByServiceSlug(
+    params.serviceSlug
+  );
   if (!ratingReviewSeller) {
     return <div>ratingReviewSeller tidak ditemukan...</div>;
   }
-
-  const averageRating =
-    service.review.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
-    service.review.length;
-  const countReview = service.review.length;
 
   return (
     <Layout>
@@ -54,7 +48,7 @@ export default async function detail_service({
         categorySlug={service.category.slug}
         categoryName={service.category.name}
         currentServiceId={service.id}
-        currentServiceName={service.title}
+        currentServiceSlug={service.slug}
       />
       <div className='mx-auto max-w-7xl'>
         <h1 className='mx-6 mb-4 mt-8 text-2xl font-semibold capitalize text-gray-700 xl:mx-0'>
@@ -63,21 +57,19 @@ export default async function detail_service({
       </div>
       <ProfileCard
         profileData={service.author}
-        ratingSum={averageRating}
-        reviewCount={countReview}
+        ratingAvg={ratingReviewSeller.averageRating}
+        reviewCount={ratingReviewSeller.countReviews}
       />
       <PhotoSlider images={service.servicePortfolio} />
       <ServiceDescriptionDetail description={service.description} />
       <GetToKnow
-        header='Get to Know Malik'
-        profileData={service.author}
-        ratingAvg={ratingReviewSeller.averageRating}
-        reviewCount={ratingReviewSeller.totalReviews}
+        header={`Tentang ${service.author.name}`}
+        userId={service.authorId}
       />
       <Reviews
-        avgRatingService={averageRating}
-        countReviewService={countReview}
-        reviewsData={service.review}
+        userId={''}
+        serviceId={service.id}
+        reviewsFor={'reviews for this service.'}
       />
     </Layout>
   );

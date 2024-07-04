@@ -17,18 +17,43 @@ export interface Review {
   updatedAt: Date;
 }
 
-export async function fetchUserByUserId(id: string) {
+export async function fetchReviewByUserId(id: string) {
   try {
-    // console.log('ISI DARI fetchUserByUserId >>>>>>>>>>>>>', id);
-    const reviewer = await prisma.user.findUnique({
-      where: { id: id },
+    const reviews = await prisma.review.findMany({
+      where: { userId: id },
+      include: {
+        sellerResponses: true,
+      },
     });
 
-    return reviewer;
+    const countReviews = reviews.length;
+    const avgRating =
+      reviews.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
+      countReviews;
+
+    return { reviews, countReviews, avgRating };
   } catch (error) {
-    console.error(
-      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
-      error
-    );
+    console.error('Terjadi kesalahan saat fetchReviewByUserId', error);
+  }
+}
+
+export async function fetchReviewByServiceId(serviceId: string) {
+  try {
+    const reviews = await prisma.review.findMany({
+      where: { serviceId: serviceId },
+      include: {
+        sellerResponses: true,
+      },
+    });
+
+    const countReviews = reviews.length;
+    const avgRating =
+      reviews.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
+      countReviews;
+
+    // console.log('ISI DARI REVIEWS >>>>>>>>', reviews.map);
+    return { reviews, countReviews, avgRating };
+  } catch (error) {
+    console.error('Terjadi kesalahan saat fetchReviewByServiceId', error);
   }
 }

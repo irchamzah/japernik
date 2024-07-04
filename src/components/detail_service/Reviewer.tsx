@@ -4,10 +4,6 @@ import ReviewersResponse from './ReviewersResponse';
 import SellersResponse from './SellersResponse';
 
 const Reviewer = async ({ dataReviewer }: { dataReviewer: Review }) => {
-  // console.log(
-  //   'ISI DARI DATA dataReviewer >>>>>>>>>',
-  //   dataReviewer.sellerResponses[0]
-  // );
   return (
     <div className='mb-8 mt-8 flex flex-col gap-4 rounded-2xl border p-4'>
       <ProfileReviewer userId={dataReviewer.userId} />

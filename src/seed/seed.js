@@ -37,6 +37,7 @@ async function createUsers() {
 }
 
 async function createService({
+  slug,
   title,
   description,
   price,
@@ -60,6 +61,7 @@ async function createService({
 
     const newService = await prisma.service.create({
       data: {
+        slug: slug,
         title: title,
         description: description,
         price: price,
@@ -74,10 +76,10 @@ async function createService({
   }
 }
 
-async function createServicePortfolio({ serviceTitle, url }) {
+async function createServicePortfolio({ serviceSlug, url }) {
   try {
     const service = await prisma.service.findUnique({
-      where: { title: serviceTitle },
+      where: { slug: serviceSlug },
     });
 
     if (!service) {
@@ -96,13 +98,14 @@ async function createServicePortfolio({ serviceTitle, url }) {
   }
 }
 
-async function createCategory({ slug, name, logo }) {
+async function createCategory({ slug, name, logo, description }) {
   try {
     const newCategory = await prisma.category.create({
       data: {
         slug: slug,
         name: name,
         logo: logo,
+        description: description,
       },
     });
   } catch (error) {
@@ -114,12 +117,12 @@ async function createCategory({ slug, name, logo }) {
 async function createReview({
   rating,
   response,
-  serviceTitle,
+  serviceSlug,
   reviewerUsername,
 }) {
   try {
     const service = await prisma.service.findUnique({
-      where: { title: serviceTitle },
+      where: { slug: serviceSlug },
     });
     if (!service) {
       throw new Error('Service tidak ditemukan');
@@ -197,87 +200,104 @@ async function main() {
       slug: 'make-up',
       name: 'Make Up',
       logo: '/icons/categories_icon/makeUp.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'wedding-organizer',
       name: 'Wedding Organizer',
       logo: '/icons/categories_icon/weddingOrganizer.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'fotografi-dan-videografi',
       name: 'Fotografi dan Videografi',
       logo: '/icons/categories_icon/fotografi.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'dekorasi',
       name: 'Dekorasi',
       logo: '/icons/categories_icon/dekorasi.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'catering',
       name: 'Catering',
       logo: '/icons/categories_icon/catering.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'penyewaan-gaun-dan-jas',
       name: 'Penyewaan Gaun dan Jas',
       logo: '/icons/categories_icon/penyewaanGaunDanJas.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'undangan',
       name: 'Undangan',
       logo: '/icons/categories_icon/undangan.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'souvenir',
       name: 'Souvenir',
       logo: '/icons/categories_icon/souvenir.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'hiburan',
       name: 'Hiburan',
       logo: '/icons/categories_icon/hiburan.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'mc',
       name: 'MC',
       logo: '/icons/categories_icon/mc.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'penyewaan-tempat',
       name: 'Penyewaan Tempat',
       logo: '/icons/categories_icon/tempat.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'transportasi',
       name: 'Transportasi',
       logo: '/icons/categories_icon/transportasi.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'konsultasi-pernikahan',
       name: 'Konsultasi Pernikahan',
       logo: '/icons/categories_icon/konsultasi.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'penataan-rambut',
       name: 'Penataan Rambut',
       logo: '/icons/categories_icon/hairdo.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'sound-system-dan-lighting',
       name: 'Sound System dan Lighting',
       logo: '/icons/categories_icon/soundSystem.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
     createCategory({
       slug: 'perawatan-pra-pernikahan',
       name: 'Perawatan Pra-Pernikahan',
       logo: '/icons/categories_icon/praPernikahan.svg',
+      description: 'Ini deskripsi tentang kategorinya',
     }),
   ]);
 
   // Create Service
   await Promise.all([
     createService({
+      slug: 'judul-service-pertama',
       title: 'judul service pertama',
       description: 'deskripsi judul service pertama',
       price: 1000000,
@@ -285,6 +305,7 @@ async function main() {
       categoryName: 'Make Up',
     }),
     createService({
+      slug: 'judul-service-kedua',
       title: 'judul service kedua',
       description: 'deskripsi judul service kedua',
       price: 2000000,
@@ -292,6 +313,7 @@ async function main() {
       categoryName: 'Make Up',
     }),
     createService({
+      slug: 'judul-service-ketiga',
       title: 'judul service ketiga',
       description: 'deskripsi judul service ketiga',
       price: 3000000,
@@ -299,6 +321,7 @@ async function main() {
       categoryName: 'Make Up',
     }),
     createService({
+      slug: 'judul-service-keempat',
       title: 'judul service keempat',
       description: 'deskripsi judul service keempat',
       price: 4000000,
@@ -310,35 +333,35 @@ async function main() {
   // Create Service Portfolio
   await Promise.all([
     createServicePortfolio({
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-pertama',
       url: '/images/random_image/img1.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-pertama',
       url: '/images/random_image/img2.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service kedua',
+      serviceSlug: 'judul-service-kedua',
       url: '/images/random_image/img3.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service kedua',
+      serviceSlug: 'judul-service-kedua',
       url: '/images/random_image/img4.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service ketiga',
+      serviceSlug: 'judul-service-ketiga',
       url: '/images/random_image/img5.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service ketiga',
+      serviceSlug: 'judul-service-ketiga',
       url: '/images/random_image/img6.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service keempat',
+      serviceSlug: 'judul-service-keempat',
       url: '/images/random_image/img7.jpg',
     }),
     createServicePortfolio({
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-pertama',
       url: '/images/random_image/img8.jpg',
     }),
   ]);
@@ -348,37 +371,37 @@ async function main() {
     createReview({
       rating: 5,
       response: 'Terimakasih atas jasanya! 1',
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-pertama',
       reviewerUsername: 'irch',
     }),
     createReview({
       rating: 3,
       response: 'Terimakasih atas jasanyan! 1',
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-pertama',
       reviewerUsername: 'irch',
     }),
     createReview({
       rating: 4,
       response: 'Terimakasih atas jasanyann! 1',
-      serviceTitle: 'judul service pertama',
+      serviceSlug: 'judul-service-kedua',
       reviewerUsername: 'irch',
     }),
     createReview({
       rating: 5,
       response: 'Terimakasih atas jasanya! 2',
-      serviceTitle: 'judul service kedua',
+      serviceSlug: 'judul-service-ketiga',
       reviewerUsername: 'irch_2',
     }),
     createReview({
       rating: 5,
       response: 'Terimakasih atas jasanya! 3',
-      serviceTitle: 'judul service ketiga',
+      serviceSlug: 'judul-service-ketiga',
       reviewerUsername: 'irch_2',
     }),
     createReview({
       rating: 5,
       response: 'Terimakasih atas jasanya! 4',
-      serviceTitle: 'judul service keempat',
+      serviceSlug: 'judul-service-keempat',
       reviewerUsername: 'irch_2',
     }),
   ]);

@@ -4,7 +4,7 @@ import MoreInfoSection from './categories_components/MoreInfoSection';
 import { fetchCategories } from '@/lib/actions/category.actions';
 
 const Layout = async ({ children }: { children: ReactNode }) => {
-  const categories = await fetchCategories();
+  const categories = (await fetchCategories()) || [];
   return (
     <div>
       <div>{children}</div>

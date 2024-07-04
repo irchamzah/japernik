@@ -6,7 +6,7 @@ const ProductCard = ({
   thumbnail,
   authorImg,
   authorName,
-  productDescription,
+  productTitle,
   rating,
   countReview,
   price,
@@ -16,7 +16,7 @@ const ProductCard = ({
   thumbnail: string;
   authorImg: string;
   authorName: string;
-  productDescription: string;
+  productTitle: string;
   rating: number;
   countReview: number;
   price: number;
@@ -33,7 +33,7 @@ const ProductCard = ({
               alt='foto seller'
               width={100}
               height={0}
-              className='h-52 w-full rounded-lg border object-cover'
+              className='h-52 w-full rounded-lg border object-cover hover:opacity-90'
             />
           </div>
         </Link>
@@ -48,18 +48,20 @@ const ProductCard = ({
                 alt='foto seller'
                 width={20}
                 height={0}
-                className='mr-2 h-6 w-6 rounded-full object-cover'
+                className='mr-2 h-6 w-6 rounded-full object-cover hover:opacity-90'
               />
             </Link>
             <Link href={authorLink}>
-              <span className='text-sm font-semibold'>{authorName}</span>
+              <span className='text-sm font-semibold hover:underline'>
+                {authorName}
+              </span>
             </Link>
           </div>
 
           <Link href={productLink}>
             <div title='ini deskripsi'>
-              <p className='mt-1 w-full text-sm text-gray-700'>
-                {productDescription}
+              <p className='mt-1 w-full text-sm text-gray-700 decoration-gray-700 hover:underline'>
+                {productTitle}
               </p>
             </div>
           </Link>

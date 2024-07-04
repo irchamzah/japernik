@@ -1,5 +1,4 @@
-import { fetchUserByUserId } from '@/lib/actions/review.actions';
-import { User } from '@/lib/actions/user.actions';
+import { User, fetchUserByUserId } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 
 const ProfileReviewer = async ({ userId }: { userId: string }) => {
@@ -14,7 +13,9 @@ const ProfileReviewer = async ({ userId }: { userId: string }) => {
           height={0}
           className='h-8 w-8 rounded-full'
         />
-        <span className='text-sm font-bold'>{reviewer?.name}</span>
+        <span className='text-sm font-bold hover:underline'>
+          <a href={`/profile/${reviewer?.username}`}>{reviewer?.name}</a>
+        </span>
       </div>
       <div>
         <span className='text-xs text-gray-500'>{reviewer?.address}</span>

@@ -15,7 +15,6 @@ export interface SellerResponse {
 
 export async function getSellerResponseByServiceId(serviceId: string) {
   try {
-    // console.log('DATA DARI SELLER RESPONSE >>>>>>>>>>>>', serviceId);
     const service = await prisma.service.findFirst({
       where: { id: serviceId },
     });

@@ -1,6 +1,5 @@
 import HomeHero from '@/components/home_components/HomeHero';
 import Layout from '@/components/Layout';
-import HomePopularServices from '@/components/home_components/HomePopularServices';
 import HomeServices from '@/components/home_components/HomeServices';
 import StepsSection from '@/components/home_components/StepsSection';
 import YouTubeFrame from '@/components/home_components/YoutubeFrame';
@@ -11,7 +10,7 @@ import Navbar from '@/components/Navbar';
 import { fetchCategories } from '@/lib/actions/category.actions';
 
 export default async function Home() {
-  const categories = await fetchCategories();
+  const categories = (await fetchCategories()) || [];
   return (
     <Layout>
       <Navbar mode={'fixed'} categories={categories} />

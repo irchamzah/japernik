@@ -5,11 +5,11 @@ import { IoIosStar } from 'react-icons/io';
 
 const ProfileCard = ({
   profileData,
-  ratingSum,
+  ratingAvg,
   reviewCount,
 }: {
   profileData: User;
-  ratingSum: number;
+  ratingAvg: number;
   reviewCount: number;
 }) => {
   return (
@@ -25,10 +25,12 @@ const ProfileCard = ({
           />
         </div>
         <div className='text-gray-700'>
-          <p className='font-semibold capitalize'>{profileData.name}</p>
+          <p className='font-semibold capitalize hover:underline'>
+            <a href={`/profile/${profileData.username}`}>{profileData.name}</a>
+          </p>
           <div className='flex items-center'>
             <IoIosStar className='mr-1' />
-            <span className='mr-1 font-semibold'>{ratingSum.toFixed(1)}</span>
+            <span className='mr-1 font-semibold'>{ratingAvg.toFixed(1)}</span>
             <span className='mr-1 text-gray-500'>({reviewCount})</span>
           </div>
         </div>

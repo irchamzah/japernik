@@ -6,12 +6,12 @@ const BreadCrumbs = ({
   categorySlug,
   categoryName,
   currentServiceId,
-  currentServiceName,
+  currentServiceSlug,
 }: {
   categorySlug: string | undefined;
   categoryName: string | undefined;
   currentServiceId: string | undefined;
-  currentServiceName: string | undefined;
+  currentServiceSlug: string | undefined;
 }) => {
   return (
     <div className='mx-auto max-w-7xl'>
@@ -33,13 +33,13 @@ const BreadCrumbs = ({
             <FaChevronRight className='mx-2' />
           </li>
           <li className='my-1 flex items-center text-xs'>
-            {currentServiceId !== '' ? (
+            {currentServiceSlug !== '' ? (
               <>
                 <Link
-                  href={`/service/${currentServiceId}`}
+                  href={`/categories/${categorySlug}/${currentServiceSlug}`}
                   className='decoration-gray-500 hover:underline'
                 >
-                  {currentServiceName}
+                  {currentServiceSlug}
                 </Link>
                 <FaChevronRight className='mx-2' />
               </>

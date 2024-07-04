@@ -9,7 +9,7 @@ export interface Category {
   service?: Service[];
 }
 
-async function fetchCategories() {
+export async function fetchCategories() {
   try {
     const categories = await prisma.category.findMany({});
     if (!categories || categories.length === 0) {
@@ -22,4 +22,13 @@ async function fetchCategories() {
   }
 }
 
-export { fetchCategories };
+export async function fetchCategoryBySlug(slug: string) {
+  try {
+    const category = await prisma.category.findUnique({
+      where: { slug: slug },
+    });
+    return category;
+  } catch (error) {
+    console.error('Terjadi error saat melakukan fetchCategoryBySlug', error);
+  }
+}

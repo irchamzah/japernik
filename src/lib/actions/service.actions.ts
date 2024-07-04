@@ -6,6 +6,7 @@ import { User } from './user.actions';
 
 export interface Service {
   id: string;
+  slug: string;
   title: string;
   description: string;
   price: number;
@@ -20,7 +21,7 @@ export interface Service {
   updatedAt: Date;
 }
 
-async function getServicesByCategory(categorySlug: string) {
+export async function getServicesByCategory(categorySlug: string) {
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -47,10 +48,10 @@ async function getServicesByCategory(categorySlug: string) {
   }
 }
 
-async function getServiceById(serviceId: string) {
+export async function getServiceBySlug(serviceSlug: string) {
   try {
     const service = await prisma.service.findUnique({
-      where: { id: serviceId },
+      where: { slug: serviceSlug },
       include: {
         author: true,
         category: true,
@@ -68,4 +69,30 @@ async function getServiceById(serviceId: string) {
   }
 }
 
-export { getServicesByCategory, getServiceById };
+export async function fetchServicesByUserName(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: username },
+    });
+    if (!user) {
+      throw new Error('User tidak ditemukan');
+    }
+
+    const service = await prisma.service.findMany({
+      where: { authorId: user?.id },
+      include: {
+        category: true,
+        servicePortfolio: true,
+        author: true,
+        review: {
+          include: {
+            sellerResponses: true,
+          },
+        },
+      },
+    });
+    return service;
+  } catch (error) {
+    console.error('Terjadi kesalahan saat fetch service', error);
+  }
+}

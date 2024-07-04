@@ -18,10 +18,41 @@ export interface User {
   updatedAt: Date;
 }
 
-export async function avgRatingSumReviewSeller(id: string) {
+export async function fetchUserByUserId(id: string) {
   try {
     const user = await prisma.user.findUnique({
       where: { id: id },
+    });
+
+    return user;
+  } catch (error) {
+    console.error(
+      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
+      error
+    );
+  }
+}
+
+export async function fetchUserByUserName(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: username },
+      include: { services: true, reviews: true, sellerResponses: true },
+    });
+
+    return user;
+  } catch (error) {
+    console.error(
+      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
+      error
+    );
+  }
+}
+
+export async function avgRatingCountReviewSeller(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: username },
     });
 
     if (!user) {
@@ -48,5 +79,29 @@ export async function avgRatingSumReviewSeller(id: string) {
     return { averageRating, totalReviews };
   } catch (error) {
     console.error('Terjadi kesalahan saat menjalankan sumRatingSeller', error);
+  }
+}
+
+export async function avgRatingCountReviewServiceByServiceSlug(
+  serviceSlug: string
+) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+      include: { review: true },
+    });
+    let avgRating = 0;
+    let countReviews = 0;
+    service?.review.forEach((review) => {
+      avgRating += review.rating;
+      countReviews += 1;
+    });
+    const averageRating = countReviews > 0 ? avgRating / countReviews : 0;
+    return { averageRating, countReviews };
+  } catch (error) {
+    console.error(
+      'Terjadi kesalahan saat avgRatingCountReviewServiceByServiceSlug',
+      error
+    );
   }
 }
