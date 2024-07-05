@@ -18,9 +18,9 @@ export default async function detail_profile({
   try {
     const [categories, profile, services, ratingReviewSeller] =
       await Promise.all([
-        fetchCategories(),
+        fetchCategories() || [],
         fetchUserByUserName(params.username),
-        fetchServicesByUserName(params.username),
+        fetchServicesByUserName(params.username) || [],
         avgRatingCountReviewSeller(params.username),
       ]);
     if (!categories) {
