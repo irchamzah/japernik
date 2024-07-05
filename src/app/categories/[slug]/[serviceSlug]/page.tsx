@@ -74,6 +74,6 @@ export default async function detail_service({
       </Layout>
     );
   } catch (error) {
-    return <div>Terjadi kesalahan: </div>;
+    return <div>Terjadi kesalahan pada Halaman Detail Service</div>;
   }
 }
