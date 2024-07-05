@@ -17,7 +17,7 @@ const ProfileCard = ({
       <div className='mx-6 mb-4 flex items-center gap-4 xl:mx-0'>
         <div>
           <Image
-            src={profileData.photo || ''}
+            src={profileData?.photo || ''}
             alt=''
             width={100}
             height={0}
@@ -26,7 +26,9 @@ const ProfileCard = ({
         </div>
         <div className='text-gray-700'>
           <p className='font-semibold capitalize hover:underline'>
-            <a href={`/profile/${profileData.username}`}>{profileData.name}</a>
+            <a href={`/profile/${profileData?.username}`}>
+              {profileData?.name}
+            </a>
           </p>
           <div className='flex items-center'>
             <IoIosStar className='mr-1' />
