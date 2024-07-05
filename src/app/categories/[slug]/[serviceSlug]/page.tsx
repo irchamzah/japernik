@@ -8,7 +8,7 @@ import Reviews from '@/components/detail_service/Reviews';
 import ServiceDescriptionDetail from '@/components/detail_service/ServiceDesciptionDetail';
 import { fetchCategories } from '@/lib/actions/category.actions';
 import { getServiceBySlug } from '@/lib/actions/service.actions';
-import { fetchUserByUserName } from '@/lib/actions/user.actions';
+import { fetchUserByServiceSlug } from '@/lib/actions/user.actions';
 
 export default async function detail_service({
   params,
@@ -16,9 +16,10 @@ export default async function detail_service({
   params: { serviceSlug: string };
 }) {
   try {
-    const [categories, serviceWithRatings] = await Promise.all([
+    const [categories, serviceWithRatings, userData] = await Promise.all([
       fetchCategories(),
       getServiceBySlug(params.serviceSlug),
+      fetchUserByServiceSlug(params.serviceSlug),
     ]);
     if (!categories) {
       return <div>categories tidak ditemukan...</div>;
@@ -35,9 +36,6 @@ export default async function detail_service({
         </Layout>
       );
     }
-    const userData = await fetchUserByUserName(
-      serviceWithRatings.author?.username
-    );
     if (!userData) {
       return <div>userData tidak ditemukan</div>;
     }
