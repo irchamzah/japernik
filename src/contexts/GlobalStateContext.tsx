@@ -1,3 +1,5 @@
+'use client';
+
 // contexts/GlobalStateContext.tsx
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
