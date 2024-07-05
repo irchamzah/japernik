@@ -4,11 +4,7 @@ import ProductContainer from '@/components/all_services/ProductContainer';
 import GetToKnow from '@/components/detail_service/GetToKnow';
 import Reviews from '@/components/detail_service/Reviews';
 import { fetchCategories } from '@/lib/actions/category.actions';
-import { fetchServicesByUserName } from '@/lib/actions/service.actions';
-import {
-  avgRatingCountReviewSeller,
-  fetchUserByUserName,
-} from '@/lib/actions/user.actions';
+import { fetchUserByUserName } from '@/lib/actions/user.actions';
 
 export default async function detail_profile({
   params,
@@ -16,17 +12,14 @@ export default async function detail_profile({
   params: { username: string };
 }) {
   try {
-    const [categories, profile, services, ratingReviewSeller] =
-      await Promise.all([
-        fetchCategories() || [],
-        fetchUserByUserName(params.username),
-        fetchServicesByUserName(params.username) || [],
-        avgRatingCountReviewSeller(params.username),
-      ]);
+    const [categories, userWithRatings] = await Promise.all([
+      fetchCategories() || [],
+      fetchUserByUserName(params.username),
+    ]);
     if (!categories) {
       return <div>Categories tidak ditemukan</div>;
     }
-    if (!profile) {
+    if (!userWithRatings) {
       return (
         <Layout>
           <Navbar mode={'block'} categories={categories} />
@@ -38,24 +31,20 @@ export default async function detail_profile({
         </Layout>
       );
     }
-    if (!services) {
-      return <div>Services tidak ditemukan</div>;
-    }
-    if (!ratingReviewSeller) {
-      return <div>ratingReviewSeller tidak ditemukan...</div>;
-    }
 
     return (
       <Layout>
         <Navbar mode={'block'} categories={categories} />
-        <GetToKnow header='' userId={profile.id} />
+        <GetToKnow header='' userData={userWithRatings} />
         <h1 className='mx-6 mb-5 max-w-7xl text-2xl font-bold text-gray-700 xl:mx-auto'>
           My Services
         </h1>
-        <ProductContainer services={services} />
+        <ProductContainer services={userWithRatings.services} />
         <Reviews
-          userId={profile.id}
-          serviceId={''}
+          userReviewsData={userWithRatings.reviews}
+          serviceReviewsData={[]}
+          userReviewsCount={userWithRatings.countReviews}
+          userReviewsAvg={userWithRatings.avgRating}
           reviewsFor={'reviews for this seller.'}
         />
       </Layout>

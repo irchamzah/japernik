@@ -13,7 +13,7 @@ export interface Service {
   published: boolean;
   author?: User;
   authorId: string;
-  category: Category;
+  category?: Category;
   categoryId: string;
   servicePortfolio?: ServicePortfolio[];
   review?: Review[];
@@ -58,12 +58,35 @@ export async function getServiceBySlug(serviceSlug: string) {
         servicePortfolio: true,
         review: {
           include: {
-            sellerResponses: true,
+            author: true,
+            service: true,
+            sellerResponses: { include: { author: true, review: true } },
           },
         },
       },
     });
-    return service;
+    if (!service) {
+      throw new Error('service tidak ditemukan');
+    }
+
+    let totalRating = 0;
+    let countReviews = 0;
+    service.review.forEach((review) => {
+      totalRating += review.rating;
+      countReviews += 1;
+    });
+    const avgRating = countReviews > 0 ? totalRating / countReviews : 0;
+
+    const serviceWithRatings: Service & {
+      avgRating: number;
+      countReviews: number;
+    } = {
+      ...service,
+      avgRating,
+      countReviews,
+    };
+
+    return serviceWithRatings;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
   }

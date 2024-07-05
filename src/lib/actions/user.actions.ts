@@ -1,3 +1,4 @@
+import { SellerResponse } from '@prisma/client';
 import prisma from '../../../lib/prisma';
 import { Review } from './review.actions';
 import { Service } from './service.actions';
@@ -14,6 +15,7 @@ export interface User {
   address: string;
   services?: Service[];
   reviews?: Review[];
+  sellerResponses?: SellerResponse[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -33,14 +35,47 @@ export async function fetchUserByUserId(id: string) {
   }
 }
 
-export async function fetchUserByUserName(username: string) {
+export async function fetchUserByUserName(username: string | undefined) {
   try {
     const user = await prisma.user.findUnique({
       where: { username: username },
-      include: { services: true, reviews: true, sellerResponses: true },
+      include: {
+        services: {
+          include: {
+            author: true,
+            category: true,
+            servicePortfolio: true,
+            review: { include: { sellerResponses: true } },
+          },
+        },
+        reviews: { include: { sellerResponses: true } },
+        sellerResponses: true,
+      },
     });
 
-    return user;
+    if (!user) {
+      console.error(`User dengan username ${username} tidak ditemukan.`);
+      return null;
+    }
+
+    let totalRating = 0;
+    let countReviews = 0;
+    user.services.forEach((service) => {
+      service.review.forEach((review) => {
+        totalRating += review.rating;
+        countReviews += 1;
+      });
+    });
+    const avgRating = countReviews > 0 ? totalRating / countReviews : 0;
+
+    const userWithRatings: User & { avgRating: number; countReviews: number } =
+      {
+        ...user,
+        avgRating,
+        countReviews,
+      };
+
+    return userWithRatings;
   } catch (error) {
     console.error(
       'Terjadi kesalahan saat menjalankan fetchUserByUserId',

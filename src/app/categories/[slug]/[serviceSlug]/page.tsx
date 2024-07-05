@@ -8,7 +8,7 @@ import Reviews from '@/components/detail_service/Reviews';
 import ServiceDescriptionDetail from '@/components/detail_service/ServiceDesciptionDetail';
 import { fetchCategories } from '@/lib/actions/category.actions';
 import { getServiceBySlug } from '@/lib/actions/service.actions';
-import { avgRatingCountReviewServiceByServiceSlug } from '@/lib/actions/user.actions';
+import { fetchUserByUserName } from '@/lib/actions/user.actions';
 
 export default async function detail_service({
   params,
@@ -16,16 +16,14 @@ export default async function detail_service({
   params: { serviceSlug: string };
 }) {
   try {
-    const [categories, service, ratingReviewSeller] = await Promise.all([
+    const [categories, serviceWithRatings] = await Promise.all([
       fetchCategories(),
       getServiceBySlug(params.serviceSlug),
-      avgRatingCountReviewServiceByServiceSlug(params.serviceSlug),
     ]);
-
     if (!categories) {
       return <div>categories tidak ditemukan...</div>;
     }
-    if (!service) {
+    if (!serviceWithRatings) {
       return (
         <Layout>
           <Navbar mode={'block'} categories={categories} />
@@ -37,38 +35,46 @@ export default async function detail_service({
         </Layout>
       );
     }
-    if (!ratingReviewSeller) {
-      return <div>ratingReviewSeller tidak ditemukan...</div>;
+    const userData = await fetchUserByUserName(
+      serviceWithRatings.author?.username
+    );
+    if (!userData) {
+      return <div>userData tidak ditemukan</div>;
     }
 
     return (
       <Layout>
         <Navbar mode={'block'} categories={categories} />
         <BreadCrumbs
-          categorySlug={service.category.slug}
-          categoryName={service.category.name}
-          currentServiceId={service.id}
-          currentServiceSlug={service.slug}
+          categorySlug={serviceWithRatings.category?.slug}
+          categoryName={serviceWithRatings.category?.name}
+          currentServiceId={serviceWithRatings.id}
+          currentServiceSlug={serviceWithRatings.slug}
         />
         <div className='mx-auto max-w-7xl'>
           <h1 className='mx-6 mb-4 mt-8 text-2xl font-semibold capitalize text-gray-700 xl:mx-0'>
-            {service.title}
+            {serviceWithRatings.title}
           </h1>
         </div>
         <ProfileCard
-          profileData={service.author}
-          ratingAvg={ratingReviewSeller.averageRating}
-          reviewCount={ratingReviewSeller.countReviews}
+          profileData={serviceWithRatings.author}
+          ratingAvg={serviceWithRatings.avgRating}
+          reviewCount={serviceWithRatings.countReviews}
         />
-        <PhotoSlider images={service.servicePortfolio} />
-        <ServiceDescriptionDetail description={service.description} />
+        <PhotoSlider images={serviceWithRatings.servicePortfolio} />
+        <ServiceDescriptionDetail
+          description={serviceWithRatings.description}
+        />
         <GetToKnow
-          header={`Tentang ${service.author.name}`}
-          userId={service.authorId}
+          header={`Tentang ${serviceWithRatings.author?.name}`}
+          userData={userData}
         />
+
         <Reviews
-          userId={''}
-          serviceId={service.id}
+          userReviewsData={[]}
+          serviceReviewsData={serviceWithRatings.review}
+          userReviewsCount={serviceWithRatings.countReviews}
+          userReviewsAvg={serviceWithRatings.avgRating}
           reviewsFor={'reviews for this service.'}
         />
       </Layout>

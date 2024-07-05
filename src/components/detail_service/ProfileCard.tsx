@@ -8,7 +8,7 @@ const ProfileCard = ({
   ratingAvg,
   reviewCount,
 }: {
-  profileData: User;
+  profileData: User | undefined;
   ratingAvg: number;
   reviewCount: number;
 }) => {

@@ -5,7 +5,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const PhotoSlider = ({ images }: { images: ServicePortfolio[] }) => {
+const PhotoSlider = ({
+  images,
+}: {
+  images: ServicePortfolio[] | undefined;
+}) => {
+  if (!images) {
+    images = [];
+  }
   //slider handle
   const [currentIndex, setCurrentIndex] = useState(0);
   const prevSlide = () => {

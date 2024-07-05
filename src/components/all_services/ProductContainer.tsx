@@ -1,8 +1,14 @@
 import { Service } from '@/lib/actions/service.actions';
 import ProductCard from './ProductCard';
 
-async function ProductContainer({ services }: { services: Service[] }) {
+async function ProductContainer({
+  services,
+}: {
+  services: Service[] | undefined;
+}) {
   // console.log('ISI DARI services >>>>>>>>>>>>>>>>>', services);
+
+  services = services || [];
 
   return (
     <div className='mx-auto max-w-7xl'>
@@ -34,7 +40,7 @@ async function ProductContainer({ services }: { services: Service[] }) {
               rating={averageRating}
               countReview={countReview}
               price={service.price}
-              productLink={`/categories/${service.category.slug}/${service.slug}`}
+              productLink={`/categories/${service.category?.slug}/${service.slug}`}
               authorLink={
                 service.author ? `/profile/${service.author.username}` : '#'
               }
