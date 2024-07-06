@@ -122,9 +122,9 @@ const Layout = async ({ children }: { children: ReactNode }) => {
   ];
   return (
     <div>
-      {/* <Navbar mode={'block'} categories={categories} /> */}
+      <Navbar mode={'block'} categories={categories} />
       <div>{children}</div>
-      {/* <MoreInfoSection categories={categories} /> */}
+      <MoreInfoSection categories={categories} />
       <Footer />
     </div>
   );
