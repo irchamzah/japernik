@@ -1,10 +1,8 @@
-import {
-  getServicesIdByCategory,
-  Service,
-} from '@/lib/actions/service.actions';
+import { getServicesIdByCategory } from '@/lib/actions/service.actions';
 import ProductCard from './ProductCard';
 import { Suspense } from 'react';
 import { getServicesIdByUsername } from '@/lib/actions/user.actions';
+import Loading from '../Loading';
 
 async function ProductContainer({
   categorySlug,
@@ -21,10 +19,10 @@ async function ProductContainer({
     return (
       <div className='mx-auto max-w-7xl'>
         <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-          {services?.map((service) => {
+          {services.map((service) => {
             return (
               <>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                   <ProductCard key={service.id} serviceId={service.id} />
                 </Suspense>
               </>
@@ -39,10 +37,10 @@ async function ProductContainer({
     return (
       <div className='mx-auto max-w-7xl'>
         <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-          {userServices?.map((service) => {
+          {userServices.map((service) => {
             return (
               <>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                   <ProductCard key={service.id} serviceId={service.id} />
                 </Suspense>
               </>

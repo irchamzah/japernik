@@ -21,7 +21,14 @@ export interface Service {
   updatedAt: Date;
 }
 
-export async function getServicesIdByCategory(categorySlug: string) {
+export interface ServiceId {
+  id: string;
+}
+export async function getServicesIdByCategory(
+  categorySlug: string,
+  page: number = 1,
+  limit: number = 2
+): Promise<ServiceId[]> {
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -40,6 +47,7 @@ export async function getServicesIdByCategory(categorySlug: string) {
     return services;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
+    return [];
   }
 }
 
