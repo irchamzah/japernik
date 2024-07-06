@@ -17,11 +17,13 @@ export default async function CategoriesPage({
   return (
     <>
       <Layout>
-        <BreadCrumbs categorySlug={category?.slug} currentServiceSlug={''} />
-        <ServiceDescription
-          title={category?.name}
-          description={category?.description}
-        />
+        <Suspense fallback={<Loading />}>
+          <BreadCrumbs categorySlug={category?.slug} currentServiceSlug={''} />
+          <ServiceDescription
+            title={category?.name}
+            description={category?.description}
+          />
+        </Suspense>
         <Filter />
         <Suspense fallback={<Loading />}>
           <ProductContainer categorySlug={categoriesSlug} username={''} />
