@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
-import { Category, fetchCategories } from '@/lib/actions/category.actions';
+import { Category } from '@/lib/actions/category.actions';
 
 const Navbar = ({
   mode,
