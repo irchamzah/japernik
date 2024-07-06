@@ -32,3 +32,27 @@ export async function fetchCategoryBySlug(slug: string) {
     console.error('Terjadi error saat melakukan fetchCategoryBySlug', error);
   }
 }
+
+export async function getCategoryByServiceId(serviceId: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { id: serviceId },
+    });
+    const category = await prisma.category.findFirst({
+      where: { id: service?.categoryId },
+    });
+    return category;
+  } catch (error) {}
+}
+
+export async function getCategoryByServiceSlug(serviceSlug: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+    });
+    const category = await prisma.category.findFirst({
+      where: { id: service?.categoryId },
+    });
+    return category;
+  } catch (error) {}
+}

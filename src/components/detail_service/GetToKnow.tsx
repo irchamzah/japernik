@@ -1,4 +1,7 @@
-import { fetchReviewByUserId } from '@/lib/actions/review.actions';
+import {
+  fetchReviewByUserId,
+  getReviewsByUserId,
+} from '@/lib/actions/review.actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoIosStar } from 'react-icons/io';
@@ -6,16 +9,28 @@ import { IoChatbubblesOutline } from 'react-icons/io5';
 import { MdEdit } from 'react-icons/md';
 import DateToString from '../ui_components/DateToString';
 import ProfileDescription from '../ui_components/ProfileDescription';
-import { fetchUserByUserId, User } from '@/lib/actions/user.actions';
+import { getUserByUserId } from '@/lib/actions/user.actions';
 
 const GetToKnow = async ({
   header,
-  userData,
+  userId,
 }: {
   header: string;
-  userData: (User & { avgRating: number; countReviews: number }) | undefined;
+  userId: string;
 }) => {
-  try {
+  const [user, userReviews] = await Promise.all([
+    getUserByUserId(userId),
+    getReviewsByUserId(userId),
+  ]);
+
+  if (user && userReviews) {
+    const avgRating =
+      userReviews.length > 0
+        ? userReviews.reduce((acc, curr) => acc + curr.rating, 0) /
+          userReviews.length
+        : 0;
+    const countReview = userReviews.length;
+
     return (
       <div className='mx-auto max-w-7xl'>
         <div className='mx-6 mb-8 xl:mx-0'>
@@ -28,7 +43,7 @@ const GetToKnow = async ({
           >
             <div>
               <Image
-                src={userData?.photo || ''}
+                src={user?.photo || ''}
                 alt=''
                 width={100}
                 height={0}
@@ -37,24 +52,19 @@ const GetToKnow = async ({
             </div>
             <div className='flex flex-col items-center gap-1'>
               <div className='font-semibold text-gray-700 hover:underline'>
-                <a href={`/profile/${userData?.username}`}>{userData?.name}</a>
+                <a href={`/profile/${user?.username}`}>{user?.name}</a>
               </div>
-              <div className='text-sm text-gray-600'>{userData?.title}</div>
+              <div className='text-sm text-gray-600'>{user?.title}</div>
               <div className='flex items-center'>
                 <IoIosStar className='mr-1 text-gray-700' />
                 <span className='mr-1 font-semibold text-gray-700'>
-                  {userData?.avgRating}
+                  {avgRating}
                 </span>
-                <span className='mr-1 text-gray-500'>
-                  ({userData?.countReviews})
-                </span>
+                <span className='mr-1 text-gray-500'>({countReview})</span>
               </div>
             </div>
             <div className='flex gap-2'>
-              <Link
-                href={`https://wa.me/${userData?.phoneNumber}`}
-                target='_blank'
-              >
+              <Link href={`https://wa.me/${user?.phoneNumber}`} target='_blank'>
                 <button className='flex items-center rounded border bg-purple-500 px-4 py-2 text-white active:bg-purple-600'>
                   <IoChatbubblesOutline className='mr-2' />
                   Whatsapp Seller
@@ -70,23 +80,21 @@ const GetToKnow = async ({
             <div className='mb-4 flex flex-col'>
               <span className='mb-1 text-gray-500'>Lokasi</span>
               <span className='font-semibold text-gray-600'>
-                {userData?.address}
+                {user?.address}
               </span>
             </div>
             <div className='mb-4 flex flex-col'>
               <span className='mb-1 text-gray-500'>Mulai Bergabung</span>
               <span className='font-semibold text-gray-600'>
-                <DateToString date={userData?.createdAt.toString()} />
+                <DateToString date={user?.createdAt.toString()} />
               </span>
             </div>
             <hr />
-            <ProfileDescription description={userData?.description} />
+            <ProfileDescription description={user?.description} />
           </div>
         </div>
       </div>
     );
-  } catch (error) {
-    return <div>Terjadi kesalahan pada GetToKnow</div>;
   }
 };
 

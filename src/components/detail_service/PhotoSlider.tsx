@@ -6,21 +6,23 @@ import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const PhotoSlider = ({
-  images,
+  servicePortfolios,
 }: {
-  images: ServicePortfolio[] | undefined;
+  servicePortfolios: ServicePortfolio[] | undefined;
 }) => {
-  if (!images) {
-    images = [];
+  if (!servicePortfolios) {
+    servicePortfolios = [];
   }
   //slider handle
   const [currentIndex, setCurrentIndex] = useState(0);
   const prevSlide = () => {
-    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    const newIndex =
+      currentIndex === 0 ? servicePortfolios.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
   const nextSlide = () => {
-    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+    const newIndex =
+      currentIndex === servicePortfolios.length - 1 ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
 
@@ -29,7 +31,7 @@ const PhotoSlider = ({
       <div className='relative mx-6 mb-10 xl:mx-0'>
         <div>
           <Image
-            src={images[currentIndex].url}
+            src={servicePortfolios[currentIndex].url}
             alt={`Slide ${currentIndex}`}
             className='h-56 w-full object-cover sm:h-[427px]'
             width={500}

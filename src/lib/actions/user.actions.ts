@@ -20,18 +20,31 @@ export interface User {
   updatedAt: Date;
 }
 
-export async function fetchUserByUserId(id: string) {
+export async function getUserByUserId(userId: string) {
   try {
     const user = await prisma.user.findUnique({
-      where: { id: id },
+      where: { id: userId },
     });
 
     return user;
   } catch (error) {
-    console.error(
-      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
-      error
-    );
+    console.error('Terjadi kesalahan saat menjalankan getUserByUserId', error);
+  }
+}
+
+export async function getUserByServiceSlug(serviceSlug: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+      select: { authorId: true },
+    });
+    const user = await prisma.user.findUnique({
+      where: { id: service?.authorId },
+    });
+
+    return user;
+  } catch (error) {
+    console.error('Terjadi kesalahan saat menjalankan getUserByUserId', error);
   }
 }
 
@@ -191,5 +204,37 @@ export async function avgRatingCountReviewServiceByServiceSlug(
       'Terjadi kesalahan saat avgRatingCountReviewServiceByServiceSlug',
       error
     );
+  }
+}
+
+export async function getUserByServiceId(serviceId: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { id: serviceId },
+      select: { authorId: true },
+    });
+    const user = await prisma.user.findUnique({
+      where: { id: service?.authorId },
+    });
+    return user;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getServicesByUsername(username: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { username: username },
+      select: { id: true },
+    });
+    if (user) {
+      const service = await prisma.service.findMany({
+        where: { authorId: user.id },
+      });
+      return service;
+    }
+  } catch (error) {
+    console.error(error);
   }
 }

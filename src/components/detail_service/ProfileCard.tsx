@@ -1,23 +1,24 @@
 import { Service } from '@/lib/actions/service.actions';
-import { User } from '@/lib/actions/user.actions';
+import { getUserByUserId, User } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 import { IoIosStar } from 'react-icons/io';
 
-const ProfileCard = ({
-  profileData,
+const ProfileCard = async ({
+  authorId,
   ratingAvg,
   reviewCount,
 }: {
-  profileData: User | undefined;
+  authorId: string;
   ratingAvg: number;
   reviewCount: number;
 }) => {
+  const [profile] = await Promise.all([getUserByUserId(authorId)]);
   return (
     <div className='mx-auto max-w-7xl'>
       <div className='mx-6 mb-4 flex items-center gap-4 xl:mx-0'>
         <div>
           <Image
-            src={profileData?.photo || ''}
+            src={profile?.photo || ''}
             alt=''
             width={100}
             height={0}
@@ -26,9 +27,7 @@ const ProfileCard = ({
         </div>
         <div className='text-gray-700'>
           <p className='font-semibold capitalize hover:underline'>
-            <a href={`/profile/${profileData?.username}`}>
-              {profileData?.name}
-            </a>
+            <a href={`/profile/${profile?.username}`}>{profile?.name}</a>
           </p>
           <div className='flex items-center'>
             <IoIosStar className='mr-1' />

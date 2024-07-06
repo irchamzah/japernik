@@ -35,3 +35,19 @@ export async function getSellerResponseByServiceId(serviceId: string) {
     );
   }
 }
+
+export async function getSellerResponseByReviewid(reviewId: string) {
+  try {
+    const review = await prisma.review.findUnique({
+      where: { id: reviewId },
+    });
+    if (review) {
+      const user = await prisma.user.findUnique({
+        where: { id: review.userId },
+      });
+      return user;
+    } else console.log('review tidak ditemukan');
+  } catch (error) {
+    console.error(error);
+  }
+}

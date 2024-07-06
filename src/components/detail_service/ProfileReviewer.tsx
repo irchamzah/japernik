@@ -1,8 +1,8 @@
-import { User, fetchUserByUserId } from '@/lib/actions/user.actions';
+import { getUserByUserId } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 
 const ProfileReviewer = async ({ userId }: { userId: string }) => {
-  const reviewer = await fetchUserByUserId(userId);
+  const reviewer = await getUserByUserId(userId);
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center gap-3'>

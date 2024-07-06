@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import DropdownButton from '../ui_components/DropdownButton';
 import { SellerResponse } from '@/lib/actions/sellerResponse.actions';
-import { fetchUserByUserId } from '@/lib/actions/user.actions';
+import { getUserByUserId } from '@/lib/actions/user.actions';
 
 const SellersResponse = async ({
   sellerResponse,
@@ -11,7 +11,7 @@ const SellersResponse = async ({
   if (sellerResponse.length === 0) {
     return <></>;
   }
-  const reviewer = await fetchUserByUserId(sellerResponse[0]?.userId);
+  const reviewer = await getUserByUserId(sellerResponse[0]?.userId);
 
   return (
     <>

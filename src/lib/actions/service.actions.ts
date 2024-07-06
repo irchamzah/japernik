@@ -21,7 +21,7 @@ export interface Service {
   updatedAt: Date;
 }
 
-export async function getServicesByCategory(categorySlug: string) {
+export async function getServicesIdByCategory(categorySlug: string) {
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -35,12 +35,6 @@ export async function getServicesByCategory(categorySlug: string) {
 
     const services = await prisma.service.findMany({
       where: { published: true, categoryId: category.id },
-      include: {
-        author: true,
-        category: true,
-        servicePortfolio: true,
-        review: true,
-      },
     });
     return services;
   } catch (error) {
@@ -117,5 +111,26 @@ export async function fetchServicesByUserName(username: string) {
     return service;
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
+  }
+}
+
+export async function getServiceByServiceId(serviceId: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { id: serviceId },
+    });
+    return service;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function getServiceByServiceSlug(serviceSlug: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+    });
+    return service;
+  } catch (error) {
+    console.error(error);
   }
 }

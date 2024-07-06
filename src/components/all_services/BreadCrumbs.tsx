@@ -4,13 +4,9 @@ import { FaChevronRight } from 'react-icons/fa';
 
 const BreadCrumbs = ({
   categorySlug,
-  categoryName,
-  currentServiceId,
   currentServiceSlug,
 }: {
   categorySlug: string | undefined;
-  categoryName: string | undefined;
-  currentServiceId: string | undefined;
   currentServiceSlug: string | undefined;
 }) => {
   return (

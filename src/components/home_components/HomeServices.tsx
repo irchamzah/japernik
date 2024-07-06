@@ -1,8 +1,9 @@
-import { Category } from '@/lib/actions/category.actions';
+import { Category, fetchCategories } from '@/lib/actions/category.actions';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const HomeServices = ({ categories }: { categories: Category[] }) => {
+const HomeServices = async () => {
+  const categories = (await fetchCategories()) || [];
   return (
     <>
       <div className='mx-6'>

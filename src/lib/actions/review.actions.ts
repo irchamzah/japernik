@@ -57,3 +57,36 @@ export async function fetchReviewByServiceId(serviceId: string) {
     console.error('Terjadi kesalahan saat fetchReviewByServiceId', error);
   }
 }
+
+export async function getReviewsByServiceId(serviceId: string) {
+  try {
+    const reviews = await prisma.review.findMany({
+      where: { serviceId: serviceId },
+      include: { sellerResponses: true },
+    });
+    return reviews;
+  } catch (error) {}
+}
+
+export async function getReviewByServiceSlug(serviceSlug: string) {
+  try {
+    const service = await prisma.service.findUnique({
+      where: { slug: serviceSlug },
+      select: { id: true },
+    });
+    const reviews = await prisma.review.findMany({
+      where: { serviceId: service?.id },
+    });
+    return reviews;
+  } catch (error) {}
+}
+
+export async function getReviewsByUserId(userId: string) {
+  try {
+    const reviews = await prisma.review.findMany({
+      where: { userId: userId },
+      include: { sellerResponses: true },
+    });
+    return reviews;
+  } catch (error) {}
+}
