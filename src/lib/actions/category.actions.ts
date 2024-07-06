@@ -11,7 +11,9 @@ export interface Category {
 
 export async function fetchCategories() {
   try {
-    const categories = await prisma.category.findMany({});
+    const categories = await prisma.category.findMany({
+      select: { slug: true, name: true, logo: true, id: true },
+    });
     if (!categories || categories.length === 0) {
       throw new Error('Kategori tidak ditemukan');
     }
