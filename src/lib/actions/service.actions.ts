@@ -43,6 +43,8 @@ export async function getServicesIdByCategory(
     const services = await prisma.service.findMany({
       where: { published: true, categoryId: category.id },
       select: { id: true },
+      skip: (page - 1) * limit,
+      take: limit,
     });
     return services;
   } catch (error) {
