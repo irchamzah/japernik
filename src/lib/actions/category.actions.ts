@@ -26,6 +26,7 @@ export async function fetchCategoryBySlug(slug: string) {
   try {
     const category = await prisma.category.findUnique({
       where: { slug: slug },
+      select: { slug: true, name: true, description: true },
     });
     return category;
   } catch (error) {
@@ -33,13 +34,14 @@ export async function fetchCategoryBySlug(slug: string) {
   }
 }
 
-export async function getCategoryByServiceId(serviceId: string) {
+export async function getCategorySlugByServiceId(serviceId: string) {
   try {
     const service = await prisma.service.findUnique({
       where: { id: serviceId },
     });
     const category = await prisma.category.findFirst({
       where: { id: service?.categoryId },
+      select: { slug: true },
     });
     return category;
   } catch (error) {}
@@ -52,6 +54,7 @@ export async function getCategoryByServiceSlug(serviceSlug: string) {
     });
     const category = await prisma.category.findFirst({
       where: { id: service?.categoryId },
+      select: { slug: true },
     });
     return category;
   } catch (error) {}

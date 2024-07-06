@@ -20,10 +20,20 @@ export interface User {
   updatedAt: Date;
 }
 
-export async function getUserByUserId(userId: string) {
+export async function getUserByUserId(userId: string | undefined) {
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
+      select: {
+        photo: true,
+        username: true,
+        name: true,
+        title: true,
+        address: true,
+        createdAt: true,
+        description: true,
+        phoneNumber: true,
+      },
     });
 
     return user;
@@ -40,6 +50,7 @@ export async function getUserByServiceSlug(serviceSlug: string) {
     });
     const user = await prisma.user.findUnique({
       where: { id: service?.authorId },
+      select: { name: true, id: true },
     });
 
     return user;
@@ -52,43 +63,10 @@ export async function fetchUserByUserName(username: string | undefined) {
   try {
     const user = await prisma.user.findUnique({
       where: { username: username },
-      include: {
-        services: {
-          include: {
-            author: true,
-            category: true,
-            servicePortfolio: true,
-            review: { include: { sellerResponses: true } },
-          },
-        },
-        reviews: { include: { sellerResponses: true } },
-        sellerResponses: true,
-      },
+      select: { id: true },
     });
 
-    if (!user) {
-      console.error(`User dengan username ${username} tidak ditemukan.`);
-      return null;
-    }
-
-    let totalRating = 0;
-    let countReviews = 0;
-    user.services.forEach((service) => {
-      service.review.forEach((review) => {
-        totalRating += review.rating;
-        countReviews += 1;
-      });
-    });
-    const avgRating = countReviews > 0 ? totalRating / countReviews : 0;
-
-    const userWithRatings: User & { avgRating: number; countReviews: number } =
-      {
-        ...user,
-        avgRating,
-        countReviews,
-      };
-
-    return userWithRatings;
+    return user;
   } catch (error) {
     console.error(
       'Terjadi kesalahan saat menjalankan fetchUserByUserId',
@@ -215,6 +193,7 @@ export async function getUserByServiceId(serviceId: string) {
     });
     const user = await prisma.user.findUnique({
       where: { id: service?.authorId },
+      select: { username: true, photo: true, name: true },
     });
     return user;
   } catch (error) {
@@ -222,17 +201,18 @@ export async function getUserByServiceId(serviceId: string) {
   }
 }
 
-export async function getServicesByUsername(username: string) {
+export async function getServicesIdByUsername(username: string) {
   try {
     const user = await prisma.user.findUnique({
       where: { username: username },
       select: { id: true },
     });
     if (user) {
-      const service = await prisma.service.findMany({
+      const services = await prisma.service.findMany({
         where: { authorId: user.id },
+        select: { id: true },
       });
-      return service;
+      return services;
     }
   } catch (error) {
     console.error(error);

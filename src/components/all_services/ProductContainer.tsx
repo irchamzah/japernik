@@ -4,7 +4,7 @@ import {
 } from '@/lib/actions/service.actions';
 import ProductCard from './ProductCard';
 import { Suspense } from 'react';
-import { getServicesByUsername } from '@/lib/actions/user.actions';
+import { getServicesIdByUsername } from '@/lib/actions/user.actions';
 
 async function ProductContainer({
   categorySlug,
@@ -15,7 +15,7 @@ async function ProductContainer({
 }) {
   const [services, userServices] = await Promise.all([
     getServicesIdByCategory(categorySlug),
-    getServicesByUsername(username),
+    getServicesIdByUsername(username),
   ]);
   if (services) {
     return (

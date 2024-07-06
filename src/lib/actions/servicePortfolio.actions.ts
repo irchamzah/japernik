@@ -2,16 +2,17 @@ import prisma from '../../../lib/prisma';
 import { Service } from './service.actions';
 
 export interface ServicePortfolio {
-  id: string;
+  id?: string;
   url: string;
   service?: Service;
-  serviceId: string;
+  serviceId?: string;
 }
 
 export async function getServicePortfoliosByServiceId(serviceId: string) {
   try {
     const servicePortfolios = await prisma.servicePortfolio.findMany({
       where: { serviceId: serviceId },
+      select: { url: true },
     });
     return servicePortfolios;
   } catch (error) {
@@ -28,6 +29,7 @@ export async function getServicePortfoliosByServiceSlug(serviceSlug: string) {
     });
     const servicePortfolios = await prisma.servicePortfolio.findMany({
       where: { serviceId: service?.id },
+      select: { url: true },
     });
     return servicePortfolios;
   } catch (error) {

@@ -1,4 +1,4 @@
-import { getCategoryByServiceId } from '@/lib/actions/category.actions';
+import { getCategorySlugByServiceId } from '@/lib/actions/category.actions';
 import { getReviewsByServiceId } from '@/lib/actions/review.actions';
 import { getServiceByServiceId, Service } from '@/lib/actions/service.actions';
 import { getServicePortfoliosByServiceId } from '@/lib/actions/servicePortfolio.actions';
@@ -12,7 +12,7 @@ const ProductCard = async ({ serviceId }: { serviceId: string }) => {
     await Promise.all([
       getServiceByServiceId(serviceId),
       getUserByServiceId(serviceId),
-      getCategoryByServiceId(serviceId),
+      getCategorySlugByServiceId(serviceId),
       getReviewsByServiceId(serviceId),
       getServicePortfoliosByServiceId(serviceId),
     ]);

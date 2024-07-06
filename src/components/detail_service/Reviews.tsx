@@ -41,8 +41,8 @@ const Reviews = async ({
     }
     return stars;
   };
-  if (user && userReviews) {
-    if (user && userReviews.length > 0) {
+  if (userReviews) {
+    if (userReviews.length > 0) {
       const userRating = avgRatingCountReview(userReviews);
       return (
         <div className='mx-auto max-w-7xl'>

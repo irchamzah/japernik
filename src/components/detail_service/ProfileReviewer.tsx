@@ -1,7 +1,7 @@
 import { getUserByUserId } from '@/lib/actions/user.actions';
 import Image from 'next/image';
 
-const ProfileReviewer = async ({ userId }: { userId: string }) => {
+const ProfileReviewer = async ({ userId }: { userId: string | undefined }) => {
   const reviewer = await getUserByUserId(userId);
   return (
     <div className='flex flex-col gap-2'>

@@ -7,9 +7,9 @@ const ReviewersResponse = ({
   price,
 }: {
   rating: number;
-  postDate: Date;
-  response: string;
-  price: number;
+  postDate: Date | undefined;
+  response: string | undefined;
+  price: number | undefined;
 }) => {
   const renderStarRating = (avgRating: number) => {
     let stars = [];
@@ -42,7 +42,7 @@ const ReviewersResponse = ({
           </span>
         </div>
         <span className='text-gray-300'>-</span>
-        <span className='text-xs text-gray-500'>{postDate.toString()}</span>
+        <span className='text-xs text-gray-500'>{postDate?.toString()}</span>
       </div>
       <div title='ini opinion'>
         <p className='text-base font-medium text-gray-600'>{response}</p>
@@ -51,7 +51,7 @@ const ReviewersResponse = ({
         <div className='flex'>
           <span className='block w-24 text-sm text-gray-500'>Biaya</span>
           <span className='text-sm font-bold'>
-            Rp. {price.toLocaleString('id-ID')}
+            Rp. {price?.toLocaleString('id-ID')}
           </span>
         </div>
         {/* <div className='flex'>

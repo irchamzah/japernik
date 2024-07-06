@@ -4,17 +4,17 @@ import { Service } from './service.actions';
 import { User } from './user.actions';
 
 export interface Review {
-  id: string;
+  id?: string;
   rating: number;
-  response: string;
-  price: number;
+  response?: string;
+  price?: number;
   author?: User;
-  userId: string;
+  userId?: string;
   service?: Service;
-  serviceId: string;
+  serviceId?: string;
   sellerResponses?: SellerResponse[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export async function fetchReviewByUserId(id: string) {
@@ -62,7 +62,7 @@ export async function getReviewsByServiceId(serviceId: string) {
   try {
     const reviews = await prisma.review.findMany({
       where: { serviceId: serviceId },
-      include: { sellerResponses: true },
+      include: { sellerResponses: true }, /////perlu?
     });
     return reviews;
   } catch (error) {}
@@ -76,6 +76,7 @@ export async function getReviewByServiceSlug(serviceSlug: string) {
     });
     const reviews = await prisma.review.findMany({
       where: { serviceId: service?.id },
+      select: { rating: true },
     });
     return reviews;
   } catch (error) {}
