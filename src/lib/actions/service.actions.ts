@@ -25,9 +25,9 @@ export interface ServiceId {
   id: string;
 }
 export async function getServicesIdByCategory(
-  categorySlug: string,
-  page: number = 1,
-  limit: number = 2
+  categorySlug: string
+  // page: number = 1,
+  // limit: number = 2
 ): Promise<ServiceId[]> {
   try {
     const category = await prisma.category.findUnique({
@@ -43,8 +43,8 @@ export async function getServicesIdByCategory(
     const services = await prisma.service.findMany({
       where: { published: true, categoryId: category.id },
       select: { id: true },
-      skip: (page - 1) * limit,
-      take: limit,
+      // skip: (page - 1) * limit,
+      // take: limit,
     });
     return services;
   } catch (error) {

@@ -1,5 +1,6 @@
 import BreadCrumbs from '@/components/all_services/BreadCrumbs';
 import Filter from '@/components/all_services/Filter';
+import Paging from '@/components/all_services/Paging';
 import ProductContainer from '@/components/all_services/ProductContainer';
 import ServiceDescription from '@/components/all_services/ServiceDescription';
 import Layout from '@/components/Layout';
@@ -26,6 +27,7 @@ export default async function CategoriesPage({
         <Suspense fallback={<Loading />}>
           <ProductContainer categorySlug={categoriesSlug} username={''} />
         </Suspense>
+        <Paging />
       </Layout>
     </>
   );
