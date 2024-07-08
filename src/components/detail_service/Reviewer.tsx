@@ -5,8 +5,6 @@ import SellersResponse from './SellersResponse';
 import { getSellerResponseByReviewid } from '@/lib/actions/sellerResponse.actions';
 
 const Reviewer = async ({ dataReviewer }: { dataReviewer: Review }) => {
-  // const sellerResponses = await getSellerResponseByReviewid(dataReviewer.id);
-  // console.log('//////////////////////////////', dataReviewer);
   return (
     <div className='mb-8 mt-8 flex flex-col gap-4 rounded-2xl border p-4'>
       <ProfileReviewer userId={dataReviewer.userId} />

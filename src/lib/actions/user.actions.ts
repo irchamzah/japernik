@@ -80,7 +80,6 @@ export async function fetchUserByServiceSlug(serviceSlug: string | undefined) {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },
     });
-    console.log('///////////////////////////////', service?.authorId);
     const user = await prisma.user.findUnique({
       where: { id: service?.authorId },
       include: {

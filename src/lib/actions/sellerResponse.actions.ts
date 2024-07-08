@@ -46,7 +46,7 @@ export async function getSellerResponseByReviewid(reviewId: string) {
         where: { id: review.userId },
       });
       return user;
-    } else console.log('review tidak ditemukan');
+    } else console.error('review tidak ditemukan');
   } catch (error) {
     console.error(error);
   }

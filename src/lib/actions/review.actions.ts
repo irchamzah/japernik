@@ -50,8 +50,6 @@ export async function fetchReviewByServiceId(serviceId: string) {
     const avgRating =
       reviews.reduce((acc: number, curr: any) => acc + curr.rating, 0) /
       countReviews;
-
-    // console.log('ISI DARI REVIEWS >>>>>>>>', reviews.map);
     return { reviews, countReviews, avgRating };
   } catch (error) {
     console.error('Terjadi kesalahan saat fetchReviewByServiceId', error);

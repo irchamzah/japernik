@@ -1,12 +1,12 @@
 import PageLoading from '@/components/PageLoading';
 import { Suspense } from 'react';
-import CategoriesPage from '../../categories/[slug]/CategoriesPage';
+import ServicesPage from './ServicesPage';
 
 export default function Services({ params }: { params: { slug: string } }) {
   return (
     <>
       <Suspense fallback={<PageLoading />}>
-        <CategoriesPage categoriesSlug={params.slug} />
+        <ServicesPage categoriesSlug={params.slug} />
       </Suspense>
     </>
   );
