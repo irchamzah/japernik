@@ -31,7 +31,7 @@ function ProductContainer({
   );
 
   const { data: userServices } = useSWR<User[]>(
-    `/api/services?categorySlug=${username}`,
+    `/api/user?username=${username}`,
     fetcher
   );
 
