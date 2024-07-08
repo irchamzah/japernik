@@ -62,7 +62,7 @@ export async function getReviewsByServiceId(serviceId: string) {
   try {
     const reviews = await prisma.review.findMany({
       where: { serviceId: serviceId },
-      include: { sellerResponses: true }, /////perlu?
+      include: { sellerResponses: true },
     });
     return reviews;
   } catch (error) {}

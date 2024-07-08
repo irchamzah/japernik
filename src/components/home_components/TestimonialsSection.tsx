@@ -54,33 +54,28 @@ const TestimonialsSection = () => {
           <LeftRightButton>
             <div className='flex space-x-8 pb-4'>
               {testimonials.map((testimonial, index) => (
-                <>
-                  <Link href={'#'}>
-                    <div
-                      key={index}
-                      className='w-52 flex-none rounded-lg bg-white p-4 shadow-md lg:w-80 lg:p-6'
-                    >
-                      <div className='mb-4 flex flex-col items-center lg:flex-row'>
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          width={64}
-                          height={64}
-                          className='rounded-full object-cover'
-                        />
-                        <div className='mt-4 items-center text-center lg:ml-4 lg:mt-0 lg:text-left'>
-                          <h3 className='text-xl font-semibold'>
-                            {testimonial.name}
-                          </h3>
-                          <p className='text-gray-600'>{testimonial.title}</p>
-                        </div>
+                <Link key={index} href={'#'}>
+                  <div className='w-52 flex-none rounded-lg bg-white p-4 shadow-md lg:w-80 lg:p-6'>
+                    <div className='mb-4 flex flex-col items-center lg:flex-row'>
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        width={64}
+                        height={64}
+                        className='rounded-full object-cover'
+                      />
+                      <div className='mt-4 items-center text-center lg:ml-4 lg:mt-0 lg:text-left'>
+                        <h3 className='text-xl font-semibold'>
+                          {testimonial.name}
+                        </h3>
+                        <p className='text-gray-600'>{testimonial.title}</p>
                       </div>
-                      <p className='text-center text-gray-800'>
-                        {testimonial.comment}
-                      </p>
                     </div>
-                  </Link>
-                </>
+                    <p className='text-center text-gray-800'>
+                      {testimonial.comment}
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
           </LeftRightButton>
