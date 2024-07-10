@@ -61,7 +61,6 @@ const Navbar = ({
   }, []);
 
   const [searchQuery, setSearchQuery] = useState('');
-
   const handleSearch = () => {
     router.push(
       `/search/service?searchQuery=${encodeURIComponent(searchQuery)}`
@@ -90,10 +89,15 @@ const Navbar = ({
                   type='text'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
                   className='-mr-1 w-full rounded-l-sm border px-4 py-2'
                   placeholder='Cari jasa apa?'
                 />
-                <button type='submit' onClick={handleSearch}>
+                <button onClick={handleSearch}>
                   <div className='flex h-full rounded-r-sm bg-gray-800 px-4 py-2 text-white hover:opacity-90'>
                     <IoSearch className='my-auto h-5 w-5' />
                   </div>
@@ -139,18 +143,25 @@ const Navbar = ({
             title='SEARCH FORMMMMMMMMMMMMMMMMM'
             className={`mx-6 flex justify-center overflow-hidden pb-6 sm:hidden`}
           >
-            <form action='' className='flex w-full'>
+            <div className='flex w-full'>
               <input
                 type='text'
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearch();
+                  }
+                }}
                 className='-mr-1 w-full rounded-sm border px-4 py-2'
                 placeholder='Jasa apa yang kamu cari?'
               />
-              <button className=''>
+              <button onClick={handleSearch}>
                 <div className='flex h-full rounded-r-sm bg-gray-800 px-4 py-2 text-white hover:opacity-90'>
                   <IoSearch className='my-auto h-5 w-5' />
                 </div>
               </button>
-            </form>
+            </div>
           </div>
         </div>
         <div

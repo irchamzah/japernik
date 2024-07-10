@@ -37,7 +37,8 @@ export async function getServicesIdByCategory(
     });
 
     if (!category) {
-      throw new Error('category tidak ditemukan');
+      console.error('category tidak ditemukan');
+      return [];
     }
 
     const services = await prisma.service.findMany({
@@ -152,4 +153,29 @@ export async function getServiceByServiceSlug(serviceSlug: string) {
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function getServicesIdBySearch(search: string | undefined) {
+  try {
+    const services = await prisma.service.findMany({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
+      select: { id: true },
+    });
+    return services;
+  } catch (error) {}
 }
