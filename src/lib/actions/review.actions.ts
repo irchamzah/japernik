@@ -89,3 +89,36 @@ export async function getReviewsByUserId(userId: string) {
     return reviews;
   } catch (error) {}
 }
+
+export async function getAllReviews() {
+  try {
+    const reviews = await prisma.review.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+    return reviews;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getReviewAndUser(reviewId: string) {
+  try {
+    const review = await prisma.review.findUnique({
+      where: { id: reviewId },
+    });
+    const service = await prisma.service.findUnique({
+      where: { id: review?.serviceId },
+      select: { slug: true, categoryId: true },
+    });
+    const category = await prisma.category.findUnique({
+      where: { id: service?.categoryId },
+      select: { slug: true },
+    });
+    const user = await prisma.user.findUnique({
+      where: { id: review?.userId },
+    });
+    return { review, service, category, user };
+  } catch (error) {
+    console.error(error);
+  }
+}

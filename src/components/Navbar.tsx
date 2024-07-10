@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import { IoClose, IoSearch } from 'react-icons/io5';
 import LeftRightButton_2 from './ui_components/LeftRightButton_2';
 import { Category } from '@/lib/actions/category.actions';
+import { useRouter } from 'next/navigation';
 
 const Navbar = ({
   mode,
@@ -14,6 +15,8 @@ const Navbar = ({
   mode: string;
   categories: Category[];
 }) => {
+  const router = useRouter();
+
   useEffect(() => {
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -57,6 +60,14 @@ const Navbar = ({
     };
   }, []);
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = () => {
+    router.push(
+      `/search/service?searchQuery=${encodeURIComponent(searchQuery)}`
+    );
+  };
+
   return (
     <>
       <nav className={`top-0 z-20 w-full ${mode} `}>
@@ -74,18 +85,20 @@ const Navbar = ({
               title='SEARCH FORMMMMMMMMMM'
               className={`hidden w-full justify-center overflow-hidden sm:flex`}
             >
-              <form action='' className='mx-6 flex w-full'>
+              <div className='mx-6 flex w-full'>
                 <input
                   type='text'
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   className='-mr-1 w-full rounded-l-sm border px-4 py-2'
                   placeholder='Cari jasa apa?'
                 />
-                <button className=''>
+                <button type='submit' onClick={handleSearch}>
                   <div className='flex h-full rounded-r-sm bg-gray-800 px-4 py-2 text-white hover:opacity-90'>
                     <IoSearch className='my-auto h-5 w-5' />
                   </div>
                 </button>
-              </form>
+              </div>
             </div>
             <div
               title='A'
