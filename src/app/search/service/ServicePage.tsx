@@ -18,9 +18,8 @@ export default function ServicePage({
       />
       <Filter />
       <Suspense fallback={<Loading />}>
-        <ServiceContainer params={params.searchQuery} />
+        <ServiceContainer params={params} />
       </Suspense>
-      <Paging />
     </>
   );
 }

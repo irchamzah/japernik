@@ -157,7 +157,12 @@ export async function getServiceByServiceSlug(serviceSlug: string) {
   }
 }
 
-export async function getServicesIdBySearch(search: string | undefined) {
+export async function getServicesIdBySearch(
+  search: string | undefined,
+  pageNumber: number = 1,
+  pageSize: number = 1
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
   try {
     const services = await prisma.service.findMany({
       where: {
@@ -177,7 +182,32 @@ export async function getServicesIdBySearch(search: string | undefined) {
         ],
       },
       select: { id: true },
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
     });
-    return services;
-  } catch (error) {}
+
+    const totalServicesCount = await prisma.service.count({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
+    });
+
+    const isNext = totalServicesCount > skipAmount + services.length;
+    return { services, isNext };
+  } catch (error) {
+    console.error(error);
+  }
 }
