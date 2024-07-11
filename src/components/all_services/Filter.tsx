@@ -55,10 +55,10 @@ const Filter = () => {
         ref={stickyRef}
         className={`sticky top-0 mx-auto ${isSticky ? 'shadow-lg' : ''}`}
       >
-        <div className='mx-auto max-w-7xl'>
+        <div className='mx-auto my-6 max-w-7xl'>
           <div
             title='ini isi filter & sort'
-            className='mx-6 flex justify-between gap-3 bg-white py-6 xl:mx-0'
+            className='mx-6 flex justify-between gap-3 bg-white xl:mx-0'
           >
             <div
               title='ini filter'

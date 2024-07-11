@@ -21,7 +21,7 @@ export default async function ProfilePage({
         <Suspense fallback={<Loading />}>
           <GetToKnow header='' userId={userWithRatings.id} />
         </Suspense>
-        <h1 className='mx-6 mb-5 max-w-7xl text-2xl font-bold text-gray-700 xl:mx-auto'>
+        <h1 className='mx-6 my-5 max-w-7xl text-2xl font-bold text-gray-700 xl:mx-auto'>
           My Services
         </h1>
         <Suspense fallback={<Loading />}>

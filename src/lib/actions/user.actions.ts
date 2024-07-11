@@ -213,11 +213,18 @@ export async function getServicesIdByUsername(
     });
     if (!user) return { services: [], isNext: false };
 
+    const totalServicesCount = await prisma.service.count({
+      where: { authorId: user.id },
+    });
+
     const services = await prisma.service.findMany({
       where: { authorId: user.id },
       select: { id: true },
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
     });
-    const isNext = services.length > skipAmount + services.length;
+
+    const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
   } catch (error) {
     console.error(error);
