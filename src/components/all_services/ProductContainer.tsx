@@ -3,58 +3,81 @@ import ProductCard from './ProductCard';
 import { Suspense } from 'react';
 import { getServicesIdByUsername } from '@/lib/actions/user.actions';
 import Loading from '../Loading';
+import Paging from './Paging';
 
 async function ProductContainer({
-  categorySlug,
-  username,
+  params,
+  searchParams,
 }: {
-  categorySlug: string;
-  username: string;
+  params: { slug?: string; username?: string };
+  searchParams: { pageNumber: number };
 }) {
   const [services, userServices] = await Promise.all([
-    getServicesIdByCategory(categorySlug),
-    getServicesIdByUsername(username),
+    getServicesIdByCategory(
+      params.slug,
+      searchParams.pageNumber ? +searchParams.pageNumber : 1,
+      2
+    ),
+    getServicesIdByUsername(
+      params.username,
+      searchParams.pageNumber ? +searchParams.pageNumber : 1,
+      2
+    ),
   ]);
 
   if (!services) {
     return null;
   }
-  if (services.length > 0) {
+  if (services.services.length > 0) {
     return (
-      <div className='mx-auto max-w-7xl'>
-        <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-          {services.map((service) => {
-            return (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <ProductCard key={service.id} serviceId={service.id} />
-                </Suspense>
-              </>
-            );
-          })}
+      <>
+        <div className='mx-auto max-w-7xl'>
+          <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
+            {services.services.map((service) => {
+              return (
+                <>
+                  <Suspense fallback={<Loading />}>
+                    <ProductCard key={service.id} serviceId={service.id} />
+                  </Suspense>
+                </>
+              );
+            })}
+          </div>
         </div>
-      </div>
+        <Paging
+          path={`categories/${params.slug}`}
+          pageNumber={searchParams?.pageNumber ? +searchParams.pageNumber : 1}
+          isNext={services.isNext}
+        />
+      </>
     );
   }
 
   if (!userServices) {
     return null;
   }
-  if (userServices.length > 0) {
+  if (userServices.services.length > 0) {
     return (
-      <div className='mx-auto max-w-7xl'>
-        <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-          {userServices.map((service) => {
-            return (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <ProductCard key={service.id} serviceId={service.id} />
-                </Suspense>
-              </>
-            );
-          })}
+      <>
+        <div className='mx-auto max-w-7xl'>
+          <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
+            {userServices.services.map((service) => {
+              return (
+                <>
+                  <Suspense fallback={<Loading />}>
+                    <ProductCard key={service.id} serviceId={service.id} />
+                  </Suspense>
+                </>
+              );
+            })}
+          </div>
         </div>
-      </div>
+        <Paging
+          path={`categories/${params.slug}`}
+          pageNumber={searchParams?.pageNumber ? +searchParams.pageNumber : 1}
+          isNext={userServices.isNext}
+        />
+      </>
     );
   }
 }

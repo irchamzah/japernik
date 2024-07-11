@@ -4,12 +4,14 @@ import PageLoading from '@/components/PageLoading';
 
 export default async function all_services({
   params,
+  searchParams,
 }: {
-  params: { slug: string };
+  params: { slug?: string; username?: string };
+  searchParams: { pageNumber: number };
 }) {
   return (
     <Suspense fallback={<PageLoading />}>
-      <CategoriesPage categoriesSlug={params.slug} />
+      <CategoriesPage params={params} searchParams={searchParams} />
     </Suspense>
   );
 }

@@ -200,19 +200,25 @@ export async function getUserByServiceId(serviceId: string) {
   }
 }
 
-export async function getServicesIdByUsername(username: string) {
+export async function getServicesIdByUsername(
+  username: string | undefined,
+  pageNumber: number = 1,
+  pageSize: number = 4
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
   try {
     const user = await prisma.user.findUnique({
       where: { username: username },
       select: { id: true },
     });
-    if (user) {
-      const services = await prisma.service.findMany({
-        where: { authorId: user.id },
-        select: { id: true },
-      });
-      return services;
-    }
+    if (!user) return { services: [], isNext: false };
+
+    const services = await prisma.service.findMany({
+      where: { authorId: user.id },
+      select: { id: true },
+    });
+    const isNext = services.length > skipAmount + services.length;
+    return { services, isNext };
   } catch (error) {
     console.error(error);
   }

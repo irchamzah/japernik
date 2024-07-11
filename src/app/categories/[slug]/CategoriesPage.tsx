@@ -1,6 +1,5 @@
 import BreadCrumbs from '@/components/all_services/BreadCrumbs';
 import Filter from '@/components/all_services/Filter';
-import Paging from '@/components/all_services/Paging';
 import ProductContainer from '@/components/all_services/ProductContainer';
 import ServiceDescription from '@/components/all_services/ServiceDescription';
 import Layout from '@/components/Layout';
@@ -9,11 +8,13 @@ import { fetchCategoryBySlug } from '@/lib/actions/category.actions';
 import { Suspense } from 'react';
 
 export default async function CategoriesPage({
-  categoriesSlug,
+  params,
+  searchParams,
 }: {
-  categoriesSlug: string;
+  params: { slug?: string; username?: string };
+  searchParams: { pageNumber: number };
 }) {
-  const category = await fetchCategoryBySlug(categoriesSlug);
+  const category = await fetchCategoryBySlug(params.slug);
 
   return (
     <>
@@ -25,9 +26,8 @@ export default async function CategoriesPage({
         />
         <Filter />
         <Suspense fallback={<Loading />}>
-          <ProductContainer categorySlug={categoriesSlug} username={''} />
+          <ProductContainer params={params} searchParams={searchParams} />
         </Suspense>
-        <Paging />
       </Layout>
     </>
   );

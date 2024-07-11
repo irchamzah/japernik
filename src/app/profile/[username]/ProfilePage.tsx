@@ -6,8 +6,14 @@ import Reviews from '../../../components/detail_service/Reviews';
 import { Suspense } from 'react';
 import Loading from '@/components/Loading';
 
-export default async function ProfilePage({ username }: { username: string }) {
-  const userWithRatings = await fetchUserByUserName(username);
+export default async function ProfilePage({
+  params,
+  searchParams,
+}: {
+  params: { slug?: string; username?: string };
+  searchParams: { pageNumber: number };
+}) {
+  const userWithRatings = await fetchUserByUserName(params.username);
 
   if (userWithRatings) {
     return (
@@ -19,7 +25,7 @@ export default async function ProfilePage({ username }: { username: string }) {
           My Services
         </h1>
         <Suspense fallback={<Loading />}>
-          <ProductContainer categorySlug={''} username={username} />
+          <ProductContainer params={params} searchParams={searchParams} />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <Reviews

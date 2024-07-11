@@ -22,7 +22,7 @@ export async function fetchCategories() {
   }
 }
 
-export async function fetchCategoryBySlug(slug: string) {
+export async function fetchCategoryBySlug(slug: string | undefined) {
   try {
     const category = await prisma.category.findUnique({
       where: { slug: slug },

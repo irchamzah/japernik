@@ -4,12 +4,14 @@ import { Suspense } from 'react';
 
 export default async function detail_profile({
   params,
+  searchParams,
 }: {
-  params: { username: string };
+  params: { slug?: string; username?: string };
+  searchParams: { pageNumber: number };
 }) {
   return (
     <Suspense fallback={<PageLoading />}>
-      <ProfilePage username={params.username} />
+      <ProfilePage params={params} searchParams={searchParams} />
     </Suspense>
   );
 }

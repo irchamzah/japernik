@@ -21,14 +21,12 @@ export interface Service {
   updatedAt: Date;
 }
 
-export interface ServiceId {
-  id: string;
-}
 export async function getServicesIdByCategory(
-  categorySlug: string
-  // page: number = 1,
-  // limit: number = 2
-): Promise<ServiceId[]> {
+  categorySlug: string | undefined,
+  pageNumber: number = 1,
+  pageSize: number = 2
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -38,19 +36,23 @@ export async function getServicesIdByCategory(
 
     if (!category) {
       console.error('category tidak ditemukan');
-      return [];
+      return { services: [], isNext: false };
     }
 
     const services = await prisma.service.findMany({
       where: { published: true, categoryId: category.id },
       select: { id: true },
-      // skip: (page - 1) * limit,
-      // take: limit,
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
     });
-    return services;
+
+    const totalServicesCount = await prisma.service.count();
+
+    const isNext = totalServicesCount > skipAmount + services.length;
+    return { services, isNext };
   } catch (error) {
     console.error('Terjadi kesalahan saat fetch service', error);
-    return [];
+    return { services: [], isNext: false };
   }
 }
 
