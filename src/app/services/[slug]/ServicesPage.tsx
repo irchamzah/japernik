@@ -27,7 +27,6 @@ export default async function ServicesPage({
         <Suspense fallback={<Loading />}>
           <ServicesContainer categorySlug={categoriesSlug} username={''} />
         </Suspense>
-        <Paging />
       </Layout>
     </>
   );
