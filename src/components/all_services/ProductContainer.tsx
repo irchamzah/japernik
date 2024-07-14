@@ -9,8 +9,8 @@ async function ProductContainer({
   params,
   searchParams,
 }: {
-  params: { slug?: string; username?: string };
-  searchParams: { pageNumber: number };
+  params: { [key: string]: string | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const [services, userServices] = await Promise.all([
     getServicesIdByCategory(
@@ -73,7 +73,7 @@ async function ProductContainer({
           </div>
         </div>
         <Paging
-          path={`profile/${params.username}`}
+          path={`profile/${params.username}${searchParams.reviewPageNumber ? `?reviewPageNumber=${searchParams.reviewPageNumber}` : ''}`}
           pageNumber={searchParams?.pageNumber ? +searchParams.pageNumber : 1}
           isNext={userServices.isNext}
         />

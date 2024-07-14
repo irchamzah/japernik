@@ -1,6 +1,5 @@
 import BreadCrumbs from '@/components/all_services/BreadCrumbs';
 import Filter from '@/components/all_services/Filter';
-import Paging from '@/components/all_services/Paging';
 import ServiceDescription from '@/components/all_services/ServiceDescription';
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';

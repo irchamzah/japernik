@@ -47,7 +47,9 @@ export async function getCategorySlugByServiceId(serviceId: string) {
   } catch (error) {}
 }
 
-export async function getCategoryByServiceSlug(serviceSlug: string) {
+export async function getCategoryByServiceSlug(
+  serviceSlug: string | undefined
+) {
   try {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },

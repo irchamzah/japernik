@@ -42,7 +42,7 @@ export async function getUserByUserId(userId: string | undefined) {
   }
 }
 
-export async function getUserByServiceSlug(serviceSlug: string) {
+export async function getUserByServiceSlug(serviceSlug: string | undefined) {
   try {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },

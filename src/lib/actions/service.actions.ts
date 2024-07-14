@@ -46,7 +46,9 @@ export async function getServicesIdByCategory(
       take: pageSize,
     });
 
-    const totalServicesCount = await prisma.service.count();
+    const totalServicesCount = await prisma.service.count({
+      where: { published: true, categoryId: category.id },
+    });
 
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
@@ -139,7 +141,7 @@ export async function getServiceByServiceId(serviceId: string) {
     console.error(error);
   }
 }
-export async function getServiceByServiceSlug(serviceSlug: string) {
+export async function getServiceByServiceSlug(serviceSlug: string | undefined) {
   try {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },

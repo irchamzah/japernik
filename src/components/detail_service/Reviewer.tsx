@@ -2,7 +2,6 @@ import { Review } from '@/lib/actions/review.actions';
 import ProfileReviewer from './ProfileReviewer';
 import ReviewersResponse from './ReviewersResponse';
 import SellersResponse from './SellersResponse';
-import { getSellerResponseByReviewid } from '@/lib/actions/sellerResponse.actions';
 
 const Reviewer = async ({ dataReviewer }: { dataReviewer: Review }) => {
   return (

@@ -10,8 +10,8 @@ export default async function ProfilePage({
   params,
   searchParams,
 }: {
-  params: { slug?: string; username?: string };
-  searchParams: { pageNumber: number };
+  params: { [key: string]: string | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const userWithRatings = await fetchUserByUserName(params.username);
 
@@ -32,6 +32,8 @@ export default async function ProfilePage({
             userId={userWithRatings.id}
             serviceId={''}
             reviewsFor={'reviews for this seller.'}
+            params={params}
+            searchParams={searchParams}
           />
         </Suspense>
       </Layout>

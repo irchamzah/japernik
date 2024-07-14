@@ -22,7 +22,9 @@ export async function getServicePortfoliosByServiceId(serviceId: string) {
     );
   }
 }
-export async function getServicePortfoliosByServiceSlug(serviceSlug: string) {
+export async function getServicePortfoliosByServiceSlug(
+  serviceSlug: string | undefined
+) {
   try {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },

@@ -1,3 +1,4 @@
+import { avgRatingCountReview } from '@/contexts/context';
 import prisma from '../../../lib/prisma';
 import { SellerResponse } from './sellerResponse.actions';
 import { Service } from './service.actions';
@@ -56,17 +57,31 @@ export async function fetchReviewByServiceId(serviceId: string) {
   }
 }
 
-export async function getReviewsByServiceId(serviceId: string) {
+export async function getReviewsByServiceId(
+  serviceId: string,
+  pageNumber: number = 1,
+  pageSize: number = 2
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
   try {
     const reviews = await prisma.review.findMany({
       where: { serviceId: serviceId },
       include: { sellerResponses: true },
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
     });
-    return reviews;
+    const totalReviews = await prisma.review.findMany({
+      where: { serviceId: serviceId },
+    });
+    const totalReviewsCount = totalReviews.length;
+    const isNext = totalReviewsCount > skipAmount + reviews.length;
+
+    const serviceRating = avgRatingCountReview(totalReviews);
+    return { reviews, serviceRating, isNext };
   } catch (error) {}
 }
 
-export async function getReviewByServiceSlug(serviceSlug: string) {
+export async function getReviewByServiceSlug(serviceSlug: string | undefined) {
   try {
     const service = await prisma.service.findUnique({
       where: { slug: serviceSlug },
@@ -80,13 +95,26 @@ export async function getReviewByServiceSlug(serviceSlug: string) {
   } catch (error) {}
 }
 
-export async function getReviewsByUserId(userId: string) {
+export async function getReviewsByUserId(
+  userId: string,
+  pageNumber: number = 1,
+  pageSize: number = 1
+) {
+  const skipAmount = (pageNumber - 1) * pageSize;
   try {
     const reviews = await prisma.review.findMany({
       where: { userId: userId },
       include: { sellerResponses: true },
+      skip: skipAmount,
+      take: pageSize,
     });
-    return reviews;
+    const totalReviews = await prisma.review.findMany({
+      where: { userId: userId },
+    });
+    const totalReviewsCount = totalReviews.length;
+    const isNext = totalReviewsCount > skipAmount + reviews.length;
+    const userRating = await avgRatingCountReview(totalReviews);
+    return { reviews, userRating, isNext };
   } catch (error) {}
 }
 

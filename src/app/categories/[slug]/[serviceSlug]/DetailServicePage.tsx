@@ -15,17 +15,19 @@ import { getUserByServiceSlug } from '@/lib/actions/user.actions';
 import { Suspense } from 'react';
 
 export default async function DetailServicePage({
-  serviceSlug,
+  params,
+  searchParams,
 }: {
-  serviceSlug: string;
+  params: { [key: string]: string | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const [category, service, servicePortfolios, user, review] =
     await Promise.all([
-      getCategoryByServiceSlug(serviceSlug),
-      getServiceByServiceSlug(serviceSlug),
-      getServicePortfoliosByServiceSlug(serviceSlug),
-      getUserByServiceSlug(serviceSlug),
-      getReviewByServiceSlug(serviceSlug),
+      getCategoryByServiceSlug(params.serviceSlug),
+      getServiceByServiceSlug(params.serviceSlug),
+      getServicePortfoliosByServiceSlug(params.serviceSlug),
+      getUserByServiceSlug(params.serviceSlug),
+      getReviewByServiceSlug(params.serviceSlug),
     ]);
 
   if (service && category && servicePortfolios && user && review) {
@@ -59,6 +61,8 @@ export default async function DetailServicePage({
               userId={''}
               serviceId={service.id}
               reviewsFor={'reviews for this service.'}
+              params={params}
+              searchParams={searchParams}
             />
           </Suspense>
         </Layout>

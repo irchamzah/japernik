@@ -6,8 +6,8 @@ export default async function detail_profile({
   params,
   searchParams,
 }: {
-  params: { slug?: string; username?: string };
-  searchParams: { pageNumber: number };
+  params: { [key: string]: string | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   return (
     <Suspense fallback={<PageLoading />}>

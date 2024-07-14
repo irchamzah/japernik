@@ -1,4 +1,5 @@
 import { Review } from '@/lib/actions/review.actions';
+import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
 
 export function avgRatingCountReview(review: Review[]) {
   const avgRating =

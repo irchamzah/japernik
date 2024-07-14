@@ -1,5 +1,20 @@
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
 
+export function renderStarRating(avgRating: number) {
+  let stars = [];
+  const fullStars = Math.floor(avgRating);
+  const halfStar = avgRating % 1 !== 0;
+  for (let i = 0; i < fullStars; i++) {
+    stars.push(<IoIosStar key={i} />);
+  }
+  if (halfStar) {
+    stars.push(<IoIosStarHalf key={'half'} />);
+  }
+  while (stars.length < 5) {
+    stars.push(<IoIosStarOutline key={stars.length} />);
+  }
+  return stars;
+}
 const ReviewersResponse = ({
   rating,
   postDate,
@@ -11,25 +26,6 @@ const ReviewersResponse = ({
   response: string | undefined;
   price: number | undefined;
 }) => {
-  const renderStarRating = (avgRating: number) => {
-    let stars = [];
-    const fullStars = Math.floor(avgRating);
-    const halfStar = avgRating % 1 !== 0;
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<IoIosStar key={i} />);
-    }
-
-    if (halfStar) {
-      stars.push(<IoIosStarHalf key={'half'} />);
-    }
-
-    while (stars.length < 5) {
-      stars.push(<IoIosStarOutline key={stars.length} />);
-    }
-
-    return stars;
-  };
   return (
     <div className='flex flex-col gap-2'>
       <div className='flex items-center gap-3'>

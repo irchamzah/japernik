@@ -24,13 +24,6 @@ const GetToKnow = async ({
   ]);
 
   if (user && userReviews) {
-    const avgRating =
-      userReviews.length > 0
-        ? userReviews.reduce((acc, curr) => acc + curr.rating, 0) /
-          userReviews.length
-        : 0;
-    const countReview = userReviews.length;
-
     return (
       <div className='mx-auto max-w-7xl'>
         <div className='mx-6 mb-8 xl:mx-0'>
@@ -58,9 +51,11 @@ const GetToKnow = async ({
               <div className='flex items-center'>
                 <IoIosStar className='mr-1 text-gray-700' />
                 <span className='mr-1 font-semibold text-gray-700'>
-                  {avgRating}
+                  {userReviews.userRating.avgRating.toFixed(1)}
                 </span>
-                <span className='mr-1 text-gray-500'>({countReview})</span>
+                <span className='mr-1 text-gray-500'>
+                  ({userReviews.userRating.countReview})
+                </span>
               </div>
             </div>
             <div className='flex gap-2'>

@@ -19,11 +19,11 @@ const ProductCard = async ({ serviceId }: { serviceId: string }) => {
 
   if (serviceReviews) {
     const avgRating =
-      serviceReviews.length > 0
-        ? serviceReviews.reduce((acc, curr) => acc + curr.rating, 0) /
-          serviceReviews.length
+      serviceReviews.reviews.length > 0
+        ? serviceReviews.reviews.reduce((acc, curr) => acc + curr.rating, 0) /
+          serviceReviews.reviews.length
         : 0;
-    const countReview = serviceReviews.length;
+    const countReview = serviceReviews.reviews.length;
     if (servicePortfolios) {
       const firstThumbnail =
         servicePortfolios.length > 0

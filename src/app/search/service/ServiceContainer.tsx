@@ -16,7 +16,6 @@ export default async function ServiceContainer({
     1
   );
   if (!services) return null;
-  console.log('//////////////////////////////', services);
   return (
     <>
       {services.services.length === 0 ? (
