@@ -2,12 +2,10 @@ import Reviewer from './Reviewer';
 import {
   getReviewsByServiceId,
   getReviewsByUserId,
-  Review,
 } from '@/lib/actions/review.actions';
 import DropdownButton from '../ui_components/DropdownButton';
 import { Suspense } from 'react';
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from 'react-icons/io';
-import Paging from '../all_services/Paging';
 import ReviewPaging from '../ui_components/ReviewPaging';
 
 export function renderStarRating(avgRating: number) {
@@ -81,11 +79,8 @@ const Reviews = async ({
                     <Reviewer dataReviewer={userReview} />
                   </Suspense>
                 ))}
-                {/* <button className='mb-5 rounded-lg border border-black px-4 py-2 font-semibold active:bg-gray-100'>
-                  Show More Reviews
-                </button> */}
                 <ReviewPaging
-                  path={`profile/${params.username}${searchParams.pageNumber ? `?pageNumber=${searchParams.pageNumber}` : ''}`}
+                  path={`profile/${params.username}`}
                   reviewPageNumber={
                     searchParams?.reviewPageNumber
                       ? +searchParams.reviewPageNumber

@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ReviewPaging = ({
@@ -12,24 +12,17 @@ const ReviewPaging = ({
   isNext: boolean;
 }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleNavigation = (type: string) => {
-    let nextPageNumber = reviewPageNumber;
-    if (type === 'prev') {
-      nextPageNumber = Math.max(1, reviewPageNumber - 1);
-    } else if (type === 'next') {
-      nextPageNumber = reviewPageNumber + 1;
-    }
+    let nextPageNumber =
+      type === 'prev'
+        ? Math.max(1, reviewPageNumber - 1)
+        : reviewPageNumber + 1;
 
-    const separator = path.includes('?') ? '&' : '?';
-
-    if (nextPageNumber > 1) {
-      router.push(`/${path}${separator}reviewPageNumber=${nextPageNumber}`, {
-        scroll: false,
-      });
-    } else {
-      router.push(`/${path}`, { scroll: false });
-    }
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('reviewPageNumber', nextPageNumber.toString());
+    router.push(`/${path}?${params.toString()}`, { scroll: false });
   };
 
   if (!isNext && reviewPageNumber === 1) return null;

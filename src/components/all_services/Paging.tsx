@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Paging = ({
@@ -12,23 +12,15 @@ const Paging = ({
   isNext: boolean;
 }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleNavigation = (type: string) => {
-    let nextPageNumber = pageNumber;
-    if (type === 'prev') {
-      nextPageNumber = Math.max(1, pageNumber - 1);
-    } else if (type === 'next') {
-      nextPageNumber = pageNumber + 1;
-    }
+    let nextPageNumber =
+      type === 'prev' ? Math.max(1, pageNumber - 1) : pageNumber + 1;
 
-    const separator = path.includes('?') ? '&' : '?';
-
-    if (nextPageNumber > 1) {
-      router.push(`/${path}${separator}pageNumber=${nextPageNumber}`),
-        { scroll: false };
-    } else {
-      router.push(`/${path}`, { scroll: false });
-    }
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('pageNumber', nextPageNumber.toString());
+    router.push(`/${path}?${params.toString()}`, { scroll: false });
   };
 
   if (!isNext && pageNumber === 1) return null;

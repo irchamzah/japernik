@@ -36,7 +36,7 @@ export default async function ServiceContainer({
             </div>
           </div>
           <Paging
-            path={`search/service?searchQuery=${params.searchQuery}`}
+            path={`search/service`}
             pageNumber={params?.pageNumber ? +params.pageNumber : 1}
             isNext={services.isNext}
           />
