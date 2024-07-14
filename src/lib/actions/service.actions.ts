@@ -52,9 +52,7 @@ export async function getServicesIdByCategory(
 
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
-  } catch (error) {
-    console.error('Terjadi error saat melakukan getServicesIdByCategory');
-  }
+  } catch (error) {}
 }
 
 export async function getServiceBySlug(serviceSlug: string) {

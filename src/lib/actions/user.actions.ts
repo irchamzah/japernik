@@ -223,7 +223,5 @@ export async function getServicesIdByUsername(
 
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
-  } catch (error) {
-    console.error('Terjadi error saat melakukan getServicesIdByUsername');
-  }
+  } catch (error) {}
 }
