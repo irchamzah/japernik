@@ -24,9 +24,11 @@ const ReviewPaging = ({
     const separator = path.includes('?') ? '&' : '?';
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}${separator}reviewPageNumber=${nextPageNumber}`);
+      router.push(`/${path}${separator}reviewPageNumber=${nextPageNumber}`, {
+        scroll: false,
+      });
     } else {
-      router.push(`/${path}`);
+      router.push(`/${path}`, { scroll: false });
     }
   };
 

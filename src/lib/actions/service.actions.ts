@@ -53,8 +53,7 @@ export async function getServicesIdByCategory(
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetch service', error);
-    return { services: [], isNext: false };
+    console.error('Terjadi error saat melakukan getServicesIdByCategory');
   }
 }
 
@@ -98,7 +97,7 @@ export async function getServiceBySlug(serviceSlug: string) {
 
     return serviceWithRatings;
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetch service', error);
+    console.error('Terjadi error saat melakukan getServiceBySlug', error);
   }
 }
 
@@ -126,7 +125,10 @@ export async function fetchServicesByUserName(username: string) {
     });
     return service;
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetch service', error);
+    console.error(
+      'Terjadi error saat melakukan fetchServicesByUserName',
+      error
+    );
   }
 }
 
@@ -138,7 +140,7 @@ export async function getServiceByServiceId(serviceId: string) {
     });
     return service;
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getServiceByServiceId', error);
   }
 }
 export async function getServiceByServiceSlug(serviceSlug: string | undefined) {
@@ -155,7 +157,10 @@ export async function getServiceByServiceSlug(serviceSlug: string | undefined) {
     });
     return service;
   } catch (error) {
-    console.error(error);
+    console.error(
+      'Terjadi error saat melakukan getServiceByServiceSlug',
+      error
+    );
   }
 }
 
@@ -210,6 +215,6 @@ export async function getServicesIdBySearch(
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getServicesIdBySearch', error);
   }
 }

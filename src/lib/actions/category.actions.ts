@@ -18,7 +18,7 @@ export async function fetchCategories() {
 
     return categories;
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetch category', error);
+    console.error('Terjadi error saat melakukan fetchCategories', error);
   }
 }
 
@@ -44,7 +44,12 @@ export async function getCategorySlugByServiceId(serviceId: string) {
       select: { slug: true },
     });
     return category;
-  } catch (error) {}
+  } catch (error) {
+    console.error(
+      'Terjadi error saat melakukan getCategorySlugByServiceId',
+      error
+    );
+  }
 }
 
 export async function getCategoryByServiceSlug(
@@ -59,5 +64,10 @@ export async function getCategoryByServiceSlug(
       select: { slug: true },
     });
     return category;
-  } catch (error) {}
+  } catch (error) {
+    console.error(
+      'Terjadi error saat melakukan getCategoryByServiceSlug',
+      error
+    );
+  }
 }

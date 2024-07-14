@@ -7,7 +7,8 @@ const SearchService = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const handleSearch = () => {
     router.push(
-      `/search/service?searchQuery=${encodeURIComponent(searchQuery)}`
+      `/search/service?searchQuery=${encodeURIComponent(searchQuery)}`,
+      { scroll: false }
     );
   };
   return (

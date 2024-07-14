@@ -30,7 +30,7 @@ export async function getSellerResponseByServiceId(serviceId: string) {
     return sellerResponse;
   } catch (error) {
     console.error(
-      'terjadi kesalahan saat menjalankan getSellerResponseByServiceId',
+      'Terjadi error saat melakukan getSellerResponseByServiceId',
       error
     );
   }
@@ -48,6 +48,9 @@ export async function getSellerResponseByReviewid(reviewId: string) {
       return user;
     } else console.error('review tidak ditemukan');
   } catch (error) {
-    console.error(error);
+    console.error(
+      'Terjadi error saat melakukan getSellerResponseByReviewid',
+      error
+    );
   }
 }

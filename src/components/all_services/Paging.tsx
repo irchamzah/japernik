@@ -24,9 +24,10 @@ const Paging = ({
     const separator = path.includes('?') ? '&' : '?';
 
     if (nextPageNumber > 1) {
-      router.push(`/${path}${separator}pageNumber=${nextPageNumber}`);
+      router.push(`/${path}${separator}pageNumber=${nextPageNumber}`),
+        { scroll: false };
     } else {
-      router.push(`/${path}`);
+      router.push(`/${path}`, { scroll: false });
     }
   };
 

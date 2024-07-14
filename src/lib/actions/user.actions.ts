@@ -38,7 +38,7 @@ export async function getUserByUserId(userId: string | undefined) {
 
     return user;
   } catch (error) {
-    console.error('Terjadi kesalahan saat menjalankan getUserByUserId', error);
+    console.error('Terjadi error saat melakukan getUserByUserId', error);
   }
 }
 
@@ -55,7 +55,7 @@ export async function getUserByServiceSlug(serviceSlug: string | undefined) {
 
     return user;
   } catch (error) {
-    console.error('Terjadi kesalahan saat menjalankan getUserByUserId', error);
+    console.error('Terjadi error saat melakukan getServicesIdBySearch', error);
   }
 }
 
@@ -68,10 +68,7 @@ export async function fetchUserByUserName(username: string | undefined) {
 
     return user;
   } catch (error) {
-    console.error(
-      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
-      error
-    );
+    console.error('Terjadi error saat melakukan getUserByServiceSlug', error);
   }
 }
 
@@ -120,10 +117,7 @@ export async function fetchUserByServiceSlug(serviceSlug: string | undefined) {
 
     return userWithRatings;
   } catch (error) {
-    console.error(
-      'Terjadi kesalahan saat menjalankan fetchUserByUserId',
-      error
-    );
+    console.error('Terjadi error saat melakukan fetchUserByServiceSlug', error);
   }
 }
 
@@ -156,7 +150,10 @@ export async function avgRatingCountReviewSeller(username: string) {
 
     return { averageRating, totalReviews };
   } catch (error) {
-    console.error('Terjadi kesalahan saat menjalankan sumRatingSeller', error);
+    console.error(
+      'Terjadi error saat melakukan avgRatingCountReviewSeller',
+      error
+    );
   }
 }
 
@@ -178,7 +175,7 @@ export async function avgRatingCountReviewServiceByServiceSlug(
     return { averageRating, countReviews };
   } catch (error) {
     console.error(
-      'Terjadi kesalahan saat avgRatingCountReviewServiceByServiceSlug',
+      'Terjadi error saat melakukan avgRatingCountReviewServiceByServiceSlug',
       error
     );
   }
@@ -196,7 +193,7 @@ export async function getUserByServiceId(serviceId: string) {
     });
     return user;
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getUserByServiceId', error);
   }
 }
 
@@ -227,6 +224,6 @@ export async function getServicesIdByUsername(
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getServicesIdByUsername');
   }
 }

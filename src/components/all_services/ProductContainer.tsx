@@ -24,24 +24,16 @@ async function ProductContainer({
       1
     ),
   ]);
-
-  if (!services) {
-    return null;
-  }
-  if (services.services.length > 0) {
+  if (services && services.services.length > 0) {
     return (
       <>
         <div className='mx-auto my-6 max-w-7xl'>
           <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-            {services.services.map((service) => {
-              return (
-                <>
-                  <Suspense fallback={<Loading />}>
-                    <ProductCard key={service.id} serviceId={service.id} />
-                  </Suspense>
-                </>
-              );
-            })}
+            {services.services.map((service) => (
+              <Suspense fallback={<Loading />} key={service.id}>
+                <ProductCard serviceId={service.id} />
+              </Suspense>
+            ))}
           </div>
         </div>
         <Paging
@@ -53,23 +45,16 @@ async function ProductContainer({
     );
   }
 
-  if (!userServices) {
-    return null;
-  }
-  if (userServices.services.length > 0) {
+  if (userServices && userServices.services.length > 0) {
     return (
       <>
         <div className='mx-auto max-w-7xl'>
           <div className='mx-6 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:mx-0 xl:grid-cols-4'>
-            {userServices.services.map((service) => {
-              return (
-                <>
-                  <Suspense fallback={<Loading />}>
-                    <ProductCard key={service.id} serviceId={service.id} />
-                  </Suspense>
-                </>
-              );
-            })}
+            {userServices.services.map((service) => (
+              <Suspense fallback={<Loading />} key={service.id}>
+                <ProductCard serviceId={service.id} />
+              </Suspense>
+            ))}
           </div>
         </div>
         <Paging
@@ -80,6 +65,8 @@ async function ProductContainer({
       </>
     );
   }
+
+  return null;
 }
 
 export default ProductContainer;

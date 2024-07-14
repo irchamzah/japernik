@@ -17,7 +17,7 @@ export async function getServicePortfoliosByServiceId(serviceId: string) {
     return servicePortfolios;
   } catch (error) {
     console.error(
-      'Terjadi kesalahan saat getServicePortfoliosByServiceId :',
+      'Terjadi error saat melakukan getServicePortfoliosByServiceId',
       error
     );
   }
@@ -36,7 +36,7 @@ export async function getServicePortfoliosByServiceSlug(
     return servicePortfolios;
   } catch (error) {
     console.error(
-      'Terjadi kesalahan saat getServicePortfoliosByServiceId :',
+      'Terjadi error saat melakukan getServicePortfoliosByServiceSlug',
       error
     );
   }

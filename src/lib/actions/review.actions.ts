@@ -34,7 +34,7 @@ export async function fetchReviewByUserId(id: string) {
 
     return { reviews, countReviews, avgRating };
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetchReviewByUserId', error);
+    console.error('Terjadi error saat melakukan fetchReviewByUserId', error);
   }
 }
 
@@ -53,7 +53,7 @@ export async function fetchReviewByServiceId(serviceId: string) {
       countReviews;
     return { reviews, countReviews, avgRating };
   } catch (error) {
-    console.error('Terjadi kesalahan saat fetchReviewByServiceId', error);
+    console.error('Terjadi error saat melakukan fetchReviewByServiceId', error);
   }
 }
 
@@ -78,7 +78,9 @@ export async function getReviewsByServiceId(
 
     const serviceRating = avgRatingCountReview(totalReviews);
     return { reviews, serviceRating, isNext };
-  } catch (error) {}
+  } catch (error) {
+    console.error('Terjadi error saat melakukan getReviewsByServiceId', error);
+  }
 }
 
 export async function getReviewByServiceSlug(serviceSlug: string | undefined) {
@@ -92,7 +94,9 @@ export async function getReviewByServiceSlug(serviceSlug: string | undefined) {
       select: { rating: true },
     });
     return reviews;
-  } catch (error) {}
+  } catch (error) {
+    console.error('Terjadi error saat melakukan getReviewByServiceSlug', error);
+  }
 }
 
 export async function getReviewsByUserId(
@@ -115,7 +119,9 @@ export async function getReviewsByUserId(
     const isNext = totalReviewsCount > skipAmount + reviews.length;
     const userRating = await avgRatingCountReview(totalReviews);
     return { reviews, userRating, isNext };
-  } catch (error) {}
+  } catch (error) {
+    console.error('Terjadi error saat melakukan getReviewsByUserId', error);
+  }
 }
 
 export async function getAllReviews() {
@@ -125,7 +131,7 @@ export async function getAllReviews() {
     });
     return reviews;
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getAllReviews', error);
   }
 }
 
@@ -147,6 +153,6 @@ export async function getReviewAndUser(reviewId: string) {
     });
     return { review, service, category, user };
   } catch (error) {
-    console.error(error);
+    console.error('Terjadi error saat melakukan getReviewAndUser', error);
   }
 }
