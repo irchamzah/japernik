@@ -4,42 +4,123 @@ import { useEffect, useRef, useState } from 'react';
 import { CiFilter } from 'react-icons/ci';
 import { IoCloseOutline } from 'react-icons/io5';
 import { MdOutlineSort } from 'react-icons/md';
-import CheckBoxFilter from './CheckBoxFilter';
 import SortRadio from './SortRadio';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Filter = () => {
-  // Sticky filter handle
+  /////////////////////// Sticky filter handle
   const [isSticky, setIsSticky] = useState(false);
   const stickyRef = useRef<HTMLDivElement>(null);
-  const handleScroll = () => {
-    if (stickyRef.current) {
-      setIsSticky(stickyRef.current.getBoundingClientRect().top <= 0);
-    }
-  };
   useEffect(() => {
+    const handleScroll = () => {
+      if (stickyRef.current) {
+        setIsSticky(stickyRef.current.getBoundingClientRect().top <= 0);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Modal filter & sort handle
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [isSortVisible, setIsSortVisible] = useState(false);
+  /////////////////////// Modal filter
   useEffect(() => {
-    document.body.classList.toggle(
-      'no-scroll',
-      isFilterVisible || isSortVisible
-    );
-  }, [isFilterVisible, isSortVisible]);
+    const filterModalButton = document.querySelector('.filterModalButton');
+    const filterModal = document.querySelector('.filterModal');
+    const filterCloseButton = document.querySelector('.filterCloseButton');
 
-  // Sort radio
+    const handleFilterMenuToggle = () => {
+      filterModal?.classList.toggle('hidden');
+      document.body.classList.add('no-scroll');
+      console.log('handleFilterMenuToggle');
+    };
+    const handleFilterCloseButton = () => {
+      filterModal?.classList.add('hidden');
+      document.body.classList.remove('no-scroll');
+      console.log('handleFilterCloseButton');
+    };
+
+    handleFilterCloseButtonRef.current = handleFilterCloseButton;
+
+    filterModalButton?.addEventListener('click', handleFilterMenuToggle);
+    filterCloseButton?.addEventListener('click', handleFilterCloseButton);
+    return () => {
+      filterModalButton?.removeEventListener('click', handleFilterMenuToggle);
+      filterCloseButton?.removeEventListener('click', handleFilterCloseButton);
+    };
+  }, []);
+
+  /////////////////////// Modal sort handle
+  useEffect(() => {
+    const sortModalButton = document.querySelector('.sortModalButton');
+    const sortModal = document.querySelector('.sortModal');
+    const sortCloseButton = document.querySelector('.sortCloseButton');
+    const handleSortMenuToggle = () => {
+      sortModal?.classList.toggle('hidden');
+      document.body.classList.add('no-scroll');
+      console.log('handleSortMenuToggle');
+    };
+
+    const handleSortCloseButton = () => {
+      sortModal?.classList.add('hidden');
+      document.body.classList.remove('no-scroll');
+      console.log('handleSortCloseButton');
+    };
+
+    handleSortCloseButtonRef.current = handleSortCloseButton;
+
+    sortModalButton?.addEventListener('click', handleSortMenuToggle);
+    sortCloseButton?.addEventListener('click', handleSortCloseButton);
+
+    return () => {
+      sortModalButton?.removeEventListener('click', handleSortMenuToggle);
+      sortModal?.removeEventListener('click', handleSortMenuToggle);
+      sortCloseButton?.removeEventListener('click', handleSortCloseButton);
+    };
+  }, []);
+
+  /////////////////////// Sort radio
   const [selectedOption, setSelectedOption] = useState('');
   const radioOptions = [
-    { id: 'recommended', label: 'Recommended' },
+    { id: 'newest', label: 'Terbaru' },
+    { id: 'latest', label: 'Terlama' },
     { id: 'bestSelling', label: 'Best selling' },
-    { id: 'newestArrivals', label: 'Newest arrivals' },
   ];
+
+  const [priceFrom, setPriceFrom] = useState<number>(0);
+  const [priceTo, setPriceTo] = useState<number>(0);
+  const [selectedLocation, setSelectedLocation] = useState('null');
+  const handleLocationChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedLocation(event.target.value);
+  };
+
+  /////////////////////// Show Filter
+  const router = useRouter();
+  const pathname = usePathname();
+  const handleFilterCloseButtonRef = useRef<() => void>();
+  const handleFilter = () => {
+    const query = new URLSearchParams({
+      priceFrom: priceFrom.toString(),
+      priceTo: priceTo.toString(),
+      location: selectedLocation,
+    }).toString();
+
+    router.push(`${pathname}?${query}`);
+    handleFilterCloseButtonRef.current?.();
+  };
+  /////////////////////// Show Sort
+  const orderBy = selectedOption;
+  const handleSortCloseButtonRef = useRef<() => void>();
+  const handleSort = () => {
+    const query = new URLSearchParams({
+      orderBy: orderBy.toString(),
+    }).toString();
+
+    router.push(`${pathname}?${query}`);
+    handleSortCloseButtonRef.current?.();
+  };
 
   return (
     <>
@@ -54,16 +135,14 @@ const Filter = () => {
           >
             <div
               title='Filter'
-              className='flex h-11 w-1/2 items-center justify-center rounded border active:bg-gray-100'
-              onClick={() => setIsFilterVisible(true)}
+              className='filterModalButton flex h-11 w-1/2 items-center justify-center rounded border active:bg-gray-100'
             >
               <CiFilter className='mr-2 h-5 w-5 text-2xl text-purple-500' />
               <p className='text-xs font-semibold'>Filter</p>
             </div>
             <div
               title='Sort'
-              className='flex h-11 w-1/2 items-center justify-center rounded border active:bg-gray-100'
-              onClick={() => setIsSortVisible(true)}
+              className='sortModalButton flex h-11 w-1/2 items-center justify-center rounded border active:bg-gray-100'
             >
               <MdOutlineSort className='mr-2 h-5 w-5 text-2xl text-purple-500' />
               <p className='text-xs font-semibold'>Sort</p>
@@ -72,7 +151,7 @@ const Filter = () => {
         </div>
       </div>
 
-      {isFilterVisible && (
+      <div className='filterModal hidden'>
         <div className='fixed inset-0 z-20 flex items-center justify-center bg-white'>
           <div className='relative h-full w-full max-w-xl overflow-auto bg-white px-6 pb-20 shadow-lg'>
             <div
@@ -84,70 +163,73 @@ const Filter = () => {
                 Filter
               </span>
               <span className='flex w-16 justify-end text-gray-500'>
-                <IoCloseOutline
-                  className='text-2xl'
-                  onClick={() => setIsFilterVisible(false)}
-                />
+                <IoCloseOutline className='filterCloseButton cursor-pointer text-2xl active:bg-gray-100' />
               </span>
             </div>
             <hr />
-            <div title='Budget' className='py-3'>
-              <p className='my-4 font-semibold'>Budget</p>
+            <div title='price' className='py-3'>
+              <p className='my-4 font-semibold'>price</p>
               <div className='flex flex-row items-center justify-start'>
                 <div className='flex w-36 border px-3 py-2'>
                   <span className='mr-3 text-gray-500'>$</span>
-                  <input type='text' className='w-full' />
+                  <input
+                    type='number'
+                    className='w-full'
+                    onChange={(e) =>
+                      setPriceFrom(
+                        e.target.value ? parseFloat(e.target.value) : 0
+                      )
+                    }
+                    value={Number(priceFrom).toString()}
+                    min='0'
+                  />
                 </div>
                 <span className='mx-4 font-semibold text-gray-500'>to</span>
                 <div className='flex w-36 border px-3 py-2'>
                   <span className='mr-3 text-gray-500'>$</span>
-                  <input type='text' className='w-full' />
+                  <input
+                    type='number'
+                    className='w-full'
+                    onChange={(e) =>
+                      setPriceTo(
+                        e.target.value ? parseFloat(e.target.value) : 0
+                      )
+                    }
+                    value={Number(priceTo).toString()}
+                    min='0'
+                  />
                 </div>
               </div>
             </div>
             <div title='Seller Location' className='py-3'>
               <p className='my-4 font-semibold'>Seller lives in</p>
               <div className='w-56 border px-3 py-2 text-gray-500'>
-                <select className='w-full'>
-                  <option value='*'>Pilih wilayah</option>
+                <select
+                  className='w-full'
+                  value={selectedLocation}
+                  onChange={handleLocationChange}
+                >
+                  <option value=''>Pilih wilayah</option>
                   <option value='jember'>Jember</option>
                   <option value='situbondo'>Situbondo</option>
                 </select>
               </div>
             </div>
-            <div title='Programming Language' className='py-3'>
-              <p className='my-4 font-semibold'>Programming language</p>
-              <CheckBoxFilter id='checkbox-1' label='JavaScript' />
-              <CheckBoxFilter id='checkbox-2' label='PHP' />
-              <CheckBoxFilter id='checkbox-3' label='HTML & CSS' />
-            </div>
-            <div title='Expertise' className='py-3'>
-              <p className='my-4 font-semibold'>Expertise</p>
-              <CheckBoxFilter id='checkbox-4' label='Performance' />
-              <CheckBoxFilter id='checkbox-5' label='Design' />
-              <CheckBoxFilter
-                id='checkbox-6'
-                label='Algorithm & Data structures'
-              />
-            </div>
-            <div title='Front End Framework' className='py-3'>
-              <p className='my-4 font-semibold'>Front End Framework</p>
-              <CheckBoxFilter id='checkbox-7' label='React JS' />
-              <CheckBoxFilter id='checkbox-8' label='Bootstrap' />
-              <CheckBoxFilter id='checkbox-9' label='Tailwind CSS' />
-            </div>
           </div>
-          <div className='fixed bottom-0 w-full max-w-xl items-center justify-center bg-white px-6 py-3 ring-2 ring-gray-200'>
-            <div className='rounded bg-black px-6 py-3 text-center font-semibold text-white'>
+          <div className='fixed bottom-0 w-full max-w-xl items-center justify-center bg-white px-6 py-3'>
+            <div
+              className='cursor-pointer rounded bg-black px-6 py-3 text-center font-semibold text-white active:opacity-80'
+              onClick={handleFilter}
+            >
               Show Results
             </div>
           </div>
         </div>
-      )}
+      </div>
 
-      {isSortVisible && (
-        <div className='fixed inset-0 z-20 w-full'>
-          <div className='relative h-full overflow-auto bg-white px-6 pb-20'>
+      <div className='sortModal hidden'>
+        <div className='fixed inset-0 z-20 flex items-center justify-center bg-white'>
+          <div className='relative h-full w-full max-w-xl overflow-auto bg-white px-6 pb-20 shadow-lg'>
             <div
               title='Sort Header'
               className='flex items-center justify-between py-5'
@@ -157,10 +239,7 @@ const Filter = () => {
                 Sort
               </span>
               <span className='flex w-16 justify-end text-gray-500'>
-                <IoCloseOutline
-                  className='text-2xl'
-                  onClick={() => setIsSortVisible(false)}
-                />
+                <IoCloseOutline className='sortCloseButton cursor-pointer text-2xl active:bg-gray-100' />
               </span>
             </div>
             <hr className='mb-3' />
@@ -172,13 +251,16 @@ const Filter = () => {
               />
             </div>
           </div>
-          <div className='fixed bottom-0 w-full bg-white px-6 py-3 ring-2 ring-gray-200'>
-            <div className='rounded bg-black px-6 py-3 text-center font-semibold text-white'>
+          <div className='fixed bottom-0 w-full max-w-xl items-center justify-center bg-white px-6 py-3'>
+            <div
+              className='cursor-pointer rounded bg-black px-6 py-3 text-center font-semibold text-white active:opacity-80'
+              onClick={handleSort}
+            >
               Show Results
             </div>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

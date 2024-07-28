@@ -17,6 +17,7 @@ export interface Service {
   categoryId: string;
   servicePortfolio?: ServicePortfolio[];
   review?: Review[];
+  location: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,7 +25,11 @@ export interface Service {
 export async function getServicesIdByCategory(
   categorySlug: string | undefined,
   pageNumber: number = 1,
-  pageSize: number = 2
+  pageSize: number = 2,
+  priceFrom: number = 0,
+  priceTo: number = 0,
+  location: string = 'null',
+  orderBy: string = 'null'
 ) {
   const skipAmount = (pageNumber - 1) * pageSize;
   try {
@@ -39,20 +44,63 @@ export async function getServicesIdByCategory(
       return { services: [], isNext: false };
     }
 
+    const priceFilter: any = {};
+    if (priceFrom > 0) priceFilter.gte = priceFrom;
+    if (priceTo > 0) priceFilter.lte = priceTo;
+
+    const locationFilter = location !== 'null' ? location : undefined;
+
+    let orderCriteria: {
+      createdAt?: 'asc' | 'desc';
+      review?: { _count?: 'asc' | 'desc' };
+    } = {};
+    switch (orderBy) {
+      case 'newest':
+        orderCriteria = { createdAt: 'desc' };
+        break;
+      case 'oldest':
+        orderCriteria = { createdAt: 'asc' };
+        break;
+      case 'bestSelling':
+        orderCriteria = { review: { _count: 'desc' } };
+        break;
+      default:
+        orderCriteria = {};
+        break;
+    }
+
+    console.log(orderCriteria);
+
     const services = await prisma.service.findMany({
-      where: { published: true, categoryId: category.id },
+      where: {
+        published: true,
+        categoryId: category.id,
+        price: priceFilter,
+        location: locationFilter,
+      },
       select: { id: true },
+      orderBy: orderCriteria,
       skip: (pageNumber - 1) * pageSize,
       take: pageSize,
     });
 
     const totalServicesCount = await prisma.service.count({
-      where: { published: true, categoryId: category.id },
+      where: {
+        published: true,
+        categoryId: category.id,
+        price: priceFilter,
+        location: locationFilter,
+      },
     });
 
     const isNext = totalServicesCount > skipAmount + services.length;
     return { services, isNext };
-  } catch (error) {}
+  } catch (error) {
+    console.error(
+      'Terjadi error saat melakukan getServicesIdByCategory',
+      error
+    );
+  }
 }
 
 export async function getServiceBySlug(serviceSlug: string) {

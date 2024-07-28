@@ -16,7 +16,11 @@ async function ProductContainer({
     getServicesIdByCategory(
       params.slug,
       searchParams.pageNumber ? +searchParams.pageNumber : 1,
-      1
+      1,
+      searchParams.priceFrom ? +searchParams.priceFrom : 0,
+      searchParams.priceTo ? +searchParams.priceTo : 0,
+      searchParams.location ? searchParams.location : 'null',
+      searchParams.orderBy ? searchParams.orderBy : 'null'
     ),
     getServicesIdByUsername(
       params.username,
@@ -66,7 +70,15 @@ async function ProductContainer({
     );
   }
 
-  return null;
+  return (
+    <>
+      <div className='flex h-52 items-center justify-center'>
+        <div className='text-center'>
+          <p className='text-3xl font-semibold'>Jasa Belum Tersedia</p>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default ProductContainer;

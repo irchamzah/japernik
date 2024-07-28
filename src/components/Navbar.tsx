@@ -27,17 +27,20 @@ const Navbar = ({
       mobileMenu?.classList.toggle('hidden');
       overlay?.classList.toggle('hidden');
       document.body.classList.add('no-scroll');
+      console.log('handleMenuToggle');
     };
 
     const handleClickOutside = (event: any) => {
       if (
         mobileMenu &&
+        !mobileMenu.classList.contains('hidden') &&
         !mobileMenu.contains(event?.target) &&
         !mobileMenuButton?.contains(event?.target)
       ) {
         mobileMenu.classList.add('hidden');
         overlay?.classList.add('hidden');
         document.body.classList.remove('no-scroll');
+        console.log('handleClickOutside');
       }
     };
 
@@ -45,6 +48,7 @@ const Navbar = ({
       mobileMenu?.classList.toggle('hidden');
       overlay?.classList.toggle('hidden');
       document.body.classList.remove('no-scroll');
+      console.log('handleCloseButtonClick');
     };
 
     mobileMenuButton?.addEventListener('click', handleMenuToggle);
@@ -177,7 +181,7 @@ const Navbar = ({
                     <Link
                       key={index}
                       href={`/categories/${category.slug}`}
-                      className='snap-center'
+                      className=''
                     >
                       <div className='px-3 py-2 hover:border-b-2 hover:border-purple-500'>
                         {category.name}
